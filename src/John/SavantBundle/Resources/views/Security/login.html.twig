@@ -1,0 +1,95 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 'bundles/johnsavant/css/login.css' filter='uglifycss' %}
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+
+    <div id="forms_div">
+
+    <div id="login_div">
+
+            {% if error %}
+                <div>{{ error.message }}</div>
+            {% endif %}
+
+            <form id="login_form" action="{{ path('john_savant_login_check') }}" method="post">
+                <p>Enter to your account.</p>
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" />
+                </div>
+
+
+                {#
+                    If you want to control the URL the user
+                    is redirected to on success (more details below)
+                    <input type="hidden" name="_target_path" value="/account" />
+                #}
+
+                <button type="submit"> Login </button>
+            </form>
+
+            <div id="facebook-login">
+                <button type="submit">Login Via Facebook</button>
+            </div>
+
+
+
+    </div>
+
+
+    <div id="register_div">
+
+
+        {{ form_start(register_form,{'attr': {'novalidate': 'novalidate'}}) }}
+        <p>Don't have an account? <br/>Register here and become our savant member !</p>
+        {% for flash in app.session.flashbag.get('security_msg') %}
+            {{ flash }}
+        {% endfor %}
+        {{ form_errors(register_form) }}
+
+        {{ form_row(register_form.first_name) }}
+        {{ form_row(register_form.last_name) }}
+        {{ form_row(register_form.email) }}
+        {{ form_row(register_form.plainPassword.first,{'label':'Password'}) }}
+        {{ form_row(register_form.plainPassword.second, {'label':'Password'}) }}
+        <div>
+            <label>Captcha</label>
+            <div id="captcha-div">
+                <img id="captcha-img" src="{{ path('john_savant_captcha') }}" alt="Security image"/>
+                <a href="#" id="refresh-btn">
+                    <img id="refresh-img" src="{{ asset('bundles/johnsavant/images/refresh.png') }}" alt="Security image"/>
+                </a>
+
+            </div>
+        </div>
+
+        {{ form_row(register_form.captcha) }}
+        {{ form_end(register_form) }}
+    </div>
+
+    </div>
+
+    {# {{ render(controller('JohnSavantBundle:Register:index')) }} #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var CAPTCHA_URL="{{ path('john_savant_captcha') }}";
+    </script>
+    {% javascripts 'bundles/johnsavant/js/login.js' filter='uglifyjs' %}
+    <script  type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

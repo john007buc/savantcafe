@@ -1,0 +1,15 @@
+john_article:
+    resource: "@JohnArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+john_admin:
+    resource: "@JohnAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+john_savant:
+    resource: "@JohnSavantBundle/Resources/config/routing.yml"
+    prefix:   /
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+

@@ -1,0 +1,17 @@
+{% extends 'JohnAdminBundle::admin_layout.html.twig' %}
+
+{% block admin_main %}
+
+<h1>{{ entity.title }}</h1>
+<p>{{ entity.content|raw }}</p>
+<h2>Article tags</h2>
+    <ol>
+        {% for tag in entity.tags %}
+            <li>{{ tag.name }}</li>
+        {% endfor %}
+    </ol>
+
+    {{ form(delete_form) }}
+    <a href="{{ path('article_edit',{'id':entity.id}) }}">Edit this article</a>
+{% endblock %}
+

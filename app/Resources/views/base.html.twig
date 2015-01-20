@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+           {% stylesheets 'css/template.css' filter='uglifycss' %}
+             <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+           {% endstylesheets %}
+            {% stylesheets 'bundles/johnsavant/css/tablet.css' filter='uglifycss' %}
+            <link rel="stylesheet" type="text/css"  media="screen and (min-width: 481px) and (max-width: 768px)"  href="{{ asset_url }}"/>
+            {% endstylesheets %}
+            {% stylesheets 'bundles/johnsavant/css/mobile.css' filter='uglifycss' %}
+            <link rel="stylesheet" type="text/css"  media="screen and (min-width: 0px) and (max-width: 480px)"  href="{{ asset_url }}"/>
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+    <header class="header">
+        <nav id="main-nav">
+           <form name="smallNav" id="select-form">
+               <select name="selectLinks" onchange="location.href=smallNav.selectLinks.options[selectedIndex].value">
+                   <option value="">Select page</option>
+                   <option value="">Categories</option>
+                   <option value="http:www.."> - Mathematics</option>
+                   <option value="http:www.."> - Astronomy</option>
+                   <option value="http:www.."> About usy</option>
+               </select>
+           </form>
+            <div id="links">
+                <ul class="menu">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Categories</a>
+                        <ul>
+                            <li><a href="#">Astronomy</a></li>
+                            <li><a href="#">Physics</a></li>
+                            <li><a href="#">Mathematics</a></li>
+                            <li><a href="#">Biology</a></li>
+                            <li><a href="#">Chemistry</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Savant Talks</a></li>
+                    <li><a href="">Ask or Answer</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Recomanded books</a></li>
+                </ul>
+                <div class="log_or_reg">
+                    <a href="#">Log In or Join</a>
+                </div>
+            </div> <!--end div#links -->
+        </nav>
+        <div class="sub-nav">
+            <div class="logo">
+                <h1>SavantCafe</h1>
+                <span>Climb the life ladder! Expand your horizon!</span>
+            </div>
+
+            <div id="search-div">
+                <form>
+                    <input type="text" class="" placeholder="Search in our site..."><input type="button" value="Search">
+                </form>
+            </div>
+
+        </div>
+
+
+    </header>
+    <div class="content">
+        {% block body %}{% endblock %}
+    </div>
+
+        {% block javascripts %}
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script>window.jQuery || document.write('<script src="{{ asset('bundles/johnsavant/js/jquery-2.1.1.min') }}"><\/script>')</script>
+
+        {% endblock %}
+    </body>
+</html>

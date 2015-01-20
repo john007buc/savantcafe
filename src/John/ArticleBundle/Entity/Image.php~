@@ -1,0 +1,56 @@
+<?php
+namespace John\ArticleBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Class Image
+ * @package John\ArticleBundle\Entity
+ * @ORM\Table(name="Images")
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks
+ */
+class Image
+{
+
+
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $root_dir;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $name;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Article", mappedBy="featured_image")
+     */
+    protected $article;
+
+
+
+}

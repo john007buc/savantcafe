@@ -1,0 +1,34 @@
+{% extends 'JohnAdminBundle::admin_layout.html.twig' %}
+
+{% block admin_main %}
+
+       {{ include("JohnArticleBundle:Article:form.html.twig",{'form':edit_form}) }}
+    <h3>Delete this article</h3>
+    {{ form(delete_form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 'bundles/johnarticle/js/collection_type.js'  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/johnarticle/ckeditor/ckeditor.js') }}"></script>
+    <script>
+
+        // This call can be placed at any point after the
+        // <textarea>, or inside a <head><script> in a
+        // window.onload event handler.
+
+        // Replace the <textarea id="editor"> with an CKEditor
+        // instance, using default configurations.
+        CKEDITOR.replace( 'article_content',{
+            filebrowserBrowseUrl: '{{ path("article_ckeditor_browse") }}',
+            filebrowserUploadUrl: '{{ path("article_ckeditor_upload") }}',
+            filebrowserWindowWidth: '640',
+            filebrowserWindowHeight: '480'
+        });
+
+
+    </script>
+
+{% endblock %}

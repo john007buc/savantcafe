@@ -1,0 +1,6 @@
+john_admin_homepage:
+    pattern:  /
+    defaults: { _controller: JohnAdminBundle:Default:index }
+
+john_admin_articles:
+    resource: "@JohnArticleBundle/Resources/config/routing.yml"

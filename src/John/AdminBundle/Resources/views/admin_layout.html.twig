@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/johnadmin/css/admin.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/johnarticle/css/article.css')}}" />
+{% endblock %}
+{% block body %}
+    <div class="admin_left_panel">
+        {{include ("JohnAdminBundle::links.html.twig") }}
+    </div>
+    <div class="admin-content">
+        {% block admin_main %}
+        {% endblock %}
+    </div>
+{% endblock %}

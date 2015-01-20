@@ -1,0 +1,7 @@
+parameters:
+#    john_admin.example.class: John\AdminBundle\Example
+
+services:
+#    john_admin.example:
+#        class: %john_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

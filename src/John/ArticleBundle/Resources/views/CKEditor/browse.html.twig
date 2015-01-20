@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+ <html>
+    <head></head>
+    <body>
+    {% for image in images %}
+
+        <img class="ck-images" alt= "{{ asset('uploads/article_images/'~image,'cdn') }}" src="{{ asset(('uploads/article_images/'~image) | imagine_filter('my_thumb'))}}">
+
+
+    {% endfor %}
+
+    </body>
+    <footer>
+        {% block javascripts %}
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script>window.jQuery || document.write('<script src="{{ asset('bundles/johnsavant/js/jquery-2.1.1.min') }}"><\/script>')</script>
+
+        {% endblock %}
+        <script>
+            $(document).ready(function(){
+                $('.ck-images').on('click',function(){
+
+                    window.opener.CKEDITOR.tools.callFunction({{callback}}, $(this).attr("alt"));
+                    window.close();
+                });
+            });
+        </script>
+    </footer>
+ </html>
+
+

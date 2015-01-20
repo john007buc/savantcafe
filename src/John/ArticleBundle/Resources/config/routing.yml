@@ -1,0 +1,45 @@
+articles:
+    pattern: /articles
+    defaults: { _controller: JohnArticleBundle:Article:index}
+
+article_new:
+    pattern : /articles/new
+    defaults: { _controller: JohnArticleBundle:Article:new}
+
+article_create:
+    pattern : /articles/create
+    defaults: { _controller: JohnArticleBundle:Article:create}
+
+article_show:
+    pattern: /articles/{id}/show
+    defaults: {_controller: JohnArticleBundle:Article:show}
+    requirements:
+        id: \d+
+
+article_delete:
+    pattern: /articles/{id}/delete
+    defaults: {_controller: JohnArticleBundle:Article:delete}
+    requirements:
+        id: \d+
+
+article_edit:
+     pattern: /articles/{id}/edit
+     defaults: {_controller: JohnArticleBundle:Article:edit}
+     requirements:
+          id: \d+
+
+article_update:
+        pattern: /articles/{id}/update
+        defaults: {_controller: JohnArticleBundle:Article:update}
+        requirements:
+             id: \d+
+
+article_ckeditor_browse:
+      pattern: /ckeditor/browse
+      defaults: {_controller: JohnArticleBundle:CKEditor:browse}
+
+article_ckeditor_upload:
+      pattern: /ckeditor/upload
+      defaults: {_controller: JohnArticleBundle:CKEditor:upload}
+
+
