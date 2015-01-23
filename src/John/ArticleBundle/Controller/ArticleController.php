@@ -14,7 +14,12 @@ class ArticleController extends Controller
 
     public function indexAction()
     {
-        return $this->render("JohnArticleBundle:Article:index.html.twig");
+        $em = $this->getDoctrine()->getManager();
+        $articles=$em->getRepository("JohnArticleBundle:Article")->findAll();
+        //dump($articles);exit();
+
+
+        return $this->render("JohnArticleBundle:Article:index.html.twig",array('articles'=>$articles));
     }
 
     /**
@@ -32,6 +37,7 @@ class ArticleController extends Controller
         if($article_form->isValid())
         {
 
+            $article->setAuthor($this->getUser());
             $manager=$this->getDoctrine()->getManager();
 
             //$existing_tags=$article_form->get('existing_tags')->getData();
@@ -86,12 +92,15 @@ class ArticleController extends Controller
             return $this->createNotFoundException("No article entity was found");
         }
 
-        $delete_form=$this->createDeleteForm($entity->getId());
+        $delete_form=$this->createDeleteForm($id);
+
+        $publish_form = $this->createPublishForm($id,$entity->getPublished()?"Unpublish":"Publish");
 
 
         return $this->render('JohnArticleBundle:Article:show.html.twig',array(
            'entity'=>$entity,
-            'delete_form'=>$delete_form->createView()
+            'delete_form'=>$delete_form->createView(),
+            'publish_form'=>$publish_form->createView()
         ));
 
     }
@@ -184,11 +193,15 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('JohnArticleBundle:Article')->find($id);
 
+
             if(!$entity){
+
                 return $this->createNotFoundException("Unable to find article entity with id:{$id}");
+
             }
 
             $em->remove($entity);
+           // dump( $entity);exit();
             $em->flush();
         }
 
@@ -224,5 +237,57 @@ class ArticleController extends Controller
             ->add('submit', 'submit', array('label'=>'Delete this article'))
             ->getForm();
     }
+
+    public function createPublishForm($id,$label)
+    {
+        return $this->createFormBuilder()
+            ->setMethod("POST")
+            ->setAction($this->generateUrl("article_publish",array('id'=>$id,'action_label'=>$label)))
+            ->add('submit','submit',array('label'=>$label))
+            ->getForm();
+
+    }
+
+    public function publishAction(Request $request, $id, $action_label="publish")
+    {
+        $publish_form=$this->createPublishForm($id,$action_label);
+
+        $publish_form->handleRequest($request);
+
+        if($publish_form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+
+            $article=$em->getRepository("JohnArticleBundle:Article")->find($id);
+
+
+           if(!$article){
+               return $this->createNotFoundException("Unable to find the entity");
+           }
+
+            //$article->setPublished('true');
+            if($article->getPublished()){
+                $article->setPublished('false');
+            }else{
+                $article->setPublished(1);
+            }
+
+           // dump($article);exit();
+           // $em->persist($article);
+            $em->flush();
+
+
+
+            //de adaugat flash messages
+
+
+        }
+
+        return $this->redirect($this->generateUrl('articles'));
+
+
+
+    }
+
 
 }

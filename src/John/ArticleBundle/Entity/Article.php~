@@ -73,14 +73,24 @@ class Article
     protected $author;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image", inversedBy="article")
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Image", inversedBy="article", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true)
      */
     protected $featured_image;
 
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    protected $active=true;
 
-    protected $isActive=false;
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    protected $published=false;
+
 
     /**
      * @var DateTime
@@ -391,4 +401,53 @@ class Article
     {
         $this->updated=new \DateTime();
     }
+
+
+    /**
+     * Set featured_image
+     *
+     * @param \John\ArticleBundle\Entity\Image $featuredImage
+     * @return Article
+     */
+    public function setFeaturedImage(\John\ArticleBundle\Entity\Image $featuredImage = null)
+    {
+        $this->featured_image = $featuredImage;
+    
+        return $this;
+    }
+
+    /**
+     * Get featured_image
+     *
+     * @return \John\ArticleBundle\Entity\Image 
+     */
+    public function getFeaturedImage()
+    {
+        return $this->featured_image;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \John\ArticleBundle\Entity\Category $categories
+     * @return Article
+     */
+    public function addCategorie(\John\ArticleBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \John\ArticleBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\John\ArticleBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+
 }

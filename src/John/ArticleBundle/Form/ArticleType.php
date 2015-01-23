@@ -18,7 +18,7 @@ class ArticleType extends AbstractType
     {
         $builder->add('title','text')
                 ->add('content','textarea')
-                ->add('url','text')
+                ->add('url','text',array('label'=>"Adresa URL"))
                 ->add('categories')
                 ->add('existing_tags','entity',array(
                     'class'=>'JohnArticleBundle:Tag',
@@ -32,7 +32,8 @@ class ArticleType extends AbstractType
                    'label'=>false,
 
                 ))
-                ->add('featured_image', new ImageType(),array('label'=>'Featured Image'))
+                ->add('featured_image', new ImageType())
+                ->add('published','checkbox',array('label'=>'Publish this file','required' => false))
                 ->add('save','submit');
 
     }

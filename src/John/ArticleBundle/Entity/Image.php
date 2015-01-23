@@ -23,11 +23,8 @@ class Image
     protected $id;
 
 
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=100)
-     */
-    protected $root_dir;
+    protected $temp;
+
 
     /**
      * @var string
@@ -38,6 +35,8 @@ class Image
     /**
      * @var DateTime
      * @ORM\Column(type="datetime")
+     *
+     *
      */
     protected $created;
 
@@ -52,6 +51,34 @@ class Image
      */
     protected $article;
 
+    /**
+     * @var UploadedFile
+     */
+    private $file;
+
+    public function getAbsolutePath()
+    {
+        return null===$this->name
+            ? null
+            : $this->getUploadRootDir()."/".$this->name;
+    }
+
+    public function getWebPath()
+    {
+        return null===$this->name
+            ? null
+            : $this->getUploadDir()."/".$this->name;
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__."/../../../../web/".$this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        return "uploads/featured_images";
+    }
 
 
 
@@ -65,28 +92,7 @@ class Image
         return $this->id;
     }
 
-    /**
-     * Set root_dir
-     *
-     * @param string $rootDir
-     * @return Image
-     */
-    public function setRootDir($rootDir)
-    {
-        $this->root_dir = $rootDir;
-    
-        return $this;
-    }
 
-    /**
-     * Get root_dir
-     *
-     * @return string 
-     */
-    public function getRootDir()
-    {
-        return $this->root_dir;
-    }
 
     /**
      * Set name
@@ -112,18 +118,30 @@ class Image
     }
 
 
-    private $file;
-
+    /**
+     * @return UploadedFile
+     */
     public function getFile()
     {
         return $this->file;
     }
 
+    /**
+     * @param UploadedFile $file
+     */
     public function setFile(UploadedFile $file)
     {
         $this->file=$file;
+        if(isset($this->name)){
+            $this->temp = $this->name;
+            $this->name=null;
+            $this->updated=new \DateTime();
+        }else{
+            $this->name='initial';
+        }
 
     }
+
     /**
      * Set created
      *
@@ -202,11 +220,57 @@ class Image
         $this->updated = new \DateTime();
     }
 
+
+
     /**
+     * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setUpdatedValue()
+    public function preUpload()
     {
-        $this->updated=new \DateTime();
+        if(null!=$this->getFile()) {
+
+            $hash = sha1(uniqid(mt_rand(), true));
+            $this->name = $hash .".". $this->getFile()->guessExtension();
+        }
     }
+
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function upload()
+    {
+       if($this->getFile()===null){
+           return;
+       }
+
+        $this->getFile()->move($this->getUploadRootDir(),$this->name);
+
+        if(isset($this->temp) && is_file($this->getUploadRootDir()."/".$this->temp)){
+            $this->temp=null;
+            @chmod($this->getUploadRootDir(), 0777 );
+
+            @unlink($this->getUploadRootDir()."/".$this->temp);
+
+        }else{
+            $this->file=null;
+        }
+
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function removeUpload()
+    {
+       if(is_file($this->getAbsolutePath())){
+           @chmod($this->getUploadRootDir(), 0777 );
+           @unlink($this->getAbsolutePath());
+
+       }
+    }
+
+
+
 }

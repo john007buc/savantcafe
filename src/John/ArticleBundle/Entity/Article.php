@@ -62,7 +62,7 @@ class Article
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles", cascade={"persist","remove"})
      */
     protected $tags;
 
@@ -79,8 +79,18 @@ class Article
     protected $featured_image;
 
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    protected $active=true;
 
-    protected $isActive=false;
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    protected $published=false;
+
 
     /**
      * @var DateTime
@@ -414,5 +424,53 @@ class Article
     public function getFeaturedImage()
     {
         return $this->featured_image;
+    }
+
+
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Article
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     * @return Article
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+    
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean 
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 }

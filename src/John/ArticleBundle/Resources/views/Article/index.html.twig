@@ -2,8 +2,30 @@
 
 {% block admin_main %}
 
-    <a href="{{ path('article_new') }}">Adauga</a> articol nou!
 
-    Articolele listate aici
+    <div class="articles-header">
+        <a href="{{ path('article_new') }}"><span class="genericon genericon-document">Add article</span></a>
+
+    </div>
+
+
+    {% for article in articles %}
+        <article>
+           <h2><a href="{{ path('article_show',{id:article.id}) }}">{{ article.title }}</a></h2>
+           <div class="truncate-content">
+               {{ article.content|truncate(250)|striptags }}
+           </div>
+            <footer>
+
+                 {% if article.published ==false  %}
+                     <span class="genericon genericon-show">Unpublished</span>
+
+                 {% else %}
+                     <span class="genericon genericon-edit">Published</span>
+                 {% endif %}
+                <span class="genericon genericon-user">Author:{{ article.author.firstName~' '~article.author.lastName }}</span>, <span class="genericon genericon-time">Created: {{ article.created|date("m/d/Y") }},Updated: {{ article.updated|date("m/d/Y") }}</span>
+            </footer>
+        </article>
+    {% endfor %}
 
 {% endblock %}

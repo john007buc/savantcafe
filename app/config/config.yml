@@ -114,3 +114,9 @@ liip_imagine:
        # default:
            #filesystem:
                #data_root:  %kernel.root_dir%/../web/uploads/article_images/temp
+
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
