@@ -10,10 +10,17 @@
 
 
     {% for article in articles %}
+
         <article>
            <h2><a href="{{ path('article_show',{id:article.id}) }}">{{ article.title }}</a></h2>
+            {% if article.featuredImage %}
+                <figure >
+                   <img  alt="{{ article.featuredImage.alt }}" src="{{ asset(('uploads/featured_images/'~article.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">
+                </figure>
+            {% endif %}
+
            <div class="truncate-content">
-               {{ article.content|truncate(250)|striptags }}
+               {{ article.content|truncate(550)|striptags }}
            </div>
             <footer>
 

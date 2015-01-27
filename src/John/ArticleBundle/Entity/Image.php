@@ -56,6 +56,12 @@ class Image
      */
     private $file;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $alt;
+
     public function getAbsolutePath()
     {
         return null===$this->name
@@ -273,4 +279,27 @@ class Image
 
 
 
+
+    /**
+     * Set alt
+     *
+     * @param string $alt
+     * @return Image
+     */
+    public function setAlt($alt)
+    {
+        $this->alt = $alt;
+    
+        return $this;
+    }
+
+    /**
+     * Get alt
+     *
+     * @return string 
+     */
+    public function getAlt()
+    {
+        return $this->alt;
+    }
 }

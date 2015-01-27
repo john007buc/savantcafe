@@ -2,12 +2,17 @@
 
 {% block admin_main %}
 
-    <div class="article-show-panel">
+    <div class="article-admin-panel">
         {{ form(delete_form) }}
         {{ form(publish_form) }}
         <a class="edit-article" href="{{ path('article_edit',{'id':entity.id}) }}">Edit this article</a>
     </div>
 <h1>{{ entity.title }}</h1>
+    {% if entity.featuredImage %}
+        <figure style="float:left">
+            <img  alt ="Featured images" src="{{ asset(('uploads/featured_images/'~entity.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">
+        </figure>
+    {% endif %}
 {{ entity.content|raw }}
 <h2>Article tags</h2>
     <ol>

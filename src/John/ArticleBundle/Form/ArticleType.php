@@ -20,20 +20,23 @@ class ArticleType extends AbstractType
                 ->add('content','textarea')
                 ->add('url','text',array('label'=>"Adresa URL"))
                 ->add('categories')
-                ->add('existing_tags','entity',array(
-                    'class'=>'JohnArticleBundle:Tag',
-                    'property'=>'name',
-                    'multiple'=>'true'
+
+                ->add('featured_image', new ImageType(),array(
+                    'required' => false,
                 ))
-                ->add('tags','collection',array(
-                    'type'=>new TagType(),
-                    'allow_add'=>true,
-                    'allow_delete'=>true,
-                   'label'=>false,
+                ->add('published','checkbox',array('label'=>'Publish this file','required' => false))
+               ->add('existing_tags','entity',array(
+                'class'=>'JohnArticleBundle:Tag',
+                'property'=>'name',
+                'multiple'=>'true'
+                ))
+               ->add('tags','collection',array(
+                'type'=>new TagType(),
+                'allow_add'=>true,
+                'allow_delete'=>true,
+                'label'=>false,
 
                 ))
-                ->add('featured_image', new ImageType())
-                ->add('published','checkbox',array('label'=>'Publish this file','required' => false))
                 ->add('save','submit');
 
     }
