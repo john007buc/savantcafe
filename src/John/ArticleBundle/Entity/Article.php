@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Article
  * @package John\ArticleBundle\Entity
  * @ORM\Table(name="articles")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="John\ArticleBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Article
@@ -472,5 +472,28 @@ class Article
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \John\ArticleBundle\Entity\Category $categories
+     * @return Article
+     */
+    public function addCategorie(\John\ArticleBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \John\ArticleBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\John\ArticleBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
     }
 }

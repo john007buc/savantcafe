@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Article
  * @package John\ArticleBundle\Entity
  * @ORM\Table(name="articles")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="John\ArticleBundle\Entity\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Article
@@ -62,7 +62,7 @@ class Article
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles", cascade={"persist","remove"})
      */
     protected $tags;
 
@@ -426,28 +426,51 @@ class Article
         return $this->featured_image;
     }
 
+
+
     /**
-     * Add categories
+     * Set active
      *
-     * @param \John\ArticleBundle\Entity\Category $categories
+     * @param boolean $active
      * @return Article
      */
-    public function addCategorie(\John\ArticleBundle\Entity\Category $categories)
+    public function setActive($active)
     {
-        $this->categories[] = $categories;
+        $this->active = $active;
     
         return $this;
     }
 
     /**
-     * Remove categories
+     * Get active
      *
-     * @param \John\ArticleBundle\Entity\Category $categories
+     * @return boolean 
      */
-    public function removeCategorie(\John\ArticleBundle\Entity\Category $categories)
+    public function getActive()
     {
-        $this->categories->removeElement($categories);
+        return $this->active;
     }
 
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     * @return Article
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+    
+        return $this;
+    }
 
+    /**
+     * Get published
+     *
+     * @return boolean 
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
 }
