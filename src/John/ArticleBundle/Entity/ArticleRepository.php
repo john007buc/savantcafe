@@ -37,7 +37,7 @@ class ArticleRepository extends EntityRepository
             ->select('a')
             ->where('a.published=:published')
             ->setParameter('published',$published)
-            ->andWhere('a.active=a:active')
+            ->andWhere('a.active=:active')
             ->setParameter('active',$active);
 
         if($category_id){

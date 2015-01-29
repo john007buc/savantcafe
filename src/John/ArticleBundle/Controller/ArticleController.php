@@ -15,7 +15,7 @@ class ArticleController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $articles=$em->getRepository("JohnArticleBundle:Article")->findAll();
+        $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(0);
         //dump($articles);exit();
 
 
