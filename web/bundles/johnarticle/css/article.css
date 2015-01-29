@@ -1,0 +1,96 @@
+.article-form > div
+{
+    margin: 20px 0;
+}
+form.article-form label
+{
+    display: inline-block;
+    width:100px;
+    text-align: left;
+
+}
+
+ul.tags
+{
+    margin:0;
+    padding:0;
+    list-style-type: none;
+
+}
+
+div.articles-header
+{
+    padding:15px;
+}
+div.articles-header a{
+    text-decoration: none;
+    display: block;
+}
+.truncate-content
+{
+    min-height: 100px;
+}
+article .truncate-content, article footer
+{
+    padding:10px;
+}
+article
+{
+    padding:10px;
+
+}
+article h2
+{
+    margin:5px;
+    background: #F2F2F2;
+
+
+}
+
+article h2 a
+{
+    text-decoration: none;
+    color:#0B2161;
+    padding:10px;
+
+}
+
+article figure
+{
+   float:left;
+    margin:6px;
+    padding:4px;
+    border: 1px dotted #dcdcdc;
+}
+
+article footer
+{
+    border:1px dotted lightgrey;
+
+}
+
+article footer span{
+    display: inline-block;
+    float:left;
+}
+
+div.article-admin-panel
+{
+    padding:5px;
+    border:1px solid lightgrey;
+}
+div.article-admin-panel form{
+    display: inline-block;
+    float:left;
+}
+
+a.edit-article
+{
+    display: inline-block;
+    padding: 2px;
+    height:17px;
+    line-height: 17px;
+    text-decoration: none;
+    background-color: orangered;
+    color:white;
+}

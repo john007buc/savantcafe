@@ -1,0 +1,55 @@
+/*=============================================
+====================Responsive=================*/
+/*@media only screen and (min-width: 150px) and (max-width: 901px)*/
+
+    .content{
+        width:95%;
+    }
+
+    header
+    {
+        height:140px;
+    }
+
+
+    .menu,.log_or_reg
+    {
+        display: none;
+    }
+    #select-form{
+        display:block;
+        line-height: 40px;
+    }
+
+
+    .sub-nav
+    {
+        padding: 2px;
+    }
+    .logo{
+
+        width:100%;
+        float:left;
+    }
+
+    #search-div
+    {
+        width:100%;
+        float:left;
+        margin:1px;
+        text-align: left;
+    }
+
+    #search-div input[type=text]
+    {
+        width:40%;
+    }
+
+    /*********Login page*********************/
+
+
+
+
+
+
+
