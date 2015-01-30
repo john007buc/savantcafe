@@ -3,6 +3,7 @@ namespace John\ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
@@ -27,6 +28,12 @@ class Category
      * @ORM\Column(type="string", length=100)
      */
     protected $name;
+
+     /**
+      * @Gedmo\Slug(fields={"name"}, updatable=false)
+      * @ORM\Column(type="string", length=130)
+    */
+    protected $slug;
 
     /**
      * @var ArrayCollection
@@ -151,5 +158,28 @@ class Category
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

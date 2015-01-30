@@ -6,20 +6,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use John\ArticleBundle\Form\ArticleType;
 use John\ArticleBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
+use John\ArticleBundle\Form\FilterType;
 
 
 
 class ArticleController extends Controller
 {
 
-    public function indexAction()
+    public function indexAction($category,$page)
     {
+
+
+
+
         $em = $this->getDoctrine()->getManager();
-        $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(0);
+        //$articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(0);
+        if(is_null($category) || $category=="all"){
+
+            $articles=$em->getRepository("JohnArticleBundle:Article")->findAll();
+
+        }else{
+            $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(1,1,$category);
+        }
+
         //dump($articles);exit();
+        //$nr=$em->getRepository("JohnArticleBundle:Article")->countArticles(1,0,2);
+        //dump($nr);
 
+        $filter_form=$this->createForm(new FilterType());
 
-        return $this->render("JohnArticleBundle:Article:index.html.twig",array('articles'=>$articles));
+        return $this->render("JohnArticleBundle:Article:index.html.twig",array('articles'=>$articles,'filter_form'=>$filter_form->createView()));
     }
 
     /**
@@ -86,8 +102,11 @@ class ArticleController extends Controller
      **/
     public function showAction($id)
     {
+         dump("ghhfhfghfg");
        $manager = $this->getDoctrine()->getManager();
        $entity = $manager->getRepository('JohnArticleBundle:Article')->find($id);
+
+
         if(!$entity){
             return $this->createNotFoundException("No article entity was found");
         }

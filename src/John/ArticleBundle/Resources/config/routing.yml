@@ -1,6 +1,10 @@
 articles:
-    pattern: /articles
-    defaults: { _controller: JohnArticleBundle:Article:index}
+    pattern: /articles/{category}/{page}
+    defaults: { _controller: JohnArticleBundle:Article:index,category:null,page:null}
+    requirements:
+           category: \w+
+           page: \d+
+
 
 article_new:
     pattern : /articles/new

@@ -13,25 +13,26 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
 
-    public function countArticles($published=1,$active=1,$category_id=null)
+    public function countArticles($published=1,$active=1,$category=null)
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('count(a)')
-            ->where('a.published=:published')
-            ->setParameter('published',$published)
-            ->andWhere('active=:active')
-            ->setParameter('active',$active);
+            ->select('count(a)');
 
         if($category_id){
             $qb->join('a.categories','c')
-                ->andWhere('c.category_id=:category_id')
-                ->setParameter('category_id',$category_id);
+                ->where('c.slug=:category')
+                ->setParameter('category',$category);
         }
+
+        $qb->andWhere('a.published=:published')
+        ->setParameter('published',$published)
+        ->andWhere('a.active=:active')
+        ->setParameter('active',$active);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getArticles($published=1,$active=1,$offset=null,$max=null,$category_id=null)
+    public function getArticles($published=1,$active=1,$category=null,$offset=null,$max=null)
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a')
@@ -40,10 +41,10 @@ class ArticleRepository extends EntityRepository
             ->andWhere('a.active=:active')
             ->setParameter('active',$active);
 
-        if($category_id){
+        if($category){
             $qb->join('a.categories','c')
-                ->andWhere('c.category_id=:category_id')
-                ->setParameter('category_id',$category_id);
+                ->andWhere('c.slug=:category')
+                ->setParameter('category',$category);
         }
 
         if($offset){

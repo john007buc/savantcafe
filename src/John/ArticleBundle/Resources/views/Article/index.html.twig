@@ -5,6 +5,7 @@
 
     <div class="articles-header">
         <a href="{{ path('article_new') }}"><span class="genericon genericon-document">Add article</span></a>
+        {{ include('JohnArticleBundle:Article:filter.html.twig',{'form':filter_form}) }}
 
     </div>
 
