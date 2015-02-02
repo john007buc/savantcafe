@@ -4,7 +4,7 @@
 
 
     <div class="articles-header">
-        <a href="{{ path('article_new') }}"><span class="genericon genericon-document">Add article</span></a>
+
         {{ include('JohnArticleBundle:Article:filter.html.twig',{'form':filter_form}) }}
 
     </div>
@@ -23,8 +23,8 @@
            <div class="truncate-content">
                {{ article.content|truncate(550)|striptags }}
            </div>
-            <footer>
-
+            <footer {% if article.active == false %} style="color:red" {% endif %}>
+                <span class="genericon genericon-category">{{ article.categories[0] }}</span>
                  {% if article.published ==false  %}
                      <span class="genericon genericon-show">Unpublished</span>
 
@@ -36,4 +36,12 @@
         </article>
     {% endfor %}
 
+    {{ pagination_links|raw }}
+{% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {% javascripts 'bundles/johnarticle/js/filter_articles.js' filter="uglifyjs"%}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
 {% endblock %}

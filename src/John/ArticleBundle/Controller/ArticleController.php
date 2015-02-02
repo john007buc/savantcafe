@@ -7,7 +7,7 @@ use John\ArticleBundle\Form\ArticleType;
 use John\ArticleBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 use John\ArticleBundle\Form\FilterType;
-
+use John\ArticleBundle\MyClasses\Pagination;
 
 
 class ArticleController extends Controller
@@ -17,25 +17,44 @@ class ArticleController extends Controller
     {
 
 
-
-
         $em = $this->getDoctrine()->getManager();
         //$articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(0);
-        if(is_null($category) || $category=="all"){
 
-            $articles=$em->getRepository("JohnArticleBundle:Article")->findAll();
+            $active=(null!==$this->getRequest()->query->get("active"))?filter_var($this->getRequest()->query->get("active"), FILTER_VALIDATE_BOOLEAN):null;
 
-        }else{
-            $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(1,1,$category);
-        }
+            $publish = (null!==$this->getRequest()->query->get("publish"))?filter_var($this->getRequest()->query->get("publish"), FILTER_VALIDATE_BOOLEAN):null;
 
-        //dump($articles);exit();
+            $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category);
+
+
+
+
+            $pagerOptions=array(
+                'items_per_page'=>3,
+                'items_count'=>$articles_count,
+                'class_name'=>'linksClass',
+                'rewrite_url'=>$this->generateUrl("articles")
+            );
+            $pag=new Pagination($pagerOptions);
+            list($from,$to)=$pag->getLimits();
+            $pagination_links=$pag->getLinks();
+            $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$pagerOptions['items_per_page']);
+
+
+            //dump($articles);exit();
         //$nr=$em->getRepository("JohnArticleBundle:Article")->countArticles(1,0,2);
         //dump($nr);
 
-        $filter_form=$this->createForm(new FilterType());
+        $filter_form=$this->createForm(new FilterType($em),null,array(
+            'attr'=>array(
+                'id'=>'filter_form'
+            )));
 
-        return $this->render("JohnArticleBundle:Article:index.html.twig",array('articles'=>$articles,'filter_form'=>$filter_form->createView()));
+        return $this->render("JohnArticleBundle:Article:index.html.twig",array(
+            'articles'=>$articles,
+            'filter_form'=>$filter_form->createView(),
+            'pagination_links'=>$pagination_links
+        ));
     }
 
     /**

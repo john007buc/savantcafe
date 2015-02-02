@@ -1,6 +1,8 @@
 {{ form_start(form) }}
-
-    {{ form_row(form.categories) }}
+    <div>
+        <a href="{{ path('article_new') }}"><span class="genericon genericon-document">Add article</span></a>
+    </div>
+    {{ form_row(form.category) }}
     {{ form_row(form.active) }}
     {{ form_row(form.published) }}
 {{ form_end(form) }}

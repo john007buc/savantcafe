@@ -24,7 +24,18 @@ div.articles-header
 }
 div.articles-header a{
     text-decoration: none;
-    display: block;
+    display:inline-block;
+}
+div.articles-header form
+{
+    display: inline-block;
+    float:left;
+    border:1px dotted #b2e1ff;
+    width:100%;
+}
+div.articles-header form div{
+    float:left;
+    margin:5px;
 }
 .truncate-content
 {
