@@ -110,10 +110,10 @@ liip_imagine:
                 thumbnail: { size: [120, 90], mode: outbound }
         strip: ~
 
-    #loaders:
-       # default:
-           #filesystem:
-               #data_root:  %kernel.root_dir%/../web/uploads/article_images/temp
+    loaders:
+       default:
+           filesystem:
+               data_root:  %kernel.root_dir%/../web/uploads/article_images/temp
 
 services:
     twig.extension.text:

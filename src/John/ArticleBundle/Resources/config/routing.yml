@@ -1,14 +1,18 @@
-articles:
-    pattern: /articles/{category}/{page}
-    defaults: { _controller: JohnArticleBundle:Article:index,category:null,page:null}
-    requirements:
-           category: \w+
-           page: \d+
 
 
 article_new:
     pattern : /articles/new
     defaults: { _controller: JohnArticleBundle:Article:new}
+
+
+articles:
+    pattern: /articles/{category}/{page}
+    defaults: { _controller: JohnArticleBundle:Article:index,category:'all',page:1}
+    requirements:
+           category: \w+
+           page: \d+
+
+
 
 article_create:
     pattern : /articles/create

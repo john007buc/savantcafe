@@ -38,18 +38,10 @@
             <state vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="884">
               <caret line="25" column="71" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="71" />
               <folding>
+                <element signature="e#12#51#0#Twig" expanded="false" />
+                <element signature="e#306#318#0#Twig" expanded="false" />
                 <element signature="e#836#853#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Article.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/Article.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="40.53846" vertical-offset="1139" max-vertical-offset="8568">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="38" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -57,8 +49,8 @@
       <file leaf-file-name="article.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/css/article.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1904">
-              <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1181" max-vertical-offset="2176">
+              <caret line="116" column="16" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -74,71 +66,83 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ArticleController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-37.923077" vertical-offset="1071" max-vertical-offset="5950">
+              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+              <folding>
+                <element signature="e#48#79#0#PHP" expanded="true" />
+                <element signature="e#1287#1297#1#PHP" expanded="true" />
+                <element signature="e#1332#1342#1#PHP" expanded="true" />
+                <element signature="e#2310#2353#0#PHP" expanded="true" />
+                <element signature="e#3425#3439#0#PHP" expanded="true" />
+                <element signature="e#3515#3556#0#PHP" expanded="true" />
+                <element signature="e#4030#4071#0#PHP" expanded="true" />
+                <element signature="e#4737#4779#0#PHP" expanded="true" />
+                <element signature="e#5833#5847#0#PHP" expanded="true" />
+                <element signature="e#5958#6000#0#PHP" expanded="true" />
+                <element signature="e#6623#6665#0#PHP" expanded="true" />
+                <element signature="e#7125#7141#0#PHP" expanded="true" />
+                <element signature="e#7935#7945#1#PHP" expanded="true" />
+                <element signature="e#8272#8288#1#PHP" expanded="true" />
+                <element signature="e#8599#8615#0#PHP" expanded="true" />
+                <element signature="e#8951#8968#0#PHP" expanded="true" />
+                <element signature="e#10036#10046#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1122">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collection_type.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/js/collection_type.js">
+      <file leaf-file-name="CKEditorController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/CKEditorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
-              <caret line="6" column="30" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.33333334" vertical-offset="612" max-vertical-offset="1853">
+              <caret line="55" column="87" selection-start-line="55" selection-start-column="87" selection-end-line="55" selection-end-column="87" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FilterType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Form/FilterType.php">
+      <file leaf-file-name="Image.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/Image.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.961538" vertical-offset="0" max-vertical-offset="833">
-              <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+            <state vertical-scroll-proportion="-21.26923" vertical-offset="3493" max-vertical-offset="5253">
+              <caret line="239" column="73" selection-start-line="238" selection-start-column="12" selection-end-line="239" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1266" max-vertical-offset="2159">
+              <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
               <folding>
-                <element signature="e#42#73#0#PHP" expanded="true" />
+                <marker date="1422971906087" expanded="true" signature="3159:3287" placeholder="loaders:" />
+                <marker date="1422971906087" expanded="true" signature="3175:3287" placeholder="default:" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CategoryRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/CategoryRepository.php">
+      <file leaf-file-name="Pagination.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/MyClasses/Pagination.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="697">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="-24.846153" vertical-offset="1632" max-vertical-offset="2805">
+              <caret line="134" column="83" selection-start-line="134" selection-start-column="83" selection-end-line="134" selection-end-column="83" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArticleController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5882353" vertical-offset="102" max-vertical-offset="5712">
-              <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
-              <folding>
-                <element signature="e#48#79#0#PHP" expanded="true" />
-                <element signature="e#1246#1256#1#PHP" expanded="true" />
-                <element signature="e#1895#1938#0#PHP" expanded="true" />
-                <element signature="e#3010#3024#0#PHP" expanded="true" />
-                <element signature="e#3100#3141#0#PHP" expanded="true" />
-                <element signature="e#3614#3655#0#PHP" expanded="true" />
-                <element signature="e#4321#4363#0#PHP" expanded="true" />
-                <element signature="e#5417#5431#0#PHP" expanded="true" />
-                <element signature="e#5542#5584#0#PHP" expanded="true" />
-                <element signature="e#6207#6249#0#PHP" expanded="true" />
-                <element signature="e#6709#6725#0#PHP" expanded="true" />
-                <element signature="e#7519#7529#1#PHP" expanded="true" />
-                <element signature="e#7856#7872#1#PHP" expanded="true" />
-                <element signature="e#8183#8199#0#PHP" expanded="true" />
-                <element signature="e#8535#8552#0#PHP" expanded="true" />
-                <element signature="e#9620#9630#1#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -146,8 +150,8 @@
       <file leaf-file-name="ArticleRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/ArticleRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.0" vertical-offset="85" max-vertical-offset="1428">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.769231" vertical-offset="136" max-vertical-offset="1496">
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -187,12 +191,10 @@
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/Comment.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Form/TagType.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/Tag.php" />
-        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Controller/CKEditorController.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/EventListener/UniqueTag.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/edit.html.twig" />
         <option value="$PROJECT_DIR$/web/css/template.css" />
         <option value="$PROJECT_DIR$/src/John/SavantBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/John/AdminBundle/Resources/views/admin_layout.html.twig" />
         <option value="$PROJECT_DIR$/web/bundles/johnarticle/genericons/genericons.css" />
         <option value="$PROJECT_DIR$/web/bundles/johnadmin/css/admin.css" />
@@ -201,19 +203,21 @@
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Form/ImageType.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Form/ArticleType.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/form.html.twig" />
-        <option value="$PROJECT_DIR$/src/John/ArticleBundle/MyClasses/Pagination.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/Article.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/Category.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/filter.html.twig" />
-        <option value="$PROJECT_DIR$/web/bundles/johnarticle/css/article.css" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Form/FilterType.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/CategoryRepository.php" />
         <option value="$PROJECT_DIR$/web/bundles/johnarticle/js/filter_articles.js" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/index.html.twig" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/ArticleRepository.php" />
+        <option value="$PROJECT_DIR$/src/John/ArticleBundle/MyClasses/Pagination.php" />
+        <option value="$PROJECT_DIR$/web/bundles/johnarticle/css/article.css" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php" />
+        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Controller/CKEditorController.php" />
       </list>
     </option>
   </component>
@@ -297,7 +301,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
+              <option name="myItemId" value="uploads" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -315,63 +319,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="johnarticle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="savantcafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="savantcafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="johnarticle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="savantcafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="savantcafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="johnarticle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="media" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -965,13 +913,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/John/SavantBundle/Controller/ProfileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="635">
@@ -1088,20 +1029,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/CKEditorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231" vertical-offset="306" max-vertical-offset="1224">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2159">
-          <caret line="121" column="38" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/CKEditor/browse.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="629">
@@ -1144,28 +1071,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/Image.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="113.11539" vertical-offset="4403" max-vertical-offset="5270">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <element signature="e#44#76#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/AdminBundle/JohnAdminBundle.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="893">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/MyClasses/Pagination.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="45.615383" vertical-offset="1203" max-vertical-offset="2822">
-          <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1264,14 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/Article.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="40.53846" vertical-offset="1139" max-vertical-offset="8568">
@@ -1284,14 +1185,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
           <caret line="6" column="30" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/css/article.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1904">
-          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -1327,41 +1220,100 @@
         <state vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="884">
           <caret line="25" column="71" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="71" />
           <folding>
+            <element signature="e#12#51#0#Twig" expanded="false" />
+            <element signature="e#306#318#0#Twig" expanded="false" />
             <element signature="e#836#853#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/MyClasses/Pagination.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.846153" vertical-offset="1632" max-vertical-offset="2805">
+          <caret line="134" column="83" selection-start-line="134" selection-start-column="83" selection-end-line="134" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/css/article.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1181" max-vertical-offset="2176">
+          <caret line="116" column="16" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/ArticleRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.0" vertical-offset="85" max-vertical-offset="1428">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.769231" vertical-offset="136" max-vertical-offset="1496">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5882353" vertical-offset="102" max-vertical-offset="5712">
-          <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+        <state vertical-scroll-proportion="-37.923077" vertical-offset="1071" max-vertical-offset="5950">
+          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding>
             <element signature="e#48#79#0#PHP" expanded="true" />
-            <element signature="e#1246#1256#1#PHP" expanded="true" />
-            <element signature="e#1895#1938#0#PHP" expanded="true" />
-            <element signature="e#3010#3024#0#PHP" expanded="true" />
-            <element signature="e#3100#3141#0#PHP" expanded="true" />
-            <element signature="e#3614#3655#0#PHP" expanded="true" />
-            <element signature="e#4321#4363#0#PHP" expanded="true" />
-            <element signature="e#5417#5431#0#PHP" expanded="true" />
-            <element signature="e#5542#5584#0#PHP" expanded="true" />
-            <element signature="e#6207#6249#0#PHP" expanded="true" />
-            <element signature="e#6709#6725#0#PHP" expanded="true" />
-            <element signature="e#7519#7529#1#PHP" expanded="true" />
-            <element signature="e#7856#7872#1#PHP" expanded="true" />
-            <element signature="e#8183#8199#0#PHP" expanded="true" />
-            <element signature="e#8535#8552#0#PHP" expanded="true" />
-            <element signature="e#9620#9630#1#PHP" expanded="true" />
+            <element signature="e#1287#1297#1#PHP" expanded="true" />
+            <element signature="e#1332#1342#1#PHP" expanded="true" />
+            <element signature="e#2310#2353#0#PHP" expanded="true" />
+            <element signature="e#3425#3439#0#PHP" expanded="true" />
+            <element signature="e#3515#3556#0#PHP" expanded="true" />
+            <element signature="e#4030#4071#0#PHP" expanded="true" />
+            <element signature="e#4737#4779#0#PHP" expanded="true" />
+            <element signature="e#5833#5847#0#PHP" expanded="true" />
+            <element signature="e#5958#6000#0#PHP" expanded="true" />
+            <element signature="e#6623#6665#0#PHP" expanded="true" />
+            <element signature="e#7125#7141#0#PHP" expanded="true" />
+            <element signature="e#7935#7945#1#PHP" expanded="true" />
+            <element signature="e#8272#8288#1#PHP" expanded="true" />
+            <element signature="e#8599#8615#0#PHP" expanded="true" />
+            <element signature="e#8951#8968#0#PHP" expanded="true" />
+            <element signature="e#10036#10046#1#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1122">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1266" max-vertical-offset="2159">
+          <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
+          <folding>
+            <marker date="1422971906087" expanded="true" signature="3159:3287" placeholder="loaders:" />
+            <marker date="1422971906087" expanded="true" signature="3175:3287" placeholder="default:" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/media/temp/4365.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/Image.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.26923" vertical-offset="3493" max-vertical-offset="5253">
+          <caret line="239" column="73" selection-start-line="238" selection-start-column="12" selection-end-line="239" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/CKEditorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="612" max-vertical-offset="1853">
+          <caret line="55" column="87" selection-start-line="55" selection-start-column="87" selection-end-line="55" selection-end-column="87" />
+          <folding />
         </state>
       </provider>
     </entry>

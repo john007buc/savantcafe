@@ -10,6 +10,7 @@ class Pagination
     private $phpPage;
     private $divResponseId;
     private $rewriteUrl;
+    private $query_string;
 	
 	function __construct($options){
 		$items_count= (array_key_exists('items_count',$options))?$options['items_count']:0;
@@ -34,7 +35,9 @@ class Pagination
 
 		$this->links_class_name=(array_key_exists('class_name',$options))?$options['class_name']:null;
         $this->rewriteUrl=(array_key_exists('rewrite_url',$options))?$options['rewrite_url']:null;
-		$this->page=(isset($_GET['ID'])&& is_numeric($_GET['ID']))?($_GET['ID']):1;
+		//$this->page=(isset($_GET['ID'])&& is_numeric($_GET['ID']))?($_GET['ID']):1;
+        $this->page=(array_key_exists('current_page',$options)&&!is_null($options['current_page']))?$options['current_page']:1;
+        $this->query_string=(array_key_exists('query_string',$options))?$options['query_string']:null;
 
 	}
 
@@ -107,8 +110,8 @@ class Pagination
                    <a href='#' onclick=\" processAjax('{$this->divResponseId}','GET','{$this->phpPage}?ID=".($this->page-1)."');return false;\">Previous</a> &nbsp;";
 
                 else if(!is_null($this->rewriteUrl))
-                    $link.="<a href='/".$this->rewriteUrl."/1' class='first'>First</a> &nbsp;
-                    <a href='/".$this->rewriteUrl."/".($this->page-1)."'>Previous</a> &nbsp;";
+                    $link.="<a href='".$this->rewriteUrl."/1{$this->query_string}' class='first'>First</a> &nbsp;
+                    <a href='".$this->rewriteUrl."/".($this->page-1)."{$this->query_string}'>Previous</a> &nbsp;";
                 else
                      $link.="<a href='".$_SERVER['PHP_SELF']."?ID=1' class='first'>First</a> &nbsp;
                   <a href='".$_SERVER['PHP_SELF']."?ID=".($this->page-1)."'>Previous</a> &nbsp;";
@@ -123,17 +126,13 @@ class Pagination
 
             for($i=$from;$i<=$to;$i++)
             {
-                if(!is_null($ajax))
-                  $link .= "<a href='#' onclick=\" processAjax('{$this->divResponseId}','GET','{$this->phpPage}?ID={$i}');return false; \">";
-                else if(!is_null($this->rewriteUrl))
-                    $link .= "<a href='/".$this->rewriteUrl."/{$i}'>";
-                else
-                    $link .= "<a href='".$_SERVER['PHP_SELF']."?ID={$i}'>";
 
-                if($i==$this->page)
-                $link .="<span id='current-page' style='font-weight: bold;color:red'>{$i}</span></a> ";
+                if(!is_null($ajax))
+                  $link .= "<a href='#' onclick=\" processAjax('{$this->divResponseId}','GET','{$this->phpPage}?ID={$i}');return false; \">{$i}</a>";
+                else if(!is_null($this->rewriteUrl))
+                    $link .=($i==$this->page)?"<a href='#' id='current-page' onlclick='return false;'>{$i}</a>": "<a href='".$this->rewriteUrl."/{$i}{$this->query_string}'>{$i}</a>";
                 else
-                $link .="{$i}</a> ";
+                    $link .= "<a href='".$_SERVER['PHP_SELF']."?ID={$i}'>{$i}</a>";
 
             }
 
@@ -143,8 +142,8 @@ class Pagination
                     return $link."&nbsp;<a href='#' onclick=\" processAjax('{$this->divResponseId}','GET','{$this->phpPage}?ID=".($this->page+1)."');return false;\">Next</a>
                     <a href='#' onclick=\" processAjax('{$this->divResponseId}','GET','{$this->phpPage}?ID=".($this->page_number)."');return false;\" class= 'last'>Last</a> &nbsp; <span> Page {$this->page} of {$this->page_number}</span></div>";
                 else if(!is_null($this->rewriteUrl))
-                    return $link."&nbsp;<a href='/".$this->rewriteUrl."/".($this->page+1)."'>Next</a>
-                    <a href='/".$this->rewriteUrl."/".($this->page_number)."' class= 'last'>Last</a> &nbsp; <span>Page {$this->page} of {$this->page_number}</span></div>";
+                    return $link."&nbsp;<a href='".$this->rewriteUrl."/".($this->page+1)."{$this->query_string}'>Next</a>
+                    <a href='".$this->rewriteUrl."/".($this->page_number)."{$this->query_string}' class= 'last'>Last</a> &nbsp; <span>Page {$this->page} of {$this->page_number}</span></div>";
                 else
                   return $link."&nbsp;<a href='".$_SERVER['PHP_SELF']."?ID=".($this->page+1)."'>Next</a>
                   <a href='".$_SERVER['PHP_SELF']."?ID=".($this->page_number)."' class= 'last'>Last</a> &nbsp; <span>Page {$this->page} of {$this->page_number}</span></div>";

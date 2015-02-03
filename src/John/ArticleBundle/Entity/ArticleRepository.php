@@ -18,18 +18,22 @@ class ArticleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('count(a)');
 
-        if($category){
+        if($category!="all"){
             $qb->join('a.categories','c')
                 ->where('c.slug=:category')
                 ->setParameter('category',$category);
         }
 
-        if($active && $published)
+        if(!is_null($active))
         {
-            $qb->andWhere('a.published=:published')
-                ->setParameter('published',$published)
-                ->andWhere('a.active=:active')
+
+                $qb->andWhere('a.active=:active')
                 ->setParameter('active',$active);
+        }
+
+        if(!is_null($published)){
+            $qb->andWhere('a.published=:published')
+                ->setParameter('published',$published);
         }
 
 
@@ -42,7 +46,7 @@ class ArticleRepository extends EntityRepository
             ->select('a');
 
 
-        if($category){
+        if($category!="all"){
             $qb->join('a.categories','c')
                 ->where('c.slug=:category')
                 ->setParameter('category',$category);

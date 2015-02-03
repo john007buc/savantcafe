@@ -24,20 +24,33 @@ class ArticleController extends Controller
 
             $publish = (null!==$this->getRequest()->query->get("publish"))?filter_var($this->getRequest()->query->get("publish"), FILTER_VALIDATE_BOOLEAN):null;
 
+            $category=($category===null)?"all":$category;
+
             $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category);
 
 
 
 
+        $query_string=(isset($active) && isset($publish))?("?active=".var_export($active, true)."&publish=".var_export($publish, true)):null;
+        $rewrite_url=($category)?$this->generateUrl("articles")."/".$category:$this->generateUrl("articles")."/".$category;
+
+
             $pagerOptions=array(
-                'items_per_page'=>3,
+                'items_per_page'=>1,
                 'items_count'=>$articles_count,
-                'class_name'=>'linksClass',
-                'rewrite_url'=>$this->generateUrl("articles")
+                'class_name'=>'paginator',
+                'rewrite_url'=>$rewrite_url,
+                'query_string'=>$query_string,
+                'current_page'=>$page
             );
+
+
+      // dump();
             $pag=new Pagination($pagerOptions);
             list($from,$to)=$pag->getLimits();
             $pagination_links=$pag->getLinks();
+
+
             $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$pagerOptions['items_per_page']);
 
 
@@ -106,6 +119,7 @@ class ArticleController extends Controller
      */
     public function newAction()
     {
+
         $entity=new Article();
 
         $article_form=$this->createCreateForm($entity);
