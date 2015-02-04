@@ -4,6 +4,9 @@ namespace John\ArticleBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Validator;
+
 
 class CKEditorController extends Controller
 {
@@ -42,63 +45,58 @@ class CKEditorController extends Controller
 
         $uploadedFile = $this->getRequest()->files->get('upload');
 
-        $tmpFolderPathAbs = $this->get('kernel')->getRootDir()."/../web/media/temp/"; // folder to store unfiltered temp file
+        //validate this image
+        $validator=$this->get("validator");
+        $image_constraint = new Image();
+       $image_constraint->mimeTypes=array('image/gif','image/png','image/jpeg');
+
+
+        $image_constraint->maxSize='2k';
+
+
+
+            $error =$validator->validateValue($uploadedFile,$image_constraint);
+
+if(!empty($error)){
+    return new Response($error);
+}
+
+        $tmpFolderPathAbs = $this->get('kernel')->getRootDir()."/../web/uploads/article_images/"; // folder to store unfiltered temp file
         $hash = sha1(uniqid(mt_rand(), true));
         $tmpImageName = $hash .".". $uploadedFile->guessExtension();
 
         $uploadedFile->move($tmpFolderPathAbs, $tmpImageName);
-        $tmpImagePathRel = $tmpFolderPathAbs.$tmpImageName;
+        $web_path = "uploads/article_images/".$tmpImageName;
 
-        $imagemanagerResponse = $this->container->get('liip_imagine.controller')->filterAction($request,$uploadedFile->getClientOriginalName(),'my_thumb');
+        $srcPath="";
+        foreach(['web_medium','web_large'] as $filter)
+        {
 
-        // string to put directly in the "src" of the tag <img>
-        $cacheManager = $this->container->get('liip_imagine.cache.manager');
-        $srcPath = $cacheManager->getBrowserPath($uploadedFile->getClientOriginalName(), 'my_thumb');
-
-
-
-
-        /*$processedImage = $this->container->get('liip_imagine.data.manager')->find('my_thumb', $tmpImagePathRel);
-        $filteredImage = $this->container->get('liip_imagine.filter.manager')->get($request, 'my_thumb', $processedImage, $tmpImagePathRel)->getContent();
-        unlink($tmpFolderPathAbs . $tmpImageName); // eliminate unfiltered temp file.
-        $permanentFolderPath = $this->get('kernel')->getRootDir()."/../web/uploads/article_images/";
-        $permanentImagePath = $permanentFolderPath . $_FILES["upload"]["name"];
-        $f = fopen($permanentImagePath, 'w');
-        fwrite($f, $filteredImage);
-        fclose($f);*/
-
-        return new Response($srcPath);
+            try{
+                $imagemanagerResponse = $this->container
+                    ->get('liip_imagine.controller')
+                    ->filterAction(
+                        $this->getRequest(),
+                        $web_path,
+                        $filter
+                    );
+            }catch (\Exception $e)
+            {
+                return new Response("Update Error");
+            }
 
 
+            $cacheManager = $this->container->get('liip_imagine.cache.manager');
+
+            $srcPath .= $cacheManager->getBrowserPath($web_path, $filter).";";
+
+        }
 
 
 
 
 
-
-        //move_uploaded_file($_FILES["upload"]["tmp_name"],$this->get('kernel')->getRootDir()."/../web/uploads/article_images/".$_FILES["upload"]["name"]);
-       // return new Response("image uploaded");
-      /* $filter='my_thumb';
-        $container = $this->container;
-        $dataManager = $container->get('liip_imagine.data.manager');    // the data manager service
-        $filterManager = $container->get('liip_imagine.filter.manager'); // the filter manager service
-       //$the_image_loc=$_FILES["upload"]["tmp_name"];
-
-
-        move_uploaded_file($_FILES["upload"]["tmp_name"],$this->get('kernel')->getRootDir()."/../web/media/temp/".$_FILES["upload"]["name"]);
-        $image = $dataManager->find($filter,$this->get('kernel')->getRootDir()."/../web/media/temp/".$_FILES["upload"]["name"]);
-        //dump($image);exit();// find the image and determine its type
-        $response = $filterManager->applyFilter($image, $filter);
-
-        $thumb = $response->getContent();                               // get the image from the response
-        $folder=$this->get('kernel')->getRootDir()."/../web/uploads/article_images/".$_FILES["upload"]["name"];
-        $f = fopen($folder, 'w');                                        // create thumbnail file
-        fwrite($f, $thumb);                                             // write the thumbnail
-        fclose($f);
-
-        unlink($this->get('kernel')->getRootDir()."/../web/media/temp/".$_FILES["upload"]["name"]);
-
-        return new Response("image uploaded");*/
+        return new Response("Uploaded OK");
 
     }
 

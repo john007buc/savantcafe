@@ -120,6 +120,10 @@ class ArticleController extends Controller
     public function newAction()
     {
 
+
+
+
+
         $entity=new Article();
 
         $article_form=$this->createCreateForm($entity);
