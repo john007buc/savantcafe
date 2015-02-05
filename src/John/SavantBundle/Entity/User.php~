@@ -108,11 +108,15 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     public $file;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="subscribers")
+     * @ORM\ManyToMany(targetEntity="John\ArticleBundle\Entity\Category", inversedBy="subscribers")
      *
      */
     protected $interested_fields;
 
+    /**
+     * @ORM\OneToMany(targetEntity="John\ArticleBundle\Entity\Media", mappedBy="media")
+     */
+    protected $media;
     /**
      * @var string
      * @ORM\Column(type="string", length=70, nullable=true)
@@ -126,13 +130,13 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="John\ArticleBundle\Entity\Article", mappedBy="author")
      */
     protected $articles;
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="John\ArticleBundle\Entity\Comment", mappedBy="author")
      */
     protected $comments;
 
@@ -459,10 +463,10 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     /**
      * Add interested_field
      *
-     * @param \John\SavantBundle\Entity\Category $interestedField
+     * @param \John\ArticleBundle\Entity\Category $interestedField
      * @return User
      */
-    public function addInterestedField(\John\SavantBundle\Entity\Category $interestedField)
+    public function addInterestedField(\John\ArticleBundle\Entity\Category $interestedField)
     {
         $this->interested_fields[] = $interestedField;
     
@@ -472,9 +476,9 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     /**
      * Remove interested_field
      *
-     * @param \John\SavantBundle\Entity\Category $interestedField
+     * @param \John\ArticleBundle\Entity\Category $interestedField
      */
-    public function removeInterestedField(\John\SavantBundle\Entity\Category $interestedField)
+    public function removeInterestedField(\John\ArticleBundle\Entity\Category $interestedField)
     {
         $this->interested_fields->removeElement($interestedField);
     }
@@ -633,10 +637,10 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     /**
      * Add articles
      *
-     * @param \John\SavantBundle\Entity\Article $articles
+     * @param \John\ArticleBundle\Entity\Article $articles
      * @return User
      */
-    public function addArticle(\John\SavantBundle\Entity\Article $articles)
+    public function addArticle(\John\ArticleBundle\Entity\Article $articles)
     {
         $this->articles[] = $articles;
     
@@ -646,9 +650,9 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     /**
      * Remove articles
      *
-     * @param \John\SavantBundle\Entity\Article $articles
+     * @param \John\ArticleBundle\Entity\Article $articles
      */
-    public function removeArticle(\John\SavantBundle\Entity\Article $articles)
+    public function removeArticle(\John\ArticleBundle\Entity\Article $articles)
     {
         $this->articles->removeElement($articles);
     }
@@ -666,10 +670,10 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     /**
      * Add comments
      *
-     * @param \John\SavantBundle\Entity\Comment $comments
+     * @param \John\ArticleBundle\Entity\Comment $comments
      * @return User
      */
-    public function addComment(\John\SavantBundle\Entity\Comment $comments)
+    public function addComment(\John\ArticleBundle\Entity\Comment $comments)
     {
         $this->comments[] = $comments;
     
@@ -679,9 +683,9 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     /**
      * Remove comments
      *
-     * @param \John\SavantBundle\Entity\Comment $comments
+     * @param \John\ArticleBundle\Entity\Comment $comments
      */
-    public function removeComment(\John\SavantBundle\Entity\Comment $comments)
+    public function removeComment(\John\ArticleBundle\Entity\Comment $comments)
     {
         $this->comments->removeElement($comments);
     }

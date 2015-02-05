@@ -1,0 +1,44 @@
+<?php
+namespace John\ArticleBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+
+/**
+ * Class Format
+ * @package John\ArticleBundle\Entity
+ * @ORM\Table(name="formats")
+ * @ORM\Entity()
+ */
+class Format
+{
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $name;
+
+    /**
+     * @var "John\ArticleBundle\Entity\Format;"
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="type")
+     *
+     */
+    protected $media;
+
+    public function __construct()
+    {
+        $this->media=new ArrayCollection();
+    }
+
+}

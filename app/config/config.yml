@@ -115,10 +115,17 @@ liip_imagine:
                 relative_resize: { widen: 500 }
                 strip: ~
         web_large:
-            quality: 100
+            quality: 80
             filters:
-                relative_resize: { widen: 800 }
                 strip: ~
+                relative_resize: { widen: 600 }
+                #resize: { size: [700, 700], mode: inset }
+        strip_filter:
+            quality: 80
+            filters:
+              strip: ~
+
+
 
 
 

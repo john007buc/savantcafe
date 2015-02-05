@@ -114,6 +114,10 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     protected $interested_fields;
 
     /**
+     * @ORM\OneToMany(targetEntity="John\ArticleBundle\Entity\Media", mappedBy="media")
+     */
+    protected $media;
+    /**
      * @var string
      * @ORM\Column(type="string", length=70, nullable=true)
      */
@@ -143,6 +147,7 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
         $this->interested_fields=new ArrayCollection();
         $this->articles=new ArrayCollection();
         $this->comments=new ArrayCollection();
+        $this->media=new ArrayCollection();
     }
     /**
      * Get id
@@ -694,5 +699,38 @@ class User implements AdvancedUserInterface,Serializable,EquatableInterface
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add media
+     *
+     * @param \John\ArticleBundle\Entity\Media $media
+     * @return User
+     */
+    public function addMedia(\John\ArticleBundle\Entity\Media $media)
+    {
+        $this->media[] = $media;
+    
+        return $this;
+    }
+
+    /**
+     * Remove media
+     *
+     * @param \John\ArticleBundle\Entity\Media $media
+     */
+    public function removeMedia(\John\ArticleBundle\Entity\Media $media)
+    {
+        $this->media->removeElement($media);
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }
