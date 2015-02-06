@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Validator;
-
+use John\ArticleBundle\Entity\Format;
+use John\ArticleBundle\Entity\Media;
 
 class CKEditorController extends Controller
 {
@@ -16,7 +17,7 @@ class CKEditorController extends Controller
     public function browseAction(Request $request)
     {
         $callback = $request->query->get('CKEditorFuncNum');
-        $images_directory=$this->get('kernel')->getRootDir()."/../web/media/cache/my_thumb/uploads/article_images";
+        /*$images_directory=$this->get('kernel')->getRootDir()."/../web/media/cache/my_thumb/uploads/article_images";
 
         $image_types = array(
             'gif' => 'image/gif',
@@ -33,9 +34,12 @@ class CKEditorController extends Controller
                    $i[]=$entry;
 
             }
-        }
+        }*/
+        $images = $this->getDoctrine()->getRepository("JohnArticleBundle:Media")->getAuthorImages($this->getUser()->getId());
+
+
            return $this->render("JohnArticleBundle:CKEditor:browse.html.twig",array(
-               "images"=>$i,
+               "images"=>$images,
                'callback'=>$callback
            ));
 
@@ -67,7 +71,7 @@ class CKEditorController extends Controller
         $tmpFolder = $this->get('kernel')->getRootDir()."/../web/uploads/tmp/"; // folder to store unfiltered temp file
         $hash = sha1(uniqid(mt_rand(), true));
         $imgHash = $hash .".". $uploadedFile->guessExtension();
-        $web_path = "uploads/tmp/".$imgHash;
+        $temp_path = "uploads/tmp/".$imgHash;
         $image_temp_absolute_path=$tmpFolder.$imgHash;
         $uploadedFile->move($tmpFolder, $imgHash);
 
@@ -75,9 +79,10 @@ class CKEditorController extends Controller
         date_default_timezone_set('Europe/Bucharest');
         $year = date("Y");
         $month= date("m");
-        $upload_path=$this->get('kernel')->getRootDir()."/../web/uploads/".$year."/".$month;
-        if(!is_dir($upload_path)){
-            mkdir($upload_path,0777, true);
+        $upload_dir=$this->get('kernel')->getRootDir()."/../web/uploads/".$year."/".$month;
+        $image_web_path="uploads/".$year."/".$month."/".$imgHash;
+        if(!is_dir($upload_dir)){
+            mkdir($upload_dir,0777, true);
         }
 
         list($width,$height)=getimagesize($image_temp_absolute_path);   //get the size of the file and apply the filter
@@ -88,15 +93,25 @@ class CKEditorController extends Controller
         $filterManager = $container->get('liip_imagine.filter.manager');// the filter manager service
 
         try{
-            $image = $dataManager->find($filter, $web_path);            // find the image and determine its type
+            $image = $dataManager->find($filter, $temp_path);            // find the image and determine its type
             $response = $filterManager->applyFilter($image, $filter);
             $binary = $response->getContent();                           // get the image from the response
 
-            $f = fopen($image_path=$upload_path."/".$imgHash, 'w');  // create image file
+            $f = fopen($image_root_path=$upload_dir."/".$imgHash, 'w');  // create image file
             fwrite($f, $binary);                         // write the image
             fclose($f);
 
-            //write image path in databse
+            //write image path in database
+            $em=$this->getDoctrine()->getManager();
+            $image_format = $em->getRepository("JohnArticleBundle:Format")->findOneBy(array("name"=>"image"));
+            $media = new Media();
+            $media->setType($image_format);
+            $media->setAuthor($this->getUser());
+            $media->setPath($image_web_path);
+            $media->setRootPath($image_root_path);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($media);
+            $em->flush();
 
             unlink($image_temp_absolute_path);            //delete the old image from temp folder
             return new Response("Updated OK");

@@ -4,7 +4,7 @@
     <body>
     {% for image in images %}
 
-        <img class="ck-images" alt= "{{ asset('media/cache/web_medium/uploads/article_images/'~image,'cdn') }}" src="{{ asset(('media/cache/my_thumb/uploads/article_images/'~image))}}">
+        <img class="ck-images" alt= "{{ asset(image,'cdn') }}" src="{{ asset(image|imagine_filter('my_thumb'))}}">
 
 
     {% endfor %}

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Media
  * @package John\ArticleBundle\Entity
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass = "John\ArticleBundle\Entity\MediaRepository")
  * @ORM\HasLifecycleCallbacks
  *
  */
@@ -29,6 +29,12 @@ class Media
     protected $path;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $root_path;
+
+    /**
      * @var DateTime
      * @ORM\Column(type="datetime")
      */
@@ -42,7 +48,7 @@ class Media
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Format", inversedBy="media")
+     * @ORM\ManyToOne(targetEntity="Format", inversedBy="media", cascade={"all"})
      * @ORM\JoinColumn(name="format_id", referencedColumnName="id")
      */
     protected $type;
@@ -149,5 +155,38 @@ class Media
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+
+    public function setUpdatedValue()
+    {
+        $this->updated=new \DateTime();
+    }
+
+    /**
+     * Set root_path
+     *
+     * @param string $rootPath
+     * @return Media
+     */
+    public function setRootPath($rootPath)
+    {
+        $this->root_path = $rootPath;
+    
+        return $this;
+    }
+
+    /**
+     * Get root_path
+     *
+     * @return string 
+     */
+    public function getRootPath()
+    {
+        return $this->root_path;
     }
 }
