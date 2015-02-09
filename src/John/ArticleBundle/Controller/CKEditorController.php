@@ -16,33 +16,12 @@ class CKEditorController extends Controller
 
     public function browseAction(Request $request)
     {
-        $callback = $request->query->get('CKEditorFuncNum');
-        /*$images_directory=$this->get('kernel')->getRootDir()."/../web/media/cache/my_thumb/uploads/article_images";
-
-        $image_types = array(
-            'gif' => 'image/gif',
-            'png' => 'image/png',
-            'jpg' => 'image/jpeg',
-        );
-
-        $images = array_diff(scandir($images_directory), array('..', '.'));
-
-        $i=array();
-        foreach ($images as $entry) {
-            if (!is_dir($entry)) {
-
-                   $i[]=$entry;
-
-            }
-        }*/
         $images = $this->getDoctrine()->getRepository("JohnArticleBundle:Media")->getAuthorImages($this->getUser()->getId());
 
-
-           return $this->render("JohnArticleBundle:CKEditor:browse.html.twig",array(
+        return $this->render("JohnArticleBundle:CKEditor:browse.html.twig",array(
                "images"=>$images,
                'callback'=>$callback
            ));
-
     }
 
     public function uploadAction(Request $request)
