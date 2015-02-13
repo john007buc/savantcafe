@@ -1,0 +1,70 @@
+.content{
+    width:95%;
+}
+
+header
+{
+    height:140px;
+}
+
+
+.menu,.log_or_reg
+{
+    display: none;
+}
+#select-form{
+    display:block;
+    line-height: 40px;
+}
+
+
+.sub-nav
+{
+    padding: 2px;
+}
+.logo{
+
+    width:100%;
+    float:left;
+}
+
+#search-div
+{
+    width:100%;
+    float:left;
+    margin:1px;
+    text-align: left;
+}
+
+#search-div input[type=text]
+{
+    width:65%;
+}
+
+.logo span{
+    display:none;
+}
+
+/******Login page*****/
+#login_div
+{
+
+    float:left;
+    width:100%;
+}
+
+#register_div
+{
+    float:left;
+    width:100%;
+}
+
+#login_form input,#register_form input
+{
+    width:90%;
+    max-width: 150px;
+}
+#register_form img
+{
+
+}

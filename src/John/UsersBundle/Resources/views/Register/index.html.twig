@@ -1,0 +1,21 @@
+
+    <h1>Register form here</h1>
+    {% for flash in app.session.flashbag.get('security_msg') %}
+        {{ flash }}
+    {% endfor %}
+
+    {{ form_start(register_form,{'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(register_form) }}
+
+    {{ form_row(register_form.first_name) }}
+    {{ form_row(register_form.last_name) }}
+    {{ form_row(register_form.email) }}
+    {{ form_row(register_form.plainPassword.first,{'label':'Password'}) }}
+    {{ form_row(register_form.plainPassword.second, {'label':'Repeat Password'}) }}
+    <div>
+
+        <img src="{{ path('john_savant_captcha') }}" alt="Security image"/>
+    </div>
+
+    {{ form_row(register_form.captcha) }}
+    {{ form_end(register_form) }}

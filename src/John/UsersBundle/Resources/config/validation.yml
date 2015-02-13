@@ -1,0 +1,22 @@
+John\UsersBundle\Entity\User:
+    properties:
+          first_name:
+              - NotBlank: ~
+          last_name:
+              - NotBlank: ~
+          email:
+              - NotBlank: {groups: [register]}
+              - Email: ~
+          plainPassword:
+              - NotBlank: {groups: [register]}
+          #file:
+              #- Image: {maxSize: 60000000,groups: [profile]}
+
+
+JohnUsersBundle\Form\Model\ChangePassword:
+      properties:
+           oldPassword:
+                       - Symfony\Component\Security\Core\Validator\Constraints\UserPassword:
+                           message: "Wrong value for your current password"
+           plainPassword:
+                         - NotBlank: ~

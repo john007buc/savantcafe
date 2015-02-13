@@ -1,0 +1,7 @@
+parameters:
+#    john_savant.example.class: John\SavantBundle\Example
+
+services:
+#    john_savant.example:
+#        class: %john_savant.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
