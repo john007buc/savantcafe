@@ -1,0 +1,7 @@
+parameters:
+#    john_profile.example.class: John\ProfileBundle\Example
+
+services:
+#    john_profile.example:
+#        class: %john_profile.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

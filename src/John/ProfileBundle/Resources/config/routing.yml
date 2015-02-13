@@ -1,0 +1,11 @@
+john_users_profile:
+    pattern: /profile
+    defaults: {_controller:JohnProfileBundle:Profile:index}
+
+john_users_profile_edit:
+    pattern: /profile/edit/{id}
+    defaults: {_controller:JohnProfileBundle:Profile:edit}
+
+john_users_profile_change_password:
+    pattern: /profile/change/pass
+    defaults: {_controller:JohnProfileBundle:Profile:changePassword}
