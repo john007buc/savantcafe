@@ -37,7 +37,7 @@ class Category
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="John\SavantBundle\Entity\User", mappedBy="$interested_fields")
+     * @ORM\ManyToMany(targetEntity="John\UsersBundle\Entity\User", mappedBy="$interested_fields")
      */
     protected $subscribers;
 

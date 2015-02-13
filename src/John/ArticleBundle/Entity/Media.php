@@ -42,7 +42,7 @@ class Media
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="John\SavantBundle\Entity\User", inversedBy="media")
+     * @ORM\ManyToOne(targetEntity="John\UsersBundle\Entity\User", inversedBy="media")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
@@ -114,10 +114,10 @@ class Media
     /**
      * Set author
      *
-     * @param \John\SavantBundle\Entity\User $author
+     * @param \John\UsersBundle\Entity\User $author
      * @return Media
      */
-    public function setAuthor(\John\SavantBundle\Entity\User $author = null)
+    public function setAuthor(\John\UsersBundle\Entity\User $author = null)
     {
         $this->author = $author;
     

@@ -1,3 +1,11 @@
+john_profile:
+    resource: "@JohnProfileBundle/Resources/config/routing.yml"
+    prefix:   /
+
+john_users:
+    resource: "@JohnUsersBundle/Resources/config/routing.yml"
+    prefix:   /
+
 john_article:
     resource: "@JohnArticleBundle/Resources/config/routing.yml"
     prefix:   /

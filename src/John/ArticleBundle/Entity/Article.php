@@ -67,7 +67,7 @@ class Article
     protected $tags;
 
     /**
-     * @ORM\ManyToOne(targetEntity="John\SavantBundle\Entity\User", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="John\UsersBundle\Entity\User", inversedBy="articles")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
@@ -319,10 +319,10 @@ class Article
     /**
      * Set author
      *
-     * @param \John\SavantBundle\Entity\User $author
+     * @param \John\UsersBundle\Entity\User $author
      * @return Article
      */
-    public function setAuthor(\John\SavantBundle\Entity\User $author = null)
+    public function setAuthor(\John\UsersBundle\Entity\User $author = null)
     {
         $this->author = $author;
     
@@ -332,7 +332,7 @@ class Article
     /**
      * Get author
      *
-     * @return \John\SavantBundle\Entity\User 
+     * @return \John\UsersBundle\Entity\User
      */
     public function getAuthor()
     {

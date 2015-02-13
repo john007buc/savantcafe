@@ -30,7 +30,7 @@ class Comment
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="John\SavantBundle\Entity\User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="John\UsersBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
@@ -101,7 +101,7 @@ class Comment
      * @param \John\SavantBundle\Entity\User $author
      * @return Comment
      */
-    public function setAuthor(\John\SavantBundle\Entity\User $author = null)
+    public function setAuthor(\John\UsersBundle\Entity\User $author = null)
     {
         $this->author = $author;
     

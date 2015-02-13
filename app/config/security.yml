@@ -19,7 +19,7 @@ security:
 
     providers:
               database_provider:
-                     entity: {class: JohnSavantBundle:User, property: email}
+                     entity: {class: JohnUsersBundle:User, property: email}
 
     encoders:
-         John\SavantBundle\Entity\User: sha512
+         John\UsersBundle\Entity\User: sha512
