@@ -82,9 +82,10 @@ class ArticleController extends Controller
 
         $article_form->handleRequest($request);
 
+
         if($article_form->isValid())
         {
-
+           // dump($article);exit();
             $article->setAuthor($this->getUser());
             $manager=$this->getDoctrine()->getManager();
 

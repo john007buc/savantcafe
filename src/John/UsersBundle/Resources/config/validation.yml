@@ -6,7 +6,7 @@ John\UsersBundle\Entity\User:
               - NotBlank: ~
           email:
               - NotBlank: {groups: [register]}
-              - Email: ~
+              - Email: {groups: [register]}
           plainPassword:
               - NotBlank: {groups: [register]}
           #file:
