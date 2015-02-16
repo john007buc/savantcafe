@@ -1,0 +1,54 @@
+
+John\ArticleBundle\Entity\Article:
+          properties:
+                categories:
+                     - Valid: ~
+                     - Count:
+                           min: 1
+                           minMessage: "You must specify at least one category"
+                title:
+                   - NotNull: ~
+                url:
+                   - NotNull: {message:"trl nu poate fi nul"}
+                tags:
+                   - All:
+                        - Type:
+                            type: John\ArticleBundle\Entity\Tag
+                               # addresses is array of entities, so use "traverse" option to validate each entity in that array
+
+
+
+John\ArticleBundle\Entity\Category:
+           properties:
+               name:
+                 - NotNull: ~
+                 - Length:
+                      min: 3
+               slug:
+                 - NotNull: ~
+                 - Length:
+                     min: 3
+
+
+John\ArticleBundle\Entity\Image:
+            properties:
+                 name:
+                    - NotBlank: ~
+                 alt:
+                    - NotBlank: {message: Introdu campul alt}
+                    - Length:
+                        min: 7
+                 file:
+                    - Image:
+                         notFoundMessage: Image not uploaded
+                         mimeTypes: ['image/gif','image/jpeg']
+                         mimeTypesMessage: Only GIF or JPEG images are accepted.
+
+
+John\ArticleBundle\Entity\Tag:
+               propertires:
+                     name:
+                        - NotBlank: ~
+                        - Length:
+                            min: 5
+                            minMessage: Gogu
