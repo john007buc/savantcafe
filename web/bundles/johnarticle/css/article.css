@@ -7,6 +7,7 @@ form.article-form label
     display: inline-block;
     width:100px;
     text-align: left;
+    background-color: #000099;
 
 }
 
@@ -120,4 +121,18 @@ div.paginator a{
 {
     color:red;
     font-weight: bold;
+}
+
+ul.article_error
+{
+    margin:0;
+    padding:0;
+    position:relative;
+    left:0px;
+    top:20px;
+
+}
+ul.article_error li{
+    color:red;
+    list-style-type: none;
 }

@@ -7,12 +7,13 @@ var $newLinkLi = $('<li></li>').append($addTagLink);
 $(document).ready(function() {
     // Get the ul that holds the collection of tags
 
-    $collectionHolder = $('ul.tags');
-    $collectionHolder.find('li').each(function() {
+    $collectionLi = $('ul.tags>li');
+    $collectionLi.each(function() {
         addTagFormDeleteLink($(this));
     });
 
     // add the "add a tag" anchor and li to the tags ul
+    $collectionHolder=$('ul.tags');
     $collectionHolder.append($newLinkLi);
 
     // count the current form inputs we have (e.g. 2), use that as the new

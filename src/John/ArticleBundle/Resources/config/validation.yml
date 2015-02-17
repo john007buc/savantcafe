@@ -1,5 +1,16 @@
+John\ArticleBundle\Entity\Tag:
+               propertires:
+                     name:
+                        - NotBlank: ~
+                        - Length:
+                            min: 5
+                            minMessage: Gogu
+
 
 John\ArticleBundle\Entity\Article:
+          constraints:
+                - Callback:
+                       methods: [areTagsValid]
           properties:
                 categories:
                      - Valid: ~
@@ -10,11 +21,12 @@ John\ArticleBundle\Entity\Article:
                    - NotNull: ~
                 url:
                    - NotNull: {message:"trl nu poate fi nul"}
-                tags:
-                   - All:
-                        - Type:
-                            type: John\ArticleBundle\Entity\Tag
-                               # addresses is array of entities, so use "traverse" option to validate each entity in that array
+                #tags:
+                  # - All:
+                        #- Type:
+                            #type: John\ArticleBundle\Entity\Tag
+                                              # addresses is array of entities, so use "traverse" option to validate each entity in that array
+                        #- Valid: ~
 
 
 
@@ -45,10 +57,3 @@ John\ArticleBundle\Entity\Image:
                          mimeTypesMessage: Only GIF or JPEG images are accepted.
 
 
-John\ArticleBundle\Entity\Tag:
-               propertires:
-                     name:
-                        - NotBlank: ~
-                        - Length:
-                            min: 5
-                            minMessage: Gogu

@@ -4,6 +4,7 @@ namespace John\ArticleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Class Article
@@ -495,5 +496,25 @@ class Article
     public function removeCategorie(\John\ArticleBundle\Entity\Category $categories)
     {
         $this->categories->removeElement($categories);
+    }
+
+    public function areTagsValid(ExecutionContextInterface $context)
+    {
+        if(count($this->getTags())){
+            $i=0;
+            foreach($this->getTags() as $tag)
+            {
+
+                if(!preg_match("/^[a-zA-Z ]*$/",$tag->getName()))
+                {
+                    $context->addViolationAt("tags[$i].name", 'Only letters and white space allowed', array(), null);
+                }
+                $i++;
+
+            }
+
+        }
+
+
     }
 }

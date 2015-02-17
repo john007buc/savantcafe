@@ -6,6 +6,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use John\ArticleBundle\Form\TagType;
 use John\ArticleBundle\Form\ImageType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class ArticleType extends AbstractType
 {
@@ -35,8 +39,8 @@ class ArticleType extends AbstractType
                 'allow_add'=>true,
                 'allow_delete'=>true,
                 'label'=>false,
-                   'error_bubbling' => false,
-                   'cascade_validation' => true,
+                 'error_bubbling'=>false,
+
                 ))
                 ->add('save','submit');
 
@@ -44,9 +48,11 @@ class ArticleType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+
         $resolver->setDefaults(array(
             'data_class'=>'John\ArticleBundle\Entity\Article',
-            'cascade_validation' => true
+            'cascade_validation' => true,
+
         ));
 
     }
