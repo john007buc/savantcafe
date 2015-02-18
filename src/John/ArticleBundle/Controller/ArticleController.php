@@ -45,16 +45,18 @@ class ArticleController extends Controller
             );
 
 
-      // dump();
+
             $pag=new Pagination($pagerOptions);
+
             list($from,$to)=$pag->getLimits();
+
             $pagination_links=$pag->getLinks();
 
 
             $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$pagerOptions['items_per_page']);
 
 
-            //dump($articles);exit();
+
         //$nr=$em->getRepository("JohnArticleBundle:Article")->countArticles(1,0,2);
         //dump($nr);
 
@@ -71,7 +73,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Insert the new article in data base
+     * Insert the new article in the database
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -85,9 +87,15 @@ class ArticleController extends Controller
 
         if($article_form->isValid())
         {
-           // dump($article);exit();
+
+            if($publish=$article_form->get("publish")->isClicked()){
+                $article->setPublished(true);
+                $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
+            }
             $article->setAuthor($this->getUser());
             $manager=$this->getDoctrine()->getManager();
+
+
 
             //$existing_tags=$article_form->get('existing_tags')->getData();
 
@@ -100,7 +108,11 @@ class ArticleController extends Controller
             $manager->persist($article);
             $manager->flush();
 
-              return $this->redirect($this->generateUrl('article_show',array('id'=>$article->getId())));
+              return $this->redirect($this->generateUrl('article_show',array(
+                  'id'=>$article->getId(),
+
+
+              )));
 
         }
 
@@ -108,7 +120,6 @@ class ArticleController extends Controller
             'entity'=>$article,
             'form'=>$article_form->createView()
         ));
-        //exit(Doctrine\Common\Util\Debug::dump($article_form->get('existing_tags')->getData()));
 
     }
 
@@ -120,10 +131,6 @@ class ArticleController extends Controller
      */
     public function newAction()
     {
-
-
-
-
 
         $entity=new Article();
 
@@ -140,24 +147,24 @@ class ArticleController extends Controller
      **/
     public function showAction($id)
     {
-         dump("ghhfhfghfg");
+
        $manager = $this->getDoctrine()->getManager();
        $entity = $manager->getRepository('JohnArticleBundle:Article')->find($id);
 
-
         if(!$entity){
-            return $this->createNotFoundException("No article entity was found");
+            throw $this->createNotFoundException("No article entity was found");
         }
 
         $delete_form=$this->createDeleteForm($id);
-
-        $publish_form = $this->createPublishForm($id,$entity->getPublished()?"Unpublish":"Publish");
+        $is_published=$entity->getPublished();
+        $publish_form = $this->createPublishForm($id, $is_published?"Unpublish":"Publish");
 
 
         return $this->render('JohnArticleBundle:Article:show.html.twig',array(
            'entity'=>$entity,
             'delete_form'=>$delete_form->createView(),
-            'publish_form'=>$publish_form->createView()
+            'publish_form'=>$publish_form->createView(),
+            'published'=>$is_published
         ));
 
     }

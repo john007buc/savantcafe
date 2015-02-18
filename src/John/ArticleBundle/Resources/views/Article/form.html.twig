@@ -14,20 +14,54 @@
 
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
 
-    {{ form_row(form.categories) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.content) }}
-    {{ form_row(form.url) }}
+     <div>
+        {{ form_label(form.categories) }}
+        {{ form_widget(form.categories) }}
+        {{ form_errors(form.categories) }}
+     </div>
 
-    {{ form_row(form.featured_image.file) }}
-    {{ form_row(form.featured_image.alt) }}
+    <div>
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+
+    <div>
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content) }}
+        {{ form_errors(form.content) }}
+    </div>
+
+    <div>
+        {{ form_label(form.url) }}
+        {{ form_widget(form.url) }}
+        {{ form_errors(form.url) }}
+    </div>
+
+    <div>
+        {{ form_label(form.featured_image.file) }}
+        {{ form_widget(form.featured_image.file) }}
+        {{ form_errors(form.featured_image.file) }}
+    </div>
+
+    <div>
+        {{ form_label(form.featured_image.alt,'Image Description' ) }}
+        {{ form_widget(form.featured_image.alt, { 'attr':{'disabled':'disabled'} } ) }}
+        {{ form_errors(form.featured_image.alt) }}
+    </div>
+
 
     {{ form_row(form.existing_tags) }}
-<ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype)|e}}">
-    {% for tag in form.tags %}
-        <li>{{ form_row(tag.name) }}</li>
-    {% endfor %}
-</ul>
 
-    {{ form_row(form.published) }}
+    <ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype)|e}}">
+        {% for tag in form.tags %}
+            <li>
+                <div>
+                    {{ form_label(tag.name) }}
+                    {{ form_widget(tag.name) }}
+                    {{ form_errors(tag.name) }}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 {{ form_end(form) }}

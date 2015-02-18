@@ -28,7 +28,7 @@ class ArticleType extends AbstractType
                 ->add('featured_image', new ImageType(),array(
                     'required' => false,
                 ))
-                ->add('published','checkbox',array('label'=>'Publish this file','required' => false))
+
                ->add('existing_tags','entity',array(
                 'class'=>'JohnArticleBundle:Tag',
                 'property'=>'name',
@@ -42,7 +42,9 @@ class ArticleType extends AbstractType
                  'error_bubbling'=>false,
 
                 ))
-                ->add('save','submit');
+                ->add('publish','submit',array('label'=>"Publish"))
+                ->add('savedraft','submit',array('label'=>"Save as Draft"))
+                ->add('preview','submit',array('label'=>"Preview"));
 
     }
 

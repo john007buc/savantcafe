@@ -24,7 +24,7 @@ class Pagination
 
 
 		
-		if($this->items_per_page!=0 && $items_count!=0)
+		if($this->items_per_page!=0 && $items_count>=0)
 		$this->page_number=ceil($items_count/$this->items_per_page);
 		else
 		exit();

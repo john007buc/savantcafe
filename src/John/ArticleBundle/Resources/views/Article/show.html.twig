@@ -2,11 +2,22 @@
 
 {% block admin_main %}
 
-    <div class="article-admin-panel">
-        {{ form(delete_form) }}
-        {{ form(publish_form) }}
-        <a class="edit-article" href="{{ path('article_edit',{'id':entity.id}) }}">Edit this article</a>
-    </div>
+     <a href="{{app.request.headers.get('referer')  }}"> << Back</a>
+    {#show eidt, publish and delete buttons only for admin or in preview mode #}
+    {% if is_granted("ROLE_ADMIN") or not published  %}
+        <div class="article-admin-panel">
+            {{ form(delete_form) }}
+            {{ form(publish_form) }}
+            <a class="edit-article" href="{{ path('article_edit',{'id':entity.id}) }}">Edit this article</a>
+        </div>
+   {% endif %}
+
+    {% for flashMessage in app.session.flashbag.get('publish_message') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
 <h1>{{ entity.title }}</h1>
     {% if entity.featuredImage %}
         <figure style="float:left">

@@ -47,7 +47,7 @@ John\ArticleBundle\Entity\Image:
                  name:
                     - NotBlank: ~
                  alt:
-                    - NotBlank: {message: Introdu campul alt}
+                    - NotBlank: {message: Choose file again and enter a short description}
                     - Length:
                         min: 7
                  file:

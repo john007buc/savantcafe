@@ -27,6 +27,18 @@ $(document).ready(function() {
         // add a new tag form (see next code block)
         addTagForm($collectionHolder, $newLinkLi);
     });
+
+
+
+    $("input:file").change(function (){
+        if($(this).val()){
+            $("#article_featured_image_alt").removeAttr("disabled");
+        }
+
+    });
+
+
+
 });/**
  * Created by IvanI on 11/3/2014.
  */

@@ -7,7 +7,7 @@ form.article-form label
     display: inline-block;
     width:100px;
     text-align: left;
-    background-color: #000099;
+
 
 }
 
@@ -128,11 +128,18 @@ ul.article_error
     margin:0;
     padding:0;
     position:relative;
-    left:0px;
-    top:20px;
+    left:100px;
+
 
 }
 ul.article_error li{
     color:red;
     list-style-type: none;
+}
+.flash-notice{
+    background-color: #66dd66;
+    color: green;
+    padding:5px;
+    margin:2px;
+    border:1px solid forestgreen;
 }

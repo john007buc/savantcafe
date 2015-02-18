@@ -3,7 +3,7 @@
 namespace John\ArticleBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use John\ArticleBundle\Entity\Article;
-
+use John\ArticleBundle\Entity\Tag;
 class UniqueTag
 {
 
@@ -17,7 +17,10 @@ class UniqueTag
               $tags = $entity->getTags();
               foreach( $tags as $key=>$tag){
 
-                  $result = $manager->getRepository('JohnArticleBundle:Tag')->findOneBy(array('name'=>$tag->getName()));
+                //CHANGE NAME TO LOWER CASE
+                 $tag->setName(strtolower($tag->getName()));
+
+                 $result = $manager->getRepository('JohnArticleBundle:Tag')->findOneBy(array('name'=>$tag->getName()));
 
                   if($result){
 
@@ -61,29 +64,28 @@ class UniqueTag
         $entity = $args->getEntity();
         $manager = $args->getEntityManager();
 
-        if($entity instanceof Article)
-        {
 
+        if($entity instanceof Article) {
 
             $tags = $entity->getTags();
-            //dump($tags);
 
-            foreach($tags as $tag){
+            foreach ($tags as $tag) {
 
+                $tag->setName(strtolower($tag->getName()));
 
                 /*In preUpdate events, the newest tags are persisted to Doctrine even if there is no flush()
                   So if a tag exist, it is persisted end the bellow query will find it twice.
                   Because the order is ASC, the new added tag wil be the last in the result (it has a greater id)*/
 
-                  $result = $manager->getRepository('JohnArticleBundle:Tag')->findBy(array('name'=>$tag->getName()),array('id'=>'ASC'));
-                  //dump($result);
+                $result = $manager->getRepository('JohnArticleBundle:Tag')->findBy(array('name' => $tag->getName()), array('id' => 'ASC'));
+
                 /*If there are duplicate tags*/
-                if(count($result)>1){
+                if (count($result) > 1) {
 
 
                     /*Remove the new added tag from entity and entity manager(because we don't want to add it again)*/
-                     $entity->removeTag($result[1]);
-                     $manager->remove($result[1]);
+                    $entity->removeTag($result[1]);
+                    $manager->remove($result[1]);
 
 
                     /*Add the existing tag to the entity if the entity doesn't contain it yet */
@@ -91,20 +93,28 @@ class UniqueTag
                     /*At first iteration the second mathematica object from result is removed and the first one is added*/
                     /*At second iteration the same thing happen so we must avoid do add again the first object to the entity: primary key error in article_tag table*/
 
-                    if(!$entity->getTags()->contains($result[0])){
+                    if (!$entity->getTags()->contains($result[0])) {
                         $entity->addTag($result[0]);
                     }
 
-                  }
+                }
             }
 
             $this->add_existing_tags($entity);
+        }elseif($entity instanceof Tag){
+
+            //IF ONLIY TAG NAME WAS UPDATED, CHANGE NAME TO LOWER CASE
+            $N=strtolower($entity->getName());
+            $entity->setName($N);
+           // dump($entity);exit();
+        }
+
+
 
 
 
 
         }
-    }
 
 
 
