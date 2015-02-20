@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/johnprofile/css/profile.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/johnarticle/css/article.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/johnarticle/genericons/genericons.css')}}" />
+{% endblock %}
+{% block body %}
+    <div class="profile_left_panel">
+        {{include ("JohnProfileBundle::links.html.twig") }}
+    </div>
+    <div class="profile-content">
+        {% block main %}
+        {% endblock %}
+    </div>
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset("bundles/johnprofile/js/profile.js") }}"></script>
+    {% endblock %}
+{% endblock %}
