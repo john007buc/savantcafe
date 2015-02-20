@@ -1,6 +1,7 @@
-{% extends 'JohnAdminBundle::admin_layout.html.twig' %}
 
-{% block admin_main %}
+{% extends "JohnArticleBundle:Article:article_layout.html.twig" %}
+
+{% block main %}
     {{ include("JohnArticleBundle:Article:form.html.twig",{'form':form}) }}
 {% endblock %}
 

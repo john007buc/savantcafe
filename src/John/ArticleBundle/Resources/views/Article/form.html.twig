@@ -58,8 +58,13 @@
             <li>
                 <div>
                     {{ form_label(tag.name) }}
-                    {{ form_widget(tag.name) }}
+                    {% if edit==true %}
+                    {{ form_widget(tag.name,{ 'attr':{'readonly':'readonly'} }) }}
+                    {% else %}
+                        {{ form_widget(tag.name) }}
+                    {% endif %}
                     {{ form_errors(tag.name) }}
+
                 </div>
             </li>
         {% endfor %}

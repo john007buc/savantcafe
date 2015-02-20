@@ -2,13 +2,13 @@ $(document).ready(function(){
     $("ul.links li a").on('click',function(e){
         e.preventDefault();
         var profile_url=$(this).attr('href');
-
+         alert(profile_url);
 
         $.ajax({
                 url:profile_url,
                 method:"POST",
                 success:function(result){
-                $("#profile_main_tab").html(result);
+                $("div.profile-content").html(result);
               }});
 
     });
@@ -28,7 +28,7 @@ $(document).ready(function(){
              //$("form.profile_form").serialize(), // serializes the form's elements.
             success: function(data)
             {
-                $("#profile_main_tab").html(data); // show response from the php script.
+                $("#profile-content").html(data); // show response from the php script.
 
             }
         });

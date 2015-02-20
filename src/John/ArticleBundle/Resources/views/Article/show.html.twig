@@ -1,6 +1,6 @@
-{% extends 'JohnAdminBundle::admin_layout.html.twig' %}
+{% extends "JohnArticleBundle:Article:article_layout.html.twig" %}
 
-{% block admin_main %}
+{% block main %}
 
      <a href="{{app.request.headers.get('referer')  }}"> << Back</a>
     {#show eidt, publish and delete buttons only for admin or in preview mode #}

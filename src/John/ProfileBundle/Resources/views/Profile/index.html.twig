@@ -1,16 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends 'JohnProfileBundle::profile_layout.html.twig' %}
 
-{% block body %}
+{% block main %}
+    Welcome {{ app.user.firstname }}, {{ app.user.lastname }}
 
-    <div class="profile_left_tab">
-        Actions
-        {{ include('JohnProfileBundle:Profile:left_tab.html.twig') }}
-    </div>
-    <div id="profile_main_tab">
-        Welcome {{ app.user.firstname }}, {{ app.user.lastname }}
-    </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset("bundles/johnprofile/js/profile.js") }}"></script>
 {% endblock %}

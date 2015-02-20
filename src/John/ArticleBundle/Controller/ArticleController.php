@@ -32,7 +32,7 @@ class ArticleController extends Controller
 
 
         $query_string=(isset($active) && isset($publish))?("?active=".var_export($active, true)."&publish=".var_export($publish, true)):null;
-        $rewrite_url=($category)?$this->generateUrl("articles")."/".$category:$this->generateUrl("articles")."/".$category;
+        $rewrite_url=($category)?$this->generateUrl("p_articles")."/".$category:$this->generateUrl("p_articles")."/".$category;
 
 
             $pagerOptions=array(
@@ -179,25 +179,42 @@ class ArticleController extends Controller
        if(!$entity){
            return $this->createNotFoundException("Entity not found");
        }
+
+
+
        $form = $this->createEditForm($entity);
 
        $form->handleRequest($request);
        if($form->isValid())
        {
 
+
            //add existing tags from dropdown list  if the tag doesn't exist
-           foreach($entity->existing_tags as $tag)
+          /* foreach($entity->existing_tags as $tag)
            {
                if(!$entity->getTags()->contains($tag)){
                    $entity->addTag($tag);
                }
 
-           }
+           }*/
+
 
            $entity_manager->persist($entity);
-           $entity_manager->flush();
 
-           return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+
+
+           if($form->get("publish")->isClicked()){
+               $entity->setPublished(true);
+               $entity_manager->flush();
+
+               $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
+               return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+           }else{
+               $entity_manager->flush();
+               return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+           }
+
+
        }
 
         $delete_form=$this->createDeleteForm($id);
@@ -217,6 +234,13 @@ class ArticleController extends Controller
     {
          $entity_manager=$this->getDoctrine()->getManager();
          $entity = $entity_manager->getRepository('JohnArticleBundle:Article')->find($id);
+        //dump( $entity);exit();
+        if($entity->getPublished()){
+
+            $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
+            return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+            //return $this->redirect($this->generateUrl("articles"));
+        }
          $edit_form = $this->createEditForm($entity);
         $delete_form=$this->createDeleteForm($id);
 

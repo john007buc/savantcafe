@@ -43,7 +43,7 @@ class Media
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="John\UsersBundle\Entity\User", inversedBy="media")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")
      */
     protected $author;
 

@@ -1,6 +1,8 @@
-{% extends 'JohnAdminBundle::admin_layout.html.twig' %}
+{% extends "JohnArticleBundle:Article:article_layout.html.twig" %}
+{% extends layout %}
 
-{% block admin_main %}
+{% block main %}
+    {% set edit=true %}
 
        {{ include("JohnArticleBundle:Article:form.html.twig",{'form':edit_form}) }}
     <h3>Delete this article</h3>
