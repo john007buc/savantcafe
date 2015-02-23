@@ -1,6 +1,0 @@
-{% if is_granted("ROLE_ADMIN") %}
-    {% set layout='JohnAdminBundle::admin_layout.html.twig' %}
-{% else %}
-    {% set layout='JohnProfileBundle::profile_layout.html.twig' %}
-{% endif %}
-{% extends layout %}

@@ -1,9 +1,11 @@
-.admin_left_panel
+.admin_left_panel, .profile_left_panel
 {
     width:200px;
     float:left;
+    background-color: #66dd66;
+    height:200px;
+    padding:2px;
 }
-
 #links_nav ul
 {
     margin:0;
@@ -22,8 +24,8 @@
     text-decoration: none;
     high:30px;
     line-height:30px;
-   /*background-color: #808080;
-    color:#ffffff;*/
+    /*background-color: #808080;
+     color:#ffffff;*/
     background: #e4f1f9; /* Old browsers */
     background: -moz-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e4f1f9), color-stop(100%,#d5e7f3)); /* Chrome,Safari4+ */
@@ -40,12 +42,11 @@
     background-color: #696969;
 }
 
-.admin-content
-{
-    max-width:800px;
-    float:left;
-    background: ghostwhite;
-    padding:5px;
-    height:auto;
-}
+.content{
+    max-width:600px;
+   background-color: red;
+    height:20px;
 
+
+
+}

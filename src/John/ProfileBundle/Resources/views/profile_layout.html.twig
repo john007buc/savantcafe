@@ -7,9 +7,15 @@
 {% endblock %}
 {% block body %}
     <div class="profile_left_panel">
-        {{include ("JohnProfileBundle::links.html.twig") }}
+        {% if is_granted("ROLE_ADMIN") %}
+
+            {{include ("JohnAdminBundle::links.html.twig") }}
+        {% else %}
+
+            {{include ("JohnProfileBundle::links.html.twig") }}
+        {% endif %}
     </div>
-    <div class="profile-content">
+    <div class="content">
         {% block main %}
         {% endblock %}
     </div>
