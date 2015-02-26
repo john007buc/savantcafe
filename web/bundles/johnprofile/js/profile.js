@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("ul.links li a").on('click',function(e){
+    $("ul.profile_links li a").on('click',function(e){
         e.preventDefault();
         var profile_url=$(this).attr('href');
          alert(profile_url);

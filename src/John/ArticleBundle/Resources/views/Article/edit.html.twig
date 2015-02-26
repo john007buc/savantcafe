@@ -1,9 +1,7 @@
 {% extends 'JohnProfileBundle::profile_layout.html.twig' %}
-{% extends layout %}
+
 
 {% block main %}
-    {% set edit=true %}
-
        {{ include("JohnArticleBundle:Article:form.html.twig",{'form':edit_form}) }}
     <h3>Delete this article</h3>
     {{ form(delete_form) }}

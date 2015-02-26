@@ -1,7 +1,5 @@
 {{ form_start(form) }}
-    <div>
-        <a href="{{ path('article_new') }}"><span class="genericon genericon-document">Add article</span></a>
-    </div>
+
   {% if is_granted("ROLE_ADMIN") %}
     {{ form_row(form.category) }}
     {{ form_row(form.active) }}

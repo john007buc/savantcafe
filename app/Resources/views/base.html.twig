@@ -69,14 +69,13 @@
 
 
     </header>
-    <div class="content">
+    <div class="shell-content">
         {% block body %}{% endblock %}
     </div>
 
         {% block javascripts %}
             <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
             <script>window.jQuery || document.write('<script src="{{ asset('bundles/johnsavant/js/jquery-2.1.1.min') }}"><\/script>')</script>
-
         {% endblock %}
     </body>
 </html>

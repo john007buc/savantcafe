@@ -8,7 +8,6 @@
 {% block body %}
     <div class="profile_left_panel">
         {% if is_granted("ROLE_ADMIN") %}
-
             {{include ("JohnAdminBundle::links.html.twig") }}
         {% else %}
 
@@ -20,8 +19,10 @@
         {% endblock %}
     </div>
 
-    {% block javascripts %}
-        {{ parent() }}
-        <script type="text/javascript" src="{{ asset("bundles/johnprofile/js/profile.js") }}"></script>
-    {% endblock %}
+
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     <script type="text/javascript" src="{{ asset("bundles/johnprofile/js/profile.js") }}"></script>
+ {% endblock %}

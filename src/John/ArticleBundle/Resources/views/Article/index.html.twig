@@ -2,7 +2,7 @@
 {% block main %}
 
 
-    <div class="articles-header">
+    <div class="articles-filter">
 
         {{ include('JohnArticleBundle:Article:filter.html.twig',{'form':filter_form}) }}
 
@@ -43,4 +43,4 @@
      {% javascripts 'bundles/johnarticle/js/filter_articles.js' filter="uglifyjs"%}
      <script type="text/javascript" src="{{ asset_url }}"></script>
      {% endjavascripts %}
-{% endblock %}
+ {% endblock %}

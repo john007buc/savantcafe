@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class ArticleRepository extends EntityRepository
 {
 
-    public function countArticles($active,$published,$category=null)
+    public function countArticles($active,$published,$category,$user_id=null)
     {
         $qb = $this->createQueryBuilder('a')
             ->select('count(a)');
@@ -35,6 +35,14 @@ class ArticleRepository extends EntityRepository
             $qb->andWhere('a.published=:published')
                 ->setParameter('published',$published);
         }
+
+        if(!is_null($user_id)){
+            $qb->join('a.author','u')
+                ->where('u.id=:user_id')
+                ->setParameter('user_id',$user_id);
+        }
+
+
 
 
         return $qb->getQuery()->getSingleScalarResult();

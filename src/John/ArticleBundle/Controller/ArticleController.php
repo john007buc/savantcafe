@@ -26,13 +26,21 @@ class ArticleController extends Controller
 
             $category=($category===null)?"all":$category;
 
+
+        if($this->container->get("security.context")->isGranted("ROLE_ADMIN")){
             $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category);
+        }else{
+            $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category,$this->getUser()->getId());
+        }
+
+
+
 
 
 
 
         $query_string=(isset($active) && isset($publish))?("?active=".var_export($active, true)."&publish=".var_export($publish, true)):null;
-        $rewrite_url=($category)?$this->generateUrl("articles")."/".$category:$this->generateUrl("p_articles")."/".$category;
+        $rewrite_url=$this->generateUrl("articles")."/".$category;
 
 
             $pagerOptions=array(

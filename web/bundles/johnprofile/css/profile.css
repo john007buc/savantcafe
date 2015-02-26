@@ -1,10 +1,13 @@
 .admin_left_panel, .profile_left_panel
 {
-    width:200px;
+    max-width:200px;
+    width:13%;
     float:left;
-    background-color: #66dd66;
-    height:200px;
+
+
     padding:2px;
+    margin:1px;
+
 }
 #links_nav ul
 {
@@ -34,7 +37,6 @@
     background: -ms-linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* IE10+ */
     background: linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f1f9', endColorstr='#d5e7f3',GradientType=0 ); /* IE6-9 */
-
 }
 
 #links_nav ul li a:hover
@@ -43,10 +45,12 @@
 }
 
 .content{
-    max-width:600px;
-   background-color: red;
-    height:20px;
+    margin:1px;
+    width:85%;
+    max-width:902px;
 
+    height:auto;
+    float:left;
 
 
 }
