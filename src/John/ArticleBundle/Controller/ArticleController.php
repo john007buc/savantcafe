@@ -29,8 +29,10 @@ class ArticleController extends Controller
 
         if($this->container->get("security.context")->isGranted("ROLE_ADMIN")){
             $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category);
+
         }else{
             $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category,$this->getUser()->getId());
+
         }
 
 
@@ -61,9 +63,9 @@ class ArticleController extends Controller
             $pagination_links=$pag->getLinks();
 
 
-            $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$pagerOptions['items_per_page']);
+        $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$pagerOptions['items_per_page']);
 
-
+       // dump( $articles);exit();
 
         //$nr=$em->getRepository("JohnArticleBundle:Article")->countArticles(1,0,2);
         //dump($nr);
