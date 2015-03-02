@@ -1,14 +1,14 @@
-$(document).ready(function(){
-    $("ul.profile_links li a").on('click',function(e){
+/*$(document).ready(function(){
+    $("a.ajax_link").on('click',function(e){
         e.preventDefault();
         var profile_url=$(this).attr('href');
-         alert(profile_url);
+        // alert(profile_url);
 
         $.ajax({
                 url:profile_url,
                 method:"POST",
                 success:function(result){
-                $("div.profile-content").html(result);
+                $("div.content").html(result);
               }});
 
     });
@@ -40,4 +40,4 @@ $(document).ready(function(){
 
 
 
-})
+})*/

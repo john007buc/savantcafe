@@ -13,40 +13,36 @@ use John\ArticleBundle\MyClasses\Pagination;
 class ArticleController extends Controller
 {
 
+    /*
+     * Show user's article. If ROLE_ADMIN is true  all articles are shown
+     */
     public function indexAction($category,$page)
     {
 
-
         $em = $this->getDoctrine()->getManager();
-        //$articles=$em->getRepository("JohnArticleBundle:Article")->getArticles(0);
 
-            $active=(null!==$this->getRequest()->query->get("active"))?filter_var($this->getRequest()->query->get("active"), FILTER_VALIDATE_BOOLEAN):null;
+        /* - This parameters are sent via AJAX calls when Filter button is clicked*/
+        $active=$this->getRequest()->query->get("active");
+        $publish=$this->getRequest()->query->get("publish");
 
-            $publish = (null!==$this->getRequest()->query->get("publish"))?filter_var($this->getRequest()->query->get("publish"), FILTER_VALIDATE_BOOLEAN):null;
+        $active=(null!== $active)?filter_var( $active, FILTER_VALIDATE_BOOLEAN):null;
+        $publish = (null!==$publish)?filter_var($publish, FILTER_VALIDATE_BOOLEAN):null;
+        $category=($category===null)?"all":$category;
 
-            $category=($category===null)?"all":$category;
+        //count user's articles: if admin si logged in all articles are taken into consideration
+        $user_id=$this->getUser()->getId();
+        $articles_count=($this->container->get("security.context")->isGranted("ROLE_ADMIN"))?($em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category))
+                                                                                            :($em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category,$user_id));
 
-
-        if($this->container->get("security.context")->isGranted("ROLE_ADMIN")){
-            $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category);
-
-        }else{
-            $articles_count =$em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category,$this->getUser()->getId());
-
-        }
-
-
-
-
-
-
+        /* - This query string is appended to the rewrite_url
+           - for example  articles/mathematics/2?active=true&publish=true */
 
         $query_string=(isset($active) && isset($publish))?("?active=".var_export($active, true)."&publish=".var_export($publish, true)):null;
         $rewrite_url=$this->generateUrl("articles")."/".$category;
+        $articles_per_page=$this->container->getParameter("articles_per_page");
 
-
-            $pagerOptions=array(
-                'items_per_page'=>1,
+        $pagerOptions=array(
+                'items_per_page'=>$articles_per_page,
                 'items_count'=>$articles_count,
                 'class_name'=>'paginator',
                 'rewrite_url'=>$rewrite_url,
@@ -54,21 +50,16 @@ class ArticleController extends Controller
                 'current_page'=>$page
             );
 
+        $pag=new Pagination($pagerOptions);
+        list($from,$to)=$pag->getLimits();
+        $pagination_links=$pag->getLinks();
 
+        /* - for ROLE_ADMIN, $user_id=null, so all articles are fetched from the database  */
+        $user_id=($this->container->get("security.context")->isGranted("ROLE_ADMIN"))?null: $user_id;
+        $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$articles_per_page, $user_id);
 
-            $pag=new Pagination($pagerOptions);
-
-            list($from,$to)=$pag->getLimits();
-
-            $pagination_links=$pag->getLinks();
-
-
-        $articles=$em->getRepository("JohnArticleBundle:Article")->getArticles( $active,$publish,$category,$from,$pagerOptions['items_per_page']);
-
-       // dump( $articles);exit();
-
-        //$nr=$em->getRepository("JohnArticleBundle:Article")->countArticles(1,0,2);
-        //dump($nr);
+        /* - Create the form for the filter
+           - The entity manager is sent in constructor to access slugNamePairs from Category repository.*/
 
         $filter_form=$this->createForm(new FilterType($em),null,array(
             'attr'=>array(
@@ -91,37 +82,22 @@ class ArticleController extends Controller
     {
         $article= new Article();
         $article_form=$this->createCreateForm($article);
-
         $article_form->handleRequest($request);
-
 
         if($article_form->isValid())
         {
-
+            /* - If Publish button was clicked, the article is set as published and will be active after the admin will accept it */
             if($publish=$article_form->get("publish")->isClicked()){
                 $article->setPublished(true);
-                $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
+                $request->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
             }
             $article->setAuthor($this->getUser());
             $manager=$this->getDoctrine()->getManager();
-
-
-
-            //$existing_tags=$article_form->get('existing_tags')->getData();
-
-           // $new_tags = array_map('strtolower',$article->getTags()->toArray());
-
-            //foreach($existing_tags as $e_tag){
-                  //  $article->addTag($e_tag);
-          // }
-
             $manager->persist($article);
             $manager->flush();
 
-              return $this->redirect($this->generateUrl('article_show',array(
+            return $this->redirect($this->generateUrl('article_show',array(
                   'id'=>$article->getId(),
-
-
               )));
 
         }
@@ -130,7 +106,6 @@ class ArticleController extends Controller
             'entity'=>$article,
             'form'=>$article_form->createView()
         ));
-
     }
 
 
@@ -143,11 +118,9 @@ class ArticleController extends Controller
     {
 
         $entity=new Article();
-
         $article_form=$this->createCreateForm($entity);
 
         return $this->render("JohnArticleBundle:Article:new.html.twig",array(
-           'entity'=>$entity,
            'form'=>$article_form->createView()
         ));
     }
@@ -157,26 +130,24 @@ class ArticleController extends Controller
      **/
     public function showAction($id)
     {
-
        $manager = $this->getDoctrine()->getManager();
        $entity = $manager->getRepository('JohnArticleBundle:Article')->find($id);
 
         if(!$entity){
             throw $this->createNotFoundException("No article entity was found");
         }
-
+        /* - Create delete form*/
         $delete_form=$this->createDeleteForm($id);
+        /* - Create publish form with specific submit's label (Publish or Unpublish) visibile for unpublish articles and for ROLE_ADMIN*/
         $is_published=$entity->getPublished();
         $publish_form = $this->createPublishForm($id, $is_published?"Unpublish":"Publish");
 
-
         return $this->render('JohnArticleBundle:Article:show.html.twig',array(
-           'entity'=>$entity,
+            'entity'=>$entity,
             'delete_form'=>$delete_form->createView(),
             'publish_form'=>$publish_form->createView(),
             'published'=>$is_published
         ));
-
     }
 
     /**
@@ -190,41 +161,25 @@ class ArticleController extends Controller
            return $this->createNotFoundException("Entity not found");
        }
 
-
-
        $form = $this->createEditForm($entity);
-
        $form->handleRequest($request);
        if($form->isValid())
        {
-
-
-           //add existing tags from dropdown list  if the tag doesn't exist
-          /* foreach($entity->existing_tags as $tag)
-           {
-               if(!$entity->getTags()->contains($tag)){
-                   $entity->addTag($tag);
-               }
-
-           }*/
-
-
            $entity_manager->persist($entity);
 
-
-
+           /*- Set as published and add a flash message if the Publish button was clicked*/
            if($form->get("publish")->isClicked()){
                $entity->setPublished(true);
                $entity_manager->flush();
-
+               /* - Create a flash message*/
                $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
+
                return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+
            }else{
                $entity_manager->flush();
                return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
            }
-
-
        }
 
         $delete_form=$this->createDeleteForm($id);
@@ -244,14 +199,15 @@ class ArticleController extends Controller
     {
          $entity_manager=$this->getDoctrine()->getManager();
          $entity = $entity_manager->getRepository('JohnArticleBundle:Article')->find($id);
-        //dump( $entity);exit();
-        if($entity->getPublished()){
+
+        if(!$this->container->get("security.context")->isGranted("ROLE_ADMIN") && $entity->getPublished()){
 
             $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
             return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
             //return $this->redirect($this->generateUrl("articles"));
         }
-         $edit_form = $this->createEditForm($entity);
+
+        $edit_form = $this->createEditForm($entity);
         $delete_form=$this->createDeleteForm($id);
 
         return $this->render("JohnArticleBundle:Article:edit.html.twig",array(
@@ -274,8 +230,6 @@ class ArticleController extends Controller
             'action'=>$this->generateUrl('article_update',array('id'=>$entity->getId())),
             'attr'=>array('class'=>'article-form')
         ));
-
-
     }
 
     /**
@@ -291,11 +245,8 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('JohnArticleBundle:Article')->find($id);
 
-
             if(!$entity){
-
-                return $this->createNotFoundException("Unable to find article entity with id:{$id}");
-
+                throw $this->createNotFoundException("Unable to find article entity with id:{$id}");
             }
 
             $em->remove($entity);
@@ -373,18 +324,11 @@ class ArticleController extends Controller
            // dump($article);exit();
            // $em->persist($article);
             $em->flush();
-
-
-
+            
             //de adaugat flash messages
 
-
         }
-
         return $this->redirect($this->generateUrl('articles'));
-
-
-
     }
 
 

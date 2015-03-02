@@ -92,10 +92,10 @@ class Category
     /**
      * Add subscribers
      *
-     * @param \John\SavantBundle\Entity\User $subscribers
+     * @param \John\UsersBundle\Entity\User $subscribers
      * @return Category
      */
-    public function addSubscriber(\John\SavantBundle\Entity\User $subscribers)
+    public function addSubscriber(\John\UsersBundle\Entity\User $subscribers)
     {
         $this->subscribers[] = $subscribers;
     
@@ -105,9 +105,9 @@ class Category
     /**
      * Remove subscribers
      *
-     * @param \John\SavantBundle\Entity\User $subscribers
+     * @param \John\UsersBundle\Entity\User $subscribers
      */
-    public function removeSubscriber(\John\SavantBundle\Entity\User $subscribers)
+    public function removeSubscriber(\John\UsersBundle\Entity\User $subscribers)
     {
         $this->subscribers->removeElement($subscribers);
     }

@@ -19,8 +19,8 @@ class ArticleRepository extends EntityRepository
             ->select('count(a)');
 
         if(!is_null($user_id)){
-            $qb->join('a.author','u')
-                ->where('u.id=:user_id')
+
+            $qb->where('a.author=:user_id')
                 ->setParameter('user_id',$user_id);
         }
 
@@ -34,7 +34,6 @@ class ArticleRepository extends EntityRepository
 
         if(!is_null($active))
         {
-
                 $qb->andWhere('a.active=:active')
                 ->setParameter('active',$active);
         }
@@ -44,15 +43,10 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('published',$published);
         }
 
-
-
-
-
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getArticles($active,$published,$category=null,$offset=null,$max=null)
+    public function getArticles($active,$published,$category,$offset=null,$max=null,$user_id=null)
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a');
@@ -76,6 +70,11 @@ class ArticleRepository extends EntityRepository
 
                  $qb->andWhere('a.published=:published')
                   ->setParameter('published',$published);
+        }
+
+        if(!is_null($user_id)){
+            $qb->andWhere('a.author=:user_id')
+                ->setParameter('user_id',$user_id);
         }
 
 

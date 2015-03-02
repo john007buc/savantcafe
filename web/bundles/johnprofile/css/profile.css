@@ -19,14 +19,11 @@
 #links_nav ul li
 {
     border-bottom: 1px dotted white;
-}
-#links_nav ul li a
-{
-    padding:0 5px;
     display: block;
-    text-decoration: none;
-    high:30px;
-    line-height:30px;
+
+
+    high:25px;
+
     /*background-color: #808080;
      color:#ffffff;*/
     background: #e4f1f9; /* Old browsers */
@@ -38,10 +35,22 @@
     background: linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f1f9', endColorstr='#d5e7f3',GradientType=0 ); /* IE6-9 */
 }
+#links_nav ul li a
+{
+    color:black;
+    line-height:25px;
+    font-size:0.9em;
+    text-decoration: none;
+
+}
+
+#links_nav span{
+    background-color: #b2e1ff;
+}
 
 #links_nav ul li a:hover
 {
-    background-color: #696969;
+    border-bottom: 1px solid #000000;
 }
 
 .content{
@@ -52,5 +61,10 @@
     height:auto;
     float:left;
 
+
+}
+
+.genericon{
+    margin:3px 2px 0 0;
 
 }

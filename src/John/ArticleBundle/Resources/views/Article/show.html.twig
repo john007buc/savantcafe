@@ -2,8 +2,8 @@
 
 {% block main %}
 
-     <a href="{{app.request.headers.get('referer')  }}"> << Back</a>
-    {#show eidt, publish and delete buttons only for admin or in preview mode #}
+     {#<a href="{{app.request.headers.get('referer')  }}"> << Back</a>#}
+    {#show sdit, publish and delete buttons  for admin and unpublished articles #}
     {% if is_granted("ROLE_ADMIN") or not published  %}
         <div class="article-admin-panel">
             {{ form(delete_form) }}
@@ -31,7 +31,5 @@
             <li>{{ tag.name }}</li>
         {% endfor %}
     </ol>
-
-
 {% endblock %}
 

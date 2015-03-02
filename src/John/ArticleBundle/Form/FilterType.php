@@ -17,20 +17,17 @@ class FilterType extends AbstractType
 
     protected function getCategories()
     {
-
+        /* - Get an associative array with "slug"=>"category name" pairs */
        return  $this->em->getRepository("JohnArticleBundle:Category")->getSlugNamePairs();
     }
 
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
-
-
             $builder->add('category','choice',array(
                 'choices'=>$this->getCategories(),
                 'required'=>false,
                 'empty_value'=>"Select a category",
                 'empty_data'  => null
-
             ))
                 ->add('published','checkbox',array('mapped'=>false,'required'=>false))
                 ->add('active','checkbox',array('mapped'=>false,'required'=>false))

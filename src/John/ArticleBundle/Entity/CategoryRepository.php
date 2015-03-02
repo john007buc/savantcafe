@@ -23,8 +23,6 @@ class CategoryRepository extends EntityRepository
 
         $results = $qb->getQuery()->getArrayResult();
 
-
-
         foreach($results as $result){
 
             $choices[$result['slug']]=$result['name'];

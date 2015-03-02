@@ -1,2 +1,7 @@
-<h1>Edit your profile</h1>
-{{ form(profile_form,{'attr': {'novalidate': 'novalidate'}}) }}
+{% extends 'JohnProfileBundle::profile_layout.html.twig' %}
+
+{% block main %}
+    <h1>Edit your profile</h1>
+    {{ form(profile_form,{'attr': {'novalidate': 'novalidate'}}) }}
+{% endblock %}
+
