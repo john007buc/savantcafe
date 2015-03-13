@@ -4,6 +4,7 @@ namespace John\ArticleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Class Article
@@ -67,7 +68,7 @@ class Article
     protected $tags;
 
     /**
-     * @ORM\ManyToOne(targetEntity="John\SavantBundle\Entity\User", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="John\UsersBundle\Entity\User", inversedBy="articles")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $author;
@@ -105,6 +106,13 @@ class Article
     protected $updated;
 
     public $existing_tags=array();
+
+    protected $publish_form;
+
+    protected $edit_form;
+
+    protected $delete_form;
+
 
     public function __construct()
     {
@@ -319,10 +327,10 @@ class Article
     /**
      * Set author
      *
-     * @param \John\SavantBundle\Entity\User $author
+     * @param \John\UsersBundle\Entity\User $author
      * @return Article
      */
-    public function setAuthor(\John\SavantBundle\Entity\User $author = null)
+    public function setAuthor(\John\UsersBundle\Entity\User $author = null)
     {
         $this->author = $author;
     
@@ -332,7 +340,7 @@ class Article
     /**
      * Get author
      *
-     * @return \John\SavantBundle\Entity\User 
+     * @return \John\UsersBundle\Entity\User
      */
     public function getAuthor()
     {
@@ -472,5 +480,48 @@ class Article
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \John\ArticleBundle\Entity\Category $categories
+     * @return Article
+     */
+    public function addCategorie(\John\ArticleBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \John\ArticleBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\John\ArticleBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    public function areTagsValid(ExecutionContextInterface $context)
+    {
+        if(count($this->getTags())){
+            $i=0;
+            foreach($this->getTags() as $tag)
+            {
+
+                if(!preg_match("/^[a-zA-Z ]*$/",$tag->getName()))
+                {
+                    $context->addViolationAt("tags[$i].name", 'Only letters and white space allowed', array(), null);
+                }
+                $i++;
+
+            }
+
+        }
+
+
     }
 }

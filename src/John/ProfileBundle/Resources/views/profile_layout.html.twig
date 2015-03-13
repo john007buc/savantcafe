@@ -6,19 +6,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('bundles/johnarticle/genericons/genericons.css')}}" />
 {% endblock %}
 {% block body %}
-    <div class="profile_left_panel">
+
+    <nav class="profile-left-nav">
         {% if is_granted("ROLE_ADMIN") %}
             {{include ("JohnAdminBundle::links.html.twig") }}
         {% else %}
 
             {{include ("JohnProfileBundle::links.html.twig") }}
         {% endif %}
-    </div>
+    </nav>
+
     <div class="content">
         {% block main %}
         {% endblock %}
     </div>
-
 
 {% endblock %}
 

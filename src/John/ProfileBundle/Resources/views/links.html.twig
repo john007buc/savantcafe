@@ -1,10 +1,9 @@
-<nav id="links_nav">
+
 <ul class="profile_links">
     <li><a href="{{ path('articles') }}">  <span class="genericon genericon-category"></span>My Articles</a></li>
     <li><a href="{{ path('article_new') }}"> <span class="genericon genericon-path"></span>Publish Articles</a></li>
     <li><a  href="{{ path('john_users_profile_edit',{'id':app.user.id}) }}" > <span class="genericon genericon-twitch"></span>Edit Profile</a></li>
     <li><a  href="{{ path('john_users_profile_change_password') }}"><span class="genericon genericon-lock"></span>Change Password</a></li>
-    <li><a  href=""><span class="genericon genericon-rating-empty"></span>My Favorites</a></li>
+    <li><a  href=""><span class="genericon genericon-rating-empty"></span>Bookmarks</a></li>
     <li><a  href=""><span class="genericon genericon-time"></span>My Activity</a></li>
 </ul>
-</nav>

@@ -1,9 +1,5 @@
 {{ form_start(form) }}
-
-  {% if is_granted("ROLE_ADMIN") %}
     {{ form_row(form.category) }}
     {{ form_row(form.active) }}
     {{ form_row(form.published) }}
-  {% endif %}
-
 {{ form_end(form) }}

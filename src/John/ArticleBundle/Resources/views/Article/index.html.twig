@@ -1,41 +1,54 @@
-{% extends 'JohnProfileBundle::profile_layout.html.twig' %}
+{% extends 'JohnArticleBundle::article_layout.html.twig' %}
 {% block main %}
+    {{ parent() }}
 
-
-    <div class="articles-filter">
-
-        {{ include('JohnArticleBundle:Article:filter.html.twig',{'form':filter_form}) }}
-
-    </div>
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="articles-filter">
+            {{ include('JohnArticleBundle:Article:filter.html.twig',{'form':filter_form}) }}
+        </div>
+    {% endif %}
 
 
     {% for article in articles %}
-
         <article>
-           <h2><a href="{{ path('article_show',{id:article.id}) }}">{{ article.title }}</a></h2>
+            <h2><a href="{{ path('article_show',{id:article.id}) }}">{{ article.title }}</a></h2>
+
+            {#if the article isn't sent to publish show edit,delete and publish buttons#}
+            {#only for users. The admin has all buttons in show page#}
+            {% if not is_granted('ROLE_ADMIN') and article.published==false%}
+                <div class="article-actions">
+                    <a href="{{ path('article_edit',{id:article.id}) }}">Edit</a>
+                    {{ form(article.publishform) }}
+                    {{ form(article.deleteform) }}
+                </div>
+            {% endif %}
+
+
+            <div style="clear:both"></div>
+
             {% if article.featuredImage %}
                 <figure >
-                   <img  alt="{{ article.featuredImage.alt }}" src="{{ asset(('uploads/featured_images/'~article.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">
+                    <img  alt="{{ article.featuredImage.alt }}" src="{{ asset(('uploads/featured_images/'~article.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">
                 </figure>
             {% endif %}
 
-           <div class="truncate-content">
-               {{ article.content|truncate(550)|striptags }}
-           </div>
-            <footer {% if article.active == false %} style="color:red" {% endif %}>
-                <span class="genericon genericon-category">{{ article.categories[0] }}</span>
-                 {% if article.published ==false  %}
-                     <span class="genericon genericon-show">Unpublished</span>
+            <p>{{ article.content|truncate(550)|striptags }}</p>
 
+            <footer>
+                {% if article.active %}
+                 <span class="genericon genericon-show">Published</span>
+                {% elseif  article.published %}
+                    <span class="genericon genericon-edit">Sent to publish</span>
                  {% else %}
-                     <span class="genericon genericon-edit">Published</span>
+                     <span class="genericon genericon-edit">Draft</span>
                  {% endif %}
-                <span class="genericon genericon-user">Author:{{ article.author.firstName~' '~article.author.lastName }}</span>, <span class="genericon genericon-time">Created: {{ article.created|date("m/d/Y") }},Updated: {{ article.updated|date("m/d/Y") }}</span>
+                 <span class="genericon genericon-category">{{ article.categories[0] }}</span>
+                <span class="genericon genericon-user">Author:{{ article.author.firstName~' '~article.author.lastName }}</span>, <span class="genericon genericon-time">Updated: {{ article.updated|date("m/d/Y") }}</span>
             </footer>
         </article>
     {% endfor %}
 
-    {{ pagination_links|raw }}
+    <nav>{{ pagination_links|raw }}</nav>
 {% endblock %}
 
  {% block javascripts %}

@@ -1,35 +1,45 @@
-{% extends 'JohnProfileBundle::profile_layout.html.twig' %}
+{% extends 'JohnArticleBundle::article_layout.html.twig' %}
 
 {% block main %}
-
+    {{ parent() }}
      {#<a href="{{app.request.headers.get('referer')  }}"> << Back</a>#}
-    {#show sdit, publish and delete buttons  for admin and unpublished articles #}
-    {% if is_granted("ROLE_ADMIN") or not published  %}
-        <div class="article-admin-panel">
-            {{ form(delete_form) }}
-            {{ form(publish_form) }}
-            <a class="edit-article" href="{{ path('article_edit',{'id':entity.id}) }}">Edit this article</a>
-        </div>
-   {% endif %}
 
-    {% for flashMessage in app.session.flashbag.get('publish_message') %}
-        <div class="flash-notice">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+    <article>
+        <header>
+            <h2>{{ entity.title }}</h2>
+        </header>
 
-<h1>{{ entity.title }}</h1>
+        {{ entity.content|raw }}
+
+        <aside style="background-color:beige">Tags :
+         <span class="genericon genericon-tag" ></span>
+        {% for tag in entity.tags %}
+            {{ tag.name }}&nbsp;
+        {% endfor %}
+        </aside>
+
+        {#show edit, publish,active and delete buttons  for admin #}
+        {% if is_granted("ROLE_ADMIN") %}
+            <div class=" article-admin-actions article-actions">
+                <span class="genericon genericon-cog">*</span>
+                {{ form(delete_form) }}
+                {{ form(publish_form) }}
+
+                {{ form(activate_form) }}
+                <a  href="{{ path('article_edit',{'id':entity.id}) }}">Edit</a>
+            </div>
+        {% endif %}
+    </article>
+
+    {#
     {% if entity.featuredImage %}
         <figure style="float:left">
             <img  alt ="Featured images" src="{{ asset(('uploads/featured_images/'~entity.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">
         </figure>
     {% endif %}
-{{ entity.content|raw }}
-<h2>Article tags</h2>
-    <ol>
-        {% for tag in entity.tags %}
-            <li>{{ tag.name }}</li>
-        {% endfor %}
-    </ol>
+    #}
+
+
+
 {% endblock %}
 

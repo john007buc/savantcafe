@@ -1,31 +1,23 @@
-.admin_left_panel, .profile_left_panel
+nav.profile-left-nav
 {
     max-width:200px;
     width:13%;
     float:left;
-
-
     padding:2px;
     margin:1px;
 
 }
-#links_nav ul
+nav.profile-left-nav ul
 {
     margin:0;
     padding:0;
     list-style-type: none;
-
 }
-#links_nav ul li
+nav.profile-left-nav ul li
 {
     border-bottom: 1px dotted white;
     display: block;
-
-
-    high:25px;
-
-    /*background-color: #808080;
-     color:#ffffff;*/
+    padding:9px 1px;
     background: #e4f1f9; /* Old browsers */
     background: -moz-linear-gradient(top, #e4f1f9 0%, #d5e7f3 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e4f1f9), color-stop(100%,#d5e7f3)); /* Chrome,Safari4+ */
@@ -35,20 +27,21 @@
     background: linear-gradient(top, #e4f1f9 0%,#d5e7f3 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f1f9', endColorstr='#d5e7f3',GradientType=0 ); /* IE6-9 */
 }
-#links_nav ul li a
+nav.profile-left-nav ul li a
 {
     color:black;
-    line-height:25px;
     font-size:0.9em;
     text-decoration: none;
-
+}
+/*style genericons */
+nav.profile-left-nav span{
+    color:white;
+    background: cornflowerblue; /* Old browsers */
+    border-radius:4px;
+    margin:0 2px;
 }
 
-#links_nav span{
-    background-color: #b2e1ff;
-}
-
-#links_nav ul li a:hover
+nav.profile-left-nav ul li a:hover
 {
     border-bottom: 1px solid #000000;
 }
@@ -57,14 +50,14 @@
     margin:1px;
     width:85%;
     max-width:902px;
-
     height:auto;
-    float:left;
-
-
+    float:right;
 }
 
-.genericon{
-    margin:3px 2px 0 0;
 
-}
+
+
+
+
+
+

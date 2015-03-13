@@ -40,6 +40,11 @@ article_update:
         requirements:
              id: \d+
 
+article_activate:
+        pattern: /articles/{id}/activate/{btn_label}
+        defaults: {_controller: JohnArticleBundle:Article:activate}
+
+
 article_ckeditor_browse:
       pattern: /ckeditor/browse
       defaults: {_controller: JohnArticleBundle:CKEditor:browse}
@@ -47,6 +52,7 @@ article_ckeditor_browse:
 article_ckeditor_upload:
       pattern: /ckeditor/upload
       defaults: {_controller: JohnArticleBundle:CKEditor:upload}
+
 
 
 articles:

@@ -1,0 +1,9 @@
+{% extends 'JohnProfileBundle::profile_layout.html.twig' %}
+
+{% block main %}
+    {% for flashMessage in app.session.flashbag.get('publish_message') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+{% endblock %}

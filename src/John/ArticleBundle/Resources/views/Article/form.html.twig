@@ -26,6 +26,8 @@
         {{ form_errors(form.title) }}
     </div>
 
+
+
     <div>
         {{ form_label(form.content) }}
         {{ form_widget(form.content) }}
@@ -67,4 +69,23 @@
             </li>
         {% endfor %}
     </ul>
+
+
+    {% if  form.preview is defined and form.draft is defined  %}
+        <div class="form_buttons">
+            {{ form_widget(form.publish ) }}
+            {{ form_widget(form.preview) }}
+            {{ form_widget(form.draft ) }}
+        </div>
+    {% else %}
+        <div class="form_button">
+            {{ form_widget(form.publish ) }}
+        </div>
+    {% endif %}
+
+
+
+
+
+
 {{ form_end(form) }}

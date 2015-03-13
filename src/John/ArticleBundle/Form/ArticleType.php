@@ -9,7 +9,8 @@ use John\ArticleBundle\Form\ImageType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class ArticleType extends AbstractType
 {
@@ -41,21 +42,39 @@ class ArticleType extends AbstractType
                 'label'=>false,
                  'error_bubbling'=>false,
 
-                ))
-                ->add('publish','submit',array('label'=>"Publish"))
-                ->add('savedraft','submit',array('label'=>"Save as Draft"))
-                ->add('preview','submit',array('label'=>"Preview"));
+                ));
+
+       $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $event){
+           $article=$event->getData();
+           $form=$event->getForm();
+
+           if($article!=null && $article->getPublished())
+           {
+               $form->add('publish','submit',array('label'=>"Save published article"));
+           }else{
+               $form
+                   ->add('publish','submit',array('label'=>"Publish"))
+                   ->add('draft','submit',array('label'=>"Save Draft"))
+                   ->add('preview','submit',array('label'=>"Preview"));
+           }
+       });
 
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
 
-        $resolver->setDefaults(array(
+        $resolver
+            ->setDefaults(array(
             'data_class'=>'John\ArticleBundle\Entity\Article',
             'cascade_validation' => true,
-
+            ));
+        /*->setRequired(array(
+            'is_published',
         ));
+        ->setAllowedTypes(array(
+            'is_published' => 'boolean',
+        ));*/
 
     }
 

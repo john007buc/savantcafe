@@ -1,7 +1,7 @@
-
-{% extends 'JohnProfileBundle::profile_layout.html.twig' %}
+{% extends 'JohnArticleBundle::article_layout.html.twig' %}
 
 {% block main %}
+    {{ parent() }}
     {{ include("JohnArticleBundle:Article:form.html.twig",{'form':form}) }}
 {% endblock %}
 

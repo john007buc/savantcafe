@@ -7,9 +7,40 @@
     display: inline-block;
     width:100px;
     text-align: left;
+}
+.article-form button
+{
+    float:left;
+}
 
+.article-form .form_button
+{
+    width:150px;
+    overflow:auto;
+    margin:0 auto;
+}
+.article-form .form_buttons
+{
+    width:210px;
+    overflow:auto;
+    margin:0 auto;
+}
+
+.article-form .form_button button,.article-form .form_buttons button
+{
+    border:none;
+    padding:5px;
+    background-color: cornflowerblue;
+    height:50px;
+    color:#ffffff;
+    margin-right:2px ;
 
 }
+.article-form .form_button button:hover,.article-form .form_buttons button:hover
+{
+    background-color: dodgerblue;
+}
+
 
 .tags
 {
@@ -21,7 +52,9 @@
 
 .articles-filter
 {
-    padding:15px;
+    padding:5px;
+    overflow: auto;
+    border:1px dotted #b2e1ff;
 }
 .articles-filter a{
     text-decoration: none;
@@ -31,31 +64,27 @@
 {
     display: inline-block;
     float:left;
-    border:1px dotted #b2e1ff;
+
     width:100%;
 }
 .articles-filter form div{
     float:left;
     margin:5px;
 }
-.truncate-content
-{
-    min-height: 100px;
-}
-article .truncate-content, article footer
-{
-    padding:10px;
-}
+
+
 article
 {
     padding:10px;
+    text-align: justify;
 
 }
+
 article h2
 {
     margin:5px;
     background: #F2F2F2;
-
+    color:#0B2161;
 
 }
 
@@ -63,7 +92,7 @@ article h2 a
 {
     text-decoration: none;
     color:#0B2161;
-    padding:10px;
+    padding:10px 0;
 
 }
 
@@ -78,7 +107,16 @@ article figure
 article footer
 {
     border:1px dotted lightgrey;
+    margin: 5px 0;
+    padding:2px;
 
+}
+
+article header
+{
+    margin:0;
+    padding:0;
+    height: auto;
 }
 
 article footer span{
@@ -86,26 +124,21 @@ article footer span{
     float:left;
 }
 
-div.article-admin-panel
+div.article-actions-panel
 {
     padding:5px;
     border:1px solid lightgrey;
+    max-width:414px;
+    margin:0 auto;
+    background-color:#808080;
+    border-radius: 7px;
 }
-div.article-admin-panel form{
+div.article-actions-panel form{
     display: inline-block;
     float:left;
+    margin-right:5px;
 }
 
-a.edit-article
-{
-    display: inline-block;
-    padding: 2px;
-    height:17px;
-    line-height: 17px;
-    text-decoration: none;
-    background-color: orangered;
-    color:white;
-}
 
 div.paginator
 {
@@ -136,6 +169,8 @@ ul.article_error li{
     color:red;
     list-style-type: none;
 }
+
+
 .flash-notice{
     background-color: #66dd66;
     color: green;
@@ -143,3 +178,45 @@ ul.article_error li{
     margin:2px;
     border:1px solid forestgreen;
 }
+
+
+.article-actions a{
+    float:left;
+    text-decoration: none;
+    line-height:20px;
+    padding:0 6px;
+}
+.article-actions form
+{
+    margin:0;
+    padding:0;
+    float:left;
+}
+.article-actions form button[type="submit"],.article-actions a
+{
+    border: none;
+    display:inline-block;
+    height:20px;
+    background-color: white;
+    color:dodgerblue;
+    margin: 2px 5px;
+    font-size:0.9em;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.article-actions form button[type="submit"]:hover,.article-actions a:hover
+{
+    font-weight: bold;
+}
+.article-admin-actions{
+    background-color:lightblue;
+    overflow: auto;
+    width:auto;
+    padding:3px;
+}
+
+.article-admin-actions span{
+    float:left;
+    color:cornflowerblue;
+    margin: 5px 5px;
+}
+

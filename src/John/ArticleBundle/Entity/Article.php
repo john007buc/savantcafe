@@ -4,6 +4,7 @@ namespace John\ArticleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
@@ -106,6 +107,13 @@ class Article
     protected $updated;
 
     public $existing_tags=array();
+
+    protected $publish_form;
+
+    protected $edit_form;
+
+    protected $delete_form;
+
 
     public function __construct()
     {
@@ -516,5 +524,37 @@ class Article
         }
 
 
+    }
+
+
+    public function setDeleteForm(FormView $delete_form)
+    {
+        $this->delete_form=$delete_form;
+    }
+
+    public function getDeleteForm()
+    {
+        return $this->delete_form;
+    }
+
+    public function setPublishForm(FormView $publish_form)
+    {
+        $this->publish_form=$publish_form;
+    }
+
+    public function getPublishForm()
+    {
+        return $this->publish_form;
+    }
+
+    public function setEditForm(FormView $edit_form)
+    {
+        $this->edit_form=$edit_form;
+
+    }
+
+    public function getEditForm()
+    {
+        return $this->edit_form;
     }
 }
