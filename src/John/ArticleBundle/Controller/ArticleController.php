@@ -195,11 +195,11 @@ class ArticleController extends Controller
 
            $entity_manager->flush();
 
-          //return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
-           return $this->forward('JohnArticleBundle:Article:show',array(
+          return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+          /* return $this->forward('JohnArticleBundle:Article:show',array(
                'id'=>$id,
                'entity'=>$entity
-           ));
+           ));*/
        }
 
 
@@ -308,7 +308,8 @@ class ArticleController extends Controller
                                ->createNamedBuilder("delete_form",'form')
                                ->setAction($this->generateUrl('article_delete',array('id'=>$id)))
                                ->setMethod("DELETE")
-                               ->add('delete','submit')
+
+                               ->add('delete','submit',array('attr'=>array("onclick"=>"return confirm('Are you sure you want to delete this article?')")))
                                ->getForm();
     }
 
@@ -319,7 +320,7 @@ class ArticleController extends Controller
                                 ->createNamedBuilder('publish_form','form')
                                 ->setMethod("POST")
                                 ->setAction($this->generateUrl("article_publish",array('id'=>$id,'action_label'=>$label)))
-                                ->add('submit','submit',array('label'=>$label))
+                                ->add('submit','submit',array('label'=>$label,'attr'=>array("onclick"=>"return confirm('Are you sure you want to publish this article?')")))
                                 ->getForm();
     }
 
@@ -365,7 +366,7 @@ class ArticleController extends Controller
         return $this->createFormBuilder()
             ->setMethod("POST")
             ->setAction($this->generateUrl("article_activate",array("id"=>$id,"btn_label"=>$label)))
-            ->add('submit','submit',array('label'=>$label))
+            ->add('submit','submit',array('label'=>$label,'attr'=>array("onclick"=>"return confirm('Are you sure you want to activate this article?')")))
             ->getForm();
     }
 
