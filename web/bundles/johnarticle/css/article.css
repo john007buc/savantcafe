@@ -2,15 +2,23 @@
 {
     margin: 20px 0;
 }
+
+.article-form
+{
+    padding:10px;
+
+}
 .article-form label
 {
     display: inline-block;
     width:100px;
     text-align: left;
+    
 }
 .article-form button
 {
     float:left;
+
 }
 
 .article-form .form_button
@@ -50,6 +58,32 @@
 
 }
 
+#article_title
+{
+    width:100%;
+
+    font-size: 16px;
+    height:30px;
+}
+#article_categories
+{
+    vertical-align: top;
+    background: transparent;
+    width: 268px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 1px solid lightskyblue;
+
+
+    -webkit-appearance: none;
+}
+#article_abstract
+{
+    width: 100%;
+    height:200px;
+    vertical-align: top;
+}
 .articles-filter
 {
     padding:5px;
@@ -106,6 +140,7 @@ article figure
 
 article footer
 {
+    clear:both;
     border:1px dotted lightgrey;
     margin: 5px 0;
     padding:2px;

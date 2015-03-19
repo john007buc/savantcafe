@@ -1,10 +1,4 @@
-John\ArticleBundle\Entity\Tag:
-               propertires:
-                     name:
-                        - NotBlank: ~
-                        - Length:
-                            min: 5
-                            minMessage: Gogu
+
 
 
 John\ArticleBundle\Entity\Article:
@@ -36,20 +30,17 @@ John\ArticleBundle\Entity\Category:
                  - NotNull: ~
                  - Length:
                       min: 3
-               slug:
-                 - NotNull: ~
-                 - Length:
-                     min: 3
+               #slug:
+                # - NotNull: ~
+                 #- Length:
+                  #   min: 3
 
 
 John\ArticleBundle\Entity\Image:
+            constraints:
+                  - Callback:
+                          methods: [isAltValid]
             properties:
-                 name:
-                    - NotBlank: ~
-                 alt:
-                    - NotBlank: {message: Choose file again and enter a short description}
-                    - Length:
-                        min: 7
                  file:
                     - Image:
                          notFoundMessage: Image not uploaded

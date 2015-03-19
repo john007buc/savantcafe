@@ -3,6 +3,7 @@ namespace John\ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Class Image
@@ -301,5 +302,14 @@ class Image
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    public function isAltValid(ExecutionContextInterface $context)
+    {
+        if( $this->getFile() && !preg_match("/^[a-zA-Z\s\d]{5,}$/",$this->getAlt()))
+        {
+            $context->addViolationAt("alt", 'Only letters and white space allowed. Min length is 5', array(), null);
+        }
+
     }
 }

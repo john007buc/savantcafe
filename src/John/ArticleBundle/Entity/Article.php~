@@ -4,6 +4,7 @@ namespace John\ArticleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
@@ -50,6 +51,12 @@ class Article
     protected $url;
 
     /**
+     * @var string
+     * @ORM\Column(type="text", length=2000)
+     */
+    protected $abstract;
+
+    /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articles")
      */
@@ -84,7 +91,7 @@ class Article
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    protected $active=true;
+    protected $active=false;
 
     /**
      * @var bool
@@ -521,7 +528,39 @@ class Article
             }
 
         }
+    }
 
 
+
+
+    public function setDeleteForm(FormView $delete_form)
+    {
+        $this->delete_form=$delete_form;
+    }
+
+    public function getDeleteForm()
+    {
+        return $this->delete_form;
+    }
+
+    public function setPublishForm(FormView $publish_form)
+    {
+        $this->publish_form=$publish_form;
+    }
+
+    public function getPublishForm()
+    {
+        return $this->publish_form;
+    }
+
+    public function setEditForm(FormView $edit_form)
+    {
+        $this->edit_form=$edit_form;
+
+    }
+
+    public function getEditForm()
+    {
+        return $this->edit_form;
     }
 }

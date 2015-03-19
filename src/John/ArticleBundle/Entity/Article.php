@@ -51,6 +51,12 @@ class Article
     protected $url;
 
     /**
+     * @var string
+     * @ORM\Column(type="text", length=2000)
+     */
+    protected $abstract;
+
+    /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articles")
      */
@@ -85,7 +91,7 @@ class Article
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    protected $active=true;
+    protected $active=false;
 
     /**
      * @var bool
@@ -522,9 +528,9 @@ class Article
             }
 
         }
-
-
     }
+
+
 
 
     public function setDeleteForm(FormView $delete_form)
@@ -556,5 +562,28 @@ class Article
     public function getEditForm()
     {
         return $this->edit_form;
+    }
+
+    /**
+     * Set abstract
+     *
+     * @param string $abstract
+     * @return Article
+     */
+    public function setAbstract($abstract)
+    {
+        $this->abstract = $abstract;
+    
+        return $this;
+    }
+
+    /**
+     * Get abstract
+     *
+     * @return string 
+     */
+    public function getAbstract()
+    {
+        return $this->abstract;
     }
 }

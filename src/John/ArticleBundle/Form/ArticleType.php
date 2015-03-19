@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
                 ->add('content','textarea')
                 ->add('url','text',array('label'=>"Adresa URL"))
                 ->add('categories')
-
+                ->add('abstract','textarea',array('label'=>'Summary'))
                 ->add('featured_image', new ImageType(),array(
                     'required' => false,
                 ))
@@ -44,13 +44,15 @@ class ArticleType extends AbstractType
 
                 ));
 
-       $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $event){
+
+
+    $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $event){
            $article=$event->getData();
            $form=$event->getForm();
 
            if($article!=null && $article->getPublished())
            {
-               $form->add('publish','submit',array('label'=>"Save published article"));
+               $form->add('draft','submit',array('label'=>"Save published article"));
            }else{
                $form
                    ->add('publish','submit',array('label'=>"Publish"))

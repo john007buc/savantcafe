@@ -142,10 +142,11 @@ class ArticleController extends Controller
     /**
      * Finds and dysplays an article
      **/
-    public function showAction($id)
+    public function showAction($id,$entity=null)
     {
        $manager = $this->getDoctrine()->getManager();
-       $entity = $manager->getRepository('JohnArticleBundle:Article')->find($id);
+
+       $entity = (is_null($entity))?$manager->getRepository('JohnArticleBundle:Article')->find($id):$entity;
 
         if(!$entity){
             throw $this->createNotFoundException("No article entity was found");
@@ -175,7 +176,8 @@ class ArticleController extends Controller
     {
        $entity_manager = $this->getDoctrine()->getManager();
        $entity = $entity_manager->getRepository('JohnArticleBundle:Article')->find($id);
-       if(!$entity){
+        /*----Forbidden for published articles when the user role is not ROLE_ADMIN------------------------------------*/
+       if(!$entity && (!$this->container->get("security.context")->isGranted("ROLE_ADMIN") && $entity->getPublished())){
            return $this->createNotFoundException("Entity not found");
        }
 
@@ -185,29 +187,26 @@ class ArticleController extends Controller
        {
            $entity_manager->persist($entity);
 
-           /*- Set as published and add a flash message if the Publish button was clicked*/
-
-           if($form->get("publish")->isClicked()){
+           /*- Set the article as published and add a flash message if the Publish button was clicked*/
+           if($form->has("publish") && $form->get("publish")->isClicked()){
                $entity->setPublished(true);
-               $entity_manager->flush();
-               /* - Create a flash message (not for ADMIN role)*/
-               if(!$this->container->get("security.context")->isGranted("ROLE_ADMIN")){
-                   $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
-               }
-
-               return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
-
-           }else{
-               $entity_manager->flush();
-               return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+               $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
            }
+
+           $entity_manager->flush();
+
+          //return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
+           return $this->forward('JohnArticleBundle:Article:show',array(
+               'id'=>$id,
+               'entity'=>$entity
+           ));
        }
 
-        $delete_form=$this->createDeleteForm($id);
+
+
         return $this->render('JohnArticleBundle:Article:edit.html.twig',array(
             'entity'=>$entity,
-            'edit_form'=>$form->createView(),
-            'delete_form'=>$delete_form->createView()
+            'edit_form'=>$form->createView()
         ));
     }
 
@@ -221,11 +220,12 @@ class ArticleController extends Controller
          $entity_manager=$this->getDoctrine()->getManager();
          $entity = $entity_manager->getRepository('JohnArticleBundle:Article')->find($id);
 
-        if(!$this->container->get("security.context")->isGranted("ROLE_ADMIN") && $entity->getPublished()){
+        /*-----Forbidden for published articles when the user role is not ROLE_ADMIN-------------------------------*/
+        /*-----An article sent to be published is not editable-----------------------------------------------------*/
 
+        if(!$this->container->get("security.context")->isGranted("ROLE_ADMIN") && $entity->getPublished()){
             $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
             return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
-            //return $this->redirect($this->generateUrl("articles"));
         }
 
         $edit_form = $this->createEditForm($entity);
@@ -244,7 +244,6 @@ class ArticleController extends Controller
      */
     public function createEditForm($entity)
     {
-
         return $this->createForm(new ArticleType(),$entity, array(
             'method'=>'POST',
             'action'=>$this->generateUrl('article_update',array('id'=>$entity->getId())),
@@ -270,7 +269,6 @@ class ArticleController extends Controller
             }
 
             $em->remove($entity);
-           // dump( $entity);exit();
             $em->flush();
         }
 
@@ -305,34 +303,34 @@ class ArticleController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label'=>'Delete this article'))
             ->getForm();*/
-
+        /*------ Multiple form on a page are rendered with the same id : <form><div id="form">....</div></form>. To avoid this create form with NamedBuilder------*/
         return $this->container->get("form.factory")
                                ->createNamedBuilder("delete_form",'form')
                                ->setAction($this->generateUrl('article_delete',array('id'=>$id)))
                                ->setMethod("DELETE")
                                ->add('delete','submit')
                                ->getForm();
-
-
     }
 
     public function createPublishForm($id,$label)
     {
-        /*return $this->createFormBuilder()
-            ->setMethod("POST")
-            ->setAction($this->generateUrl("article_publish",array('id'=>$id,'action_label'=>$label)))
-            ->add('submit','submit',array('label'=>$label))
-            ->getForm();*/
-
+        /*------ Multiple form on a page are rendered with the same id : <form><div id="form">....</div></form>. To avoid this create form with NamedBuilder------*/
         return $this->container->get("form.factory")
                                 ->createNamedBuilder('publish_form','form')
                                 ->setMethod("POST")
                                 ->setAction($this->generateUrl("article_publish",array('id'=>$id,'action_label'=>$label)))
                                 ->add('submit','submit',array('label'=>$label))
                                 ->getForm();
-
     }
 
+
+    /**
+     * Publish or unpublish the article (article->published=false|true)
+     * @param Request $request
+     * @param string $id
+     * @param string $action_label
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function publishAction(Request $request, $id, $action_label="publish")
     {
         $publish_form=$this->createPublishForm($id,$action_label);
@@ -342,40 +340,33 @@ class ArticleController extends Controller
         if($publish_form->isValid())
         {
             $em=$this->getDoctrine()->getManager();
-
             $article=$em->getRepository("JohnArticleBundle:Article")->find($id);
 
 
            if(!$article){
                throw $this->createNotFoundException("Unable to find the entity");
            }
-
-            //$article->setPublished('true');
             if($article->getPublished()){
                 $article->setPublished('false');
             }else{
                 $article->setPublished(1);
             }
 
-
             $em->flush();
-
-            //de adaugat flash messages
+            $request->getSession()->getFlashBag()->add('publish_message',"Your {$action_label} action was done successfully. You will receive an email after approval");
 
         }
-        return $this->redirect($this->generateUrl('articles'));
+
+       return $this->redirect($this->generateUrl('articles'));
     }
 
     public function createActivateForm($id,$label)
     {
-
         return $this->createFormBuilder()
             ->setMethod("POST")
             ->setAction($this->generateUrl("article_activate",array("id"=>$id,"btn_label"=>$label)))
             ->add('submit','submit',array('label'=>$label))
             ->getForm();
-
-
     }
 
     public function activateAction(Request $request,$id,$btn_label)
@@ -399,11 +390,10 @@ class ArticleController extends Controller
             }
 
             $em->flush();
-
+            $request->getSession()->getFlashBag()->add('publish_message',"Your {$action_label} action was done successfully");
         }
 
         return $this->redirect($this->generateUrl('articles'));
-
     }
 
 

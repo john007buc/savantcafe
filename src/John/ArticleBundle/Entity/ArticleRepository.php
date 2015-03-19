@@ -77,7 +77,7 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('user_id',$user_id);
         }
 
-
+          $qb->orderBy("a.updated",'desc');
 
 
         if($offset){

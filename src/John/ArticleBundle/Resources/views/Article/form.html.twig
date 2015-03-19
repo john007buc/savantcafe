@@ -13,6 +13,7 @@
 
 
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_errors(form) }}
 
      <div>
         {{ form_label(form.categories) }}
@@ -26,7 +27,11 @@
         {{ form_errors(form.title) }}
     </div>
 
-
+   <div>
+       {{ form_label(form.abstract) }}
+       {{ form_widget(form.abstract) }}
+       {{ form_errors(form.abstract) }}
+   </div>
 
     <div>
         {{ form_label(form.content) }}
@@ -71,7 +76,7 @@
     </ul>
 
 
-    {% if  form.preview is defined and form.draft is defined  %}
+    {% if  form.preview is defined %}
         <div class="form_buttons">
             {{ form_widget(form.publish ) }}
             {{ form_widget(form.preview) }}
@@ -79,7 +84,7 @@
         </div>
     {% else %}
         <div class="form_button">
-            {{ form_widget(form.publish ) }}
+            {{ form_widget(form.draft ) }}
         </div>
     {% endif %}
 
