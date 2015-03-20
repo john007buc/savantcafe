@@ -101,7 +101,7 @@ class ArticleController extends Controller
         if($article_form->isValid())
         {
             /* - If Publish button was clicked, the article is set as published and will be active after the admin will accept it */
-            if($publish=$article_form->get("publish")->isClicked()){
+            if( $article_form->has("publish") &&  $article_form->get("publish")->isClicked()){
                 $article->setPublished(true);
                 $request->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
             }
@@ -176,8 +176,9 @@ class ArticleController extends Controller
     {
        $entity_manager = $this->getDoctrine()->getManager();
        $entity = $entity_manager->getRepository('JohnArticleBundle:Article')->find($id);
+
         /*----Forbidden for published articles when the user role is not ROLE_ADMIN------------------------------------*/
-       if(!$entity && (!$this->container->get("security.context")->isGranted("ROLE_ADMIN") && $entity->getPublished())){
+       if(!$entity || (!$this->is_admin() && $entity->getPublished())){
            return $this->createNotFoundException("Entity not found");
        }
 
@@ -220,10 +221,10 @@ class ArticleController extends Controller
          $entity_manager=$this->getDoctrine()->getManager();
          $entity = $entity_manager->getRepository('JohnArticleBundle:Article')->find($id);
 
-        /*-----Forbidden for published articles when the user role is not ROLE_ADMIN-------------------------------*/
+        /*-----Forbidden for published articles --------------------------------------------------------------------*/
         /*-----An article sent to be published is not editable-----------------------------------------------------*/
 
-        if(!$this->container->get("security.context")->isGranted("ROLE_ADMIN") && $entity->getPublished()){
+        if(!$this->is_admin() && $entity->getPublished()){
             $this->getRequest()->getSession()->getFlashBag()->add('publish_message','Congratulations! Your article has been sent for publish. You will receive an email after approval!');
             return $this->redirect($this->generateUrl('article_show',array('id'=>$id)));
         }
@@ -265,8 +266,15 @@ class ArticleController extends Controller
             $entity = $em->getRepository('JohnArticleBundle:Article')->find($id);
 
             if(!$entity){
-                throw $this->createNotFoundException("Unable to find article entity with id:{$id}");
+                throw $this->createNotFoundException("Unable to find  entity ");
             }
+
+            //for articles sent to be published only administartor has delete rights
+
+            if($entity->getPublished() && !$this->is_admin()){
+                throw $this->createNotFoundException("Unable to find  entity");
+            }
+
 
             $em->remove($entity);
             $em->flush();
@@ -293,7 +301,7 @@ class ArticleController extends Controller
 
     /**
      * Get the delete form
-     * @param $id
+     * @param int $id
      * @return \Symfony\Component\Form\Form
      */
     public function createDeleteForm($id)
@@ -303,7 +311,7 @@ class ArticleController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label'=>'Delete this article'))
             ->getForm();*/
-        /*------ Multiple form on a page are rendered with the same id : <form><div id="form">....</div></form>. To avoid this create form with NamedBuilder------*/
+        /*------ Multiple forms on a page created  with FormBuilder are rendered with the same id : <form><div id="form">....</div></form>. To avoid this create form with NamedBuilder------*/
         return $this->container->get("form.factory")
                                ->createNamedBuilder("delete_form",'form')
                                ->setAction($this->generateUrl('article_delete',array('id'=>$id)))
@@ -313,9 +321,16 @@ class ArticleController extends Controller
                                ->getForm();
     }
 
+
+    /**
+     * create the published submit button
+     * @param int $id
+     * @param string $label
+     * @return mixed
+     */
     public function createPublishForm($id,$label)
     {
-        /*------ Multiple form on a page are rendered with the same id : <form><div id="form">....</div></form>. To avoid this create form with NamedBuilder------*/
+        /*------ Multiple forms on a page created  with FormBuilder are rendered with the same id : <form><div id="form">....</div></form>. To avoid this create form with NamedBuilder------*/
         return $this->container->get("form.factory")
                                 ->createNamedBuilder('publish_form','form')
                                 ->setMethod("POST")
@@ -361,6 +376,12 @@ class ArticleController extends Controller
        return $this->redirect($this->generateUrl('articles'));
     }
 
+    /**
+     * Create the active submit button
+     * @param int $id
+     * @param string $label
+     * @return \Symfony\Component\Form\Form
+     */
     public function createActivateForm($id,$label)
     {
         return $this->createFormBuilder()
@@ -370,6 +391,13 @@ class ArticleController extends Controller
             ->getForm();
     }
 
+    /**
+     * This action activate an article (been active mean that the administrator aprove it to be published on the site)
+     * @param Request $request
+     * @param INT $id
+     * @param string $btn_label
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function activateAction(Request $request,$id,$btn_label)
     {
 
@@ -379,9 +407,13 @@ class ArticleController extends Controller
 
             $em=$this->getDoctrine()->getManager();
             $article=$em->getRepository("JohnArticleBundle:Article")->find($id);
-
-            if(!$article){
+            if(!$article || !$this->is_admin()){
                 throw $this->createNotFoundException("Entity nor found");
+            }
+
+            /*-IF ADMIN ACTIVATE AN ARTICLE THAT IS NOT PUBLISHED-*/
+            if(!$article->getPublished()){
+                $article->setPublished(1);
             }
 
             if($article->getActive()){
@@ -391,11 +423,18 @@ class ArticleController extends Controller
             }
 
             $em->flush();
-            $request->getSession()->getFlashBag()->add('publish_message',"Your {$action_label} action was done successfully");
+            $request->getSession()->getFlashBag()->add('publish_message',"Your {$btn_label} action was done successfully");
         }
 
         return $this->redirect($this->generateUrl('articles'));
     }
 
-
+    /**
+     * Check if the user has admin role
+     * @return bool
+     */
+    public function is_admin()
+    {
+        return $this->container->get('security.context')->isGranted("ROLE_ADMIN");
+    }
 }
