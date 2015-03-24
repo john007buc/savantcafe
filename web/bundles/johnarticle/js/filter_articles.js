@@ -9,7 +9,7 @@ $(document).ready(function() {
      e.preventDefault();
 
      var active=$("#filter_articles_active").is(':checked');
-     var publish = $("#filter_articles_published").is(':checked');
+    var publish = $("#filter_articles_published").is(':checked');
      var category = $("#filter_articles_category").val();
 
      //set this vaues in localstorage
@@ -24,26 +24,15 @@ $(document).ready(function() {
  });
 
 
-
 })
 
 function setFilterValues()
 {
-
     var category=localStorage.getItem("category");
     var active=localStorage.getItem("active");
     var publish=localStorage.getItem("publish");
 
-
-
-
-        $("#filter_articles_category").val(category);
-        $("#filter_articles_published").attr("checked",publish==="true"?true:false);
-        $("#filter_articles_active").attr("checked",active==="true"?true:false);
-
-
-
-
-
-
+    $("#filter_articles_category").val(category);
+    $("#filter_articles_published").attr("checked",publish==="true"?true:false);
+    $("#filter_articles_active").attr("checked",active==="true"?true:false);
 }

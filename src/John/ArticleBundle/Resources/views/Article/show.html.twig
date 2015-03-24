@@ -5,11 +5,20 @@
      {#<a href="{{app.request.headers.get('referer')  }}"> << Back</a>#}
 
     <article>
-        <header>
+        <hgroup>
             <h2>{{ entity.title }}</h2>
-        </header>
+            <h5>By {{ entity.author.firstName~' '~entity.author.lastName }}</h5>
+        </hgroup>
 
-        {{ entity.content|raw }}
+        <section>
+            <h4>Abstract</h4>
+            {{ entity.abstract }}
+        </section>
+
+        <section>
+            <h4>Content</h4>
+            {{ entity.content|raw }}
+        </section>
 
         <aside style="background-color:beige">Tags :
          <span class="genericon genericon-tag" ></span>
@@ -18,17 +27,21 @@
         {% endfor %}
         </aside>
 
-        {#show edit, publish,active and delete buttons  for admin #}
-        {% if is_granted("ROLE_ADMIN") %}
-            <div class=" article-admin-actions article-actions">
-                <span class="genericon genericon-cog">*</span>
-                {{ form(delete_form) }}
-                {{ form(publish_form) }}
 
-                {{ form(activate_form) }}
-                <a  href="{{ path('article_edit',{'id':entity.id}) }}">Edit</a>
-            </div>
-        {% endif %}
+        <footer>
+            {#show edit, publish,active and delete buttons  for admin #}
+            {% if is_granted("ROLE_ADMIN") %}
+                <nav class=" article-admin-actions article-actions">
+                    <span class="genericon genericon-cog">*</span>
+                    {{ form(delete_form) }}
+                    {{ form(publish_form) }}
+
+                    {{ form(activate_form) }}
+                    <a  href="{{ path('article_edit',{'id':entity.id}) }}">Edit</a>
+                </nav>
+            {% endif %}
+        </footer>
+
     </article>
 
     {#

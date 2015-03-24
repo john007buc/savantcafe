@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php" line="202" mnemonic="8" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="fe29ed6d-9685-47a8-bf68-f70a7f48c326" name="Default" comment="" />
     <ignored path="savantcafe.iws" />
@@ -38,13 +35,42 @@
       <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.153846" vertical-offset="204" max-vertical-offset="1088">
-              <caret line="26" column="42" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="42" />
+            <state vertical-scroll-proportion="-24.192308" vertical-offset="153" max-vertical-offset="1105">
+              <caret line="46" column="120" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="120" />
               <folding>
-                <element signature="e#12#55#0#Twig" expanded="false" />
-                <element signature="e#385#397#0#Twig" expanded="false" />
-                <element signature="e#773#785#0#Twig" expanded="false" />
-                <element signature="e#986#1004#0#HTML" expanded="true" />
+                <element signature="e#1028#1046#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="links.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/John/ProfileBundle/Resources/views/links.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="255">
+              <caret line="3" column="91" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="91" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filter_articles.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/js/filter_articles.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+              <caret line="36" column="76" selection-start-line="36" selection-start-column="76" selection-end-line="36" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/show.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.9615384" vertical-offset="102" max-vertical-offset="1088">
+              <caret line="9" column="56" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
+              <folding>
+                <element signature="e#1214#1226#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,65 +99,29 @@
       <file leaf-file-name="ArticleController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5023419" vertical-offset="1390" max-vertical-offset="7565">
-              <caret line="107" column="50" selection-start-line="107" selection-start-column="50" selection-end-line="107" selection-end-column="50" />
+            <state vertical-scroll-proportion="9.057377" vertical-offset="0" max-vertical-offset="8041">
+              <caret line="455" column="9" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
               <folding>
                 <element signature="e#48#79#0#PHP" expanded="true" />
-                <element signature="e#1283#1310#1#PHP" expanded="true" />
-                <element signature="e#1469#1496#1#PHP" expanded="true" />
-                <element signature="e#1875#1885#1#PHP" expanded="true" />
-                <element signature="e#2668#2695#1#PHP" expanded="true" />
-                <element signature="e#3617#3660#0#PHP" expanded="true" />
-                <element signature="e#4924#4938#0#PHP" expanded="true" />
-                <element signature="e#5049#5090#0#PHP" expanded="true" />
-                <element signature="e#5464#5505#0#PHP" expanded="true" />
-                <element signature="e#5803#5830#1#PHP" expanded="true" />
-                <element signature="e#6507#6549#0#PHP" expanded="true" />
-                <element signature="e#7029#7056#1#PHP" expanded="true" />
-                <element signature="e#8033#8047#0#PHP" expanded="true" />
-                <element signature="e#8260#8302#0#PHP" expanded="true" />
-                <element signature="e#8694#8721#1#PHP" expanded="true" />
-                <element signature="e#9274#9288#0#PHP" expanded="true" />
-                <element signature="e#9403#9445#0#PHP" expanded="true" />
-                <element signature="e#9851#9867#0#PHP" expanded="true" />
-                <element signature="e#10313#10340#1#PHP" expanded="true" />
-                <element signature="e#10843#10853#1#PHP" expanded="true" />
-                <element signature="e#11180#11196#1#PHP" expanded="true" />
-                <element signature="e#12068#12084#0#PHP" expanded="true" />
-                <element signature="e#12986#13003#0#PHP" expanded="true" />
-                <element signature="e#13861#13888#1#PHP" expanded="true" />
-                <element signature="e#14449#14459#1#PHP" expanded="true" />
-                <element signature="e#14793#14811#0#PHP" expanded="true" />
-                <element signature="e#15645#15672#1#PHP" expanded="true" />
-                <element signature="e#16358#16368#1#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Article.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/Article.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.333334" vertical-offset="8290" max-vertical-offset="10098">
-              <caret line="584" column="25" selection-start-line="584" selection-start-column="20" selection-end-line="584" selection-end-column="25" />
-              <folding>
-                <element signature="e#44#76#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="validation.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/config/validation.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-              <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
-              <folding>
-                <marker date="1426768721328" expanded="true" signature="1108:1526" placeholder="John\ArticleBundle\Entity\Image:" />
-                <marker date="1426768721328" expanded="true" signature="1153:1243" placeholder="constraints:" />
-                <marker date="1426768721328" expanded="true" signature="1186:1243" placeholder="Callback:" />
-                <marker date="1426768721328" expanded="true" signature="1222:1242" placeholder="methods:" />
-                <marker date="1426768721328" expanded="true" signature="1256:1526" placeholder="properties:" />
+                <element signature="e#1809#1819#1#PHP" expanded="true" />
+                <element signature="e#3612#3655#0#PHP" expanded="true" />
+                <element signature="e#4906#4920#0#PHP" expanded="true" />
+                <element signature="e#5031#5072#0#PHP" expanded="true" />
+                <element signature="e#5446#5487#0#PHP" expanded="true" />
+                <element signature="e#6929#6971#0#PHP" expanded="true" />
+                <element signature="e#7304#7346#0#PHP" expanded="true" />
+                <element signature="e#8628#8642#0#PHP" expanded="true" />
+                <element signature="e#8729#8771#0#PHP" expanded="true" />
+                <element signature="e#9863#9877#0#PHP" expanded="true" />
+                <element signature="e#9992#10034#0#PHP" expanded="true" />
+                <element signature="e#10440#10456#0#PHP" expanded="true" />
+                <element signature="e#11501#11511#1#PHP" expanded="true" />
+                <element signature="e#11854#11870#1#PHP" expanded="true" />
+                <element signature="e#12785#12801#0#PHP" expanded="true" />
+                <element signature="e#13882#13899#0#PHP" expanded="true" />
+                <element signature="e#15591#15601#1#PHP" expanded="true" />
+                <element signature="e#15935#15953#0#PHP" expanded="true" />
+                <element signature="e#17643#17653#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -161,16 +151,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Form/ImageType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="663">
-              <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="form.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/form.html.twig">
           <provider selected="true" editor-type-id="text-editor">
@@ -191,7 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/John/SavantBundle/DataFixtures/ORM/ArticleFixtures.php" />
         <option value="$PROJECT_DIR$/src/John/SavantBundle/DataFixtures/ORM/CommentFixture.php" />
         <option value="$PROJECT_DIR$/src/John/SavantBundle/DataFixtures/ORM/TagFixtures.php" />
         <option value="$PROJECT_DIR$/src/John/SavantBundle/DataFixtures/ORM/UserFixtures.php" />
@@ -224,8 +203,6 @@
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/new.html.twig" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/edit_form.html.twig" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/edit.html.twig" />
-        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/John/ProfileBundle/Resources/views/links.html.twig" />
         <option value="$PROJECT_DIR$/web/bundles/johnadmin/css/admin.css" />
@@ -241,6 +218,9 @@
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Form/ArticleType.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/Image.php" />
         <option value="$PROJECT_DIR$/web/bundles/johnarticle/css/article.css" />
+        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/show.html.twig" />
+        <option value="$PROJECT_DIR$/web/bundles/johnarticle/js/filter_articles.js" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php" />
       </list>
     </option>
@@ -1302,7 +1282,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1476,13 +1456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/js/filter_articles.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="935">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/security.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
@@ -1597,17 +1570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.26923" vertical-offset="0" max-vertical-offset="867">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-          <folding>
-            <element signature="e#12#55#0#Twig" expanded="false" />
-            <element signature="e#911#923#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ProfileBundle/Resources/views/Profile/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="204">
@@ -1643,14 +1605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="374">
           <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ProfileBundle/Resources/views/links.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="255">
-          <caret line="3" column="91" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="91" />
           <folding />
         </state>
       </provider>
@@ -1693,19 +1647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846" vertical-offset="204" max-vertical-offset="1088">
-          <caret line="26" column="42" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="42" />
-          <folding>
-            <element signature="e#12#55#0#Twig" expanded="false" />
-            <element signature="e#385#397#0#Twig" expanded="false" />
-            <element signature="e#773#785#0#Twig" expanded="false" />
-            <element signature="e#986#1004#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Entity/ArticleRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.60784316" vertical-offset="816" max-vertical-offset="1683">
@@ -1719,11 +1660,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
           <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
           <folding>
-            <marker date="1426768721328" expanded="true" signature="1108:1526" placeholder="John\ArticleBundle\Entity\Image:" />
-            <marker date="1426768721328" expanded="true" signature="1153:1243" placeholder="constraints:" />
-            <marker date="1426768721328" expanded="true" signature="1186:1243" placeholder="Callback:" />
-            <marker date="1426768721328" expanded="true" signature="1222:1242" placeholder="methods:" />
-            <marker date="1426768721328" expanded="true" signature="1256:1526" placeholder="properties:" />
+            <marker date="1426768721328" expanded="true" signature="-1:-1" placeholder="John\ArticleBundle\Entity\Image:" />
+            <marker date="1426768721328" expanded="true" signature="-1:-1" placeholder="constraints:" />
+            <marker date="1426768721328" expanded="true" signature="-1:-1" placeholder="Callback:" />
+            <marker date="1426768721328" expanded="true" signature="-1:-1" placeholder="methods:" />
+            <marker date="1426768721328" expanded="true" signature="-1:-1" placeholder="properties:" />
           </folding>
         </state>
       </provider>
@@ -1790,39 +1731,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/johnarticle/js/filter_articles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+          <caret line="36" column="76" selection-start-line="36" selection-start-column="76" selection-end-line="36" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.192308" vertical-offset="153" max-vertical-offset="1105">
+          <caret line="46" column="120" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="120" />
+          <folding>
+            <element signature="e#1028#1046#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ProfileBundle/Resources/views/links.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="255">
+          <caret line="3" column="91" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9615384" vertical-offset="102" max-vertical-offset="1088">
+          <caret line="9" column="56" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
+          <folding>
+            <element signature="e#1214#1226#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Controller/ArticleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5023419" vertical-offset="1390" max-vertical-offset="7565">
-          <caret line="107" column="50" selection-start-line="107" selection-start-column="50" selection-end-line="107" selection-end-column="50" />
+        <state vertical-scroll-proportion="9.057377" vertical-offset="0" max-vertical-offset="8041">
+          <caret line="455" column="9" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
           <folding>
             <element signature="e#48#79#0#PHP" expanded="true" />
-            <element signature="e#1283#1310#1#PHP" expanded="true" />
-            <element signature="e#1469#1496#1#PHP" expanded="true" />
-            <element signature="e#1875#1885#1#PHP" expanded="true" />
-            <element signature="e#2668#2695#1#PHP" expanded="true" />
-            <element signature="e#3617#3660#0#PHP" expanded="true" />
-            <element signature="e#4924#4938#0#PHP" expanded="true" />
-            <element signature="e#5049#5090#0#PHP" expanded="true" />
-            <element signature="e#5464#5505#0#PHP" expanded="true" />
-            <element signature="e#5803#5830#1#PHP" expanded="true" />
-            <element signature="e#6507#6549#0#PHP" expanded="true" />
-            <element signature="e#7029#7056#1#PHP" expanded="true" />
-            <element signature="e#8033#8047#0#PHP" expanded="true" />
-            <element signature="e#8260#8302#0#PHP" expanded="true" />
-            <element signature="e#8694#8721#1#PHP" expanded="true" />
-            <element signature="e#9274#9288#0#PHP" expanded="true" />
-            <element signature="e#9403#9445#0#PHP" expanded="true" />
-            <element signature="e#9851#9867#0#PHP" expanded="true" />
-            <element signature="e#10313#10340#1#PHP" expanded="true" />
-            <element signature="e#10843#10853#1#PHP" expanded="true" />
-            <element signature="e#11180#11196#1#PHP" expanded="true" />
-            <element signature="e#12068#12084#0#PHP" expanded="true" />
-            <element signature="e#12986#13003#0#PHP" expanded="true" />
-            <element signature="e#13861#13888#1#PHP" expanded="true" />
-            <element signature="e#14449#14459#1#PHP" expanded="true" />
-            <element signature="e#14793#14811#0#PHP" expanded="true" />
-            <element signature="e#15645#15672#1#PHP" expanded="true" />
-            <element signature="e#16358#16368#1#PHP" expanded="true" />
+            <element signature="e#1809#1819#1#PHP" expanded="true" />
+            <element signature="e#3612#3655#0#PHP" expanded="true" />
+            <element signature="e#4906#4920#0#PHP" expanded="true" />
+            <element signature="e#5031#5072#0#PHP" expanded="true" />
+            <element signature="e#5446#5487#0#PHP" expanded="true" />
+            <element signature="e#6929#6971#0#PHP" expanded="true" />
+            <element signature="e#7304#7346#0#PHP" expanded="true" />
+            <element signature="e#8628#8642#0#PHP" expanded="true" />
+            <element signature="e#8729#8771#0#PHP" expanded="true" />
+            <element signature="e#9863#9877#0#PHP" expanded="true" />
+            <element signature="e#9992#10034#0#PHP" expanded="true" />
+            <element signature="e#10440#10456#0#PHP" expanded="true" />
+            <element signature="e#11501#11511#1#PHP" expanded="true" />
+            <element signature="e#11854#11870#1#PHP" expanded="true" />
+            <element signature="e#12785#12801#0#PHP" expanded="true" />
+            <element signature="e#13882#13899#0#PHP" expanded="true" />
+            <element signature="e#15591#15601#1#PHP" expanded="true" />
+            <element signature="e#15935#15953#0#PHP" expanded="true" />
+            <element signature="e#17643#17653#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

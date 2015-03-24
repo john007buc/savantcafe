@@ -2,7 +2,8 @@
 {% block main %}
     {{ parent() }}
 
-    {% if is_granted("ROLE_ADMIN") %}
+    {#filter form available for admin only#}
+    {% if  filter_form != null %}
         <div class="articles-filter">
             {{ include('JohnArticleBundle:Article:filter.html.twig',{'form':filter_form}) }}
         </div>
@@ -13,7 +14,7 @@
         <article>
             <h2><a href="{{ path('article_show',{id:article.id}) }}">{{ article.title }}</a></h2>
 
-            {#if the article isn't sent to publish show edit,delete and publish buttons#}
+            {#if the article wasn't sent to publish show edit,delete and publish buttons#}
             {#only for users. The admin has all buttons in show page#}
             {% if not is_granted('ROLE_ADMIN') and article.published==false%}
                 <div class="article-actions">
@@ -32,8 +33,8 @@
                 </figure>
             {% endif %}
 
-            <p>{{ article.content|truncate(550)|striptags }}</p>
-
+           {#<p>{{ article.content|truncate(550)|striptags }}</p>#}
+            <p>{{ article.abstract|striptags }}</p>
             <footer>
                 {% if article.active %}
                  <span class="genericon genericon-show">Published</span>
