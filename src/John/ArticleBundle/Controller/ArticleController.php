@@ -8,6 +8,8 @@ use John\ArticleBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 use John\ArticleBundle\Form\FilterType;
 use John\ArticleBundle\MyClasses\Pagination;
+use John\ArticleBundle\Event\ArticleEvents;
+use John\ArticleBundle\Event\ArticleEvent;
 
 
 class ArticleController extends Controller
@@ -450,6 +452,13 @@ class ArticleController extends Controller
                 $article->setActive(0);
             }else{
                 $article->setActive(1);
+
+                /*--------Send notofication to article.activate listener-----------------------------------------/
+                /---------This listener integrate PictureFill tags in article's body and send email to author---*/
+
+                $this->get("event_dispatcher")->dispatch(ArticleEvents::ARTICLE_ACTIVATE,new ArticleEvent($article->getAuthor()->getEmail(),$article->getAuthor()->getFirstName(),$article));
+
+
             }
             $em->flush();
             $request->getSession()->getFlashBag()->add('publish_message',"Your {$btn_label} action was done successfully");

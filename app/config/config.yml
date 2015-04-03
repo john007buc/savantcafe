@@ -85,6 +85,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
+    disable_delivery:  false
     transport: %mailer_transport%
     host:      %mailer_host%
     username:  %mailer_user%
@@ -124,16 +125,6 @@ liip_imagine:
             quality: 80
             filters:
               strip: ~
-
-
-
-
-
-
-
-
-
-
 
 
 

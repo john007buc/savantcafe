@@ -18,6 +18,10 @@ class CKEditorController extends Controller
     {
         $images = $this->getDoctrine()->getRepository("JohnArticleBundle:Media")->getAuthorImages($this->getUser()->getId());
 
+        //get ckeditor callback
+        $callback = $request->query->get("CKEditorFuncNum");
+        //dump($images);exit();
+
         return $this->render("JohnArticleBundle:CKEditor:browse.html.twig",array(
                "images"=>$images,
                'callback'=>$callback

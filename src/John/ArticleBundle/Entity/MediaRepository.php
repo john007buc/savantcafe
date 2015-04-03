@@ -18,10 +18,11 @@ class MediaRepository extends EntityRepository
 
         $query = $this->getEntityManager()->createQuery("select m.path from JohnArticleBundle:Media m join m.author u join m.type f where u.id=:user_id and f.name='image' ")
                                            ->setParameter('user_id',$user_id);
+
+
        // dump($query->getResult());exit();
         //get an array of images
         $images=array_map(function ($v){
-
             return $v["path"];
         },$query->getResult());
 
