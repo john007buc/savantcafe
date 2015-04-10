@@ -88,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UniqueTag.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UniqueTag.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/UniqueTag.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6153846" vertical-offset="51" max-vertical-offset="2091">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7058824" vertical-offset="1224" max-vertical-offset="2125">
+              <caret line="108" column="12" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="12" />
               <folding>
                 <element signature="e#57#99#0#PHP" expanded="true" />
               </folding>
@@ -100,10 +100,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArticleListener.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ArticleListener.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/ArticleListener.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19607843" vertical-offset="1598" max-vertical-offset="3519">
+            <state vertical-scroll-proportion="-6.5384617" vertical-offset="1598" max-vertical-offset="3519">
               <caret line="104" column="41" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
               <folding>
                 <element signature="e#57#88#0#PHP" expanded="true" />
@@ -202,7 +202,6 @@
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Resources/views/Article/show.html.twig" />
         <option value="$PROJECT_DIR$/web/bundles/johnarticle/js/filter_articles.js" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Entity/MediaRepository.php" />
-        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/UniqueTag.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Event/ArticleEvents.php" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Event/ArticleEvent.php" />
@@ -212,6 +211,7 @@
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Controller/CKEditorController.php" />
         <option value="$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/ArticleListener.php" />
+        <option value="$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/UniqueTag.php" />
       </list>
     </option>
   </component>
@@ -1751,16 +1751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/UniqueTag.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846" vertical-offset="51" max-vertical-offset="2091">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#57#99#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1487" max-vertical-offset="2465">
@@ -1786,12 +1776,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/ArticleListener.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19607843" vertical-offset="1598" max-vertical-offset="3519">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="1598" max-vertical-offset="3519">
           <caret line="104" column="41" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
           <folding>
             <element signature="e#57#88#0#PHP" expanded="true" />
             <element signature="e#5827#5863#0#PHP" expanded="true" />
             <marker date="1428673935185" expanded="true" signature="1455:1743" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/John/ArticleBundle/Event/EventListener/UniqueTag.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7058824" vertical-offset="1224" max-vertical-offset="2125">
+          <caret line="108" column="12" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="12" />
+          <folding>
+            <element signature="e#57#99#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
