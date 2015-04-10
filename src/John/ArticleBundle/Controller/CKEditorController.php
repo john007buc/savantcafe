@@ -50,8 +50,52 @@ class CKEditorController extends Controller
             return $response;
         }
 
-        //move the uploaded file in a temporary location
-        $tmpFolder = $this->get('kernel')->getRootDir()."/../web/uploads/tmp/"; // folder to store unfiltered temp file
+        //move the uploaded file in a original location
+
+        //make upload dir from current year and month
+        date_default_timezone_set('Europe/Bucharest');
+        $year = date("Y");
+        $month= date("m");
+        $upload_dir=$this->get('kernel')->getRootDir()."/../web/uploads/".$year."/".$month."/original";
+        $hash = sha1(uniqid(mt_rand(), true));
+        $imgHash = $hash .".". $uploadedFile->guessExtension();
+        $image_web_path="uploads/".$year."/".$month."/original/".$imgHash;
+
+        try{
+            //move original file to original folder
+            //this image will be resized for responsive response (PictureFill) in Event/EventListener/ArticleListener  when the administrator approve this article for publication
+            $uploadedFile->move($upload_dir, $imgHash);
+            //write image path in database
+            $em=$this->getDoctrine()->getManager();
+            $image_format = $em->getRepository("JohnArticleBundle:Format")->findOneBy(array("name"=>"image"));
+            $media = new Media();
+            $media->setType($image_format);
+            $media->setAuthor($this->getUser());
+            $media->setPath($image_web_path);
+            $media->setRootPath($upload_dir."/".$imgHash);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($media);
+            $em->flush();
+
+            return new Response("Updated OK");
+        }catch(Exception $ex)
+        {
+            return new Response("Update error");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*$tmpFolder = $this->get('kernel')->getRootDir()."/../web/uploads/tmp/"; // folder to store unfiltered temp file
         $hash = sha1(uniqid(mt_rand(), true));
         $imgHash = $hash .".". $uploadedFile->guessExtension();
         $temp_path = "uploads/tmp/".$imgHash;
@@ -62,8 +106,8 @@ class CKEditorController extends Controller
         date_default_timezone_set('Europe/Bucharest');
         $year = date("Y");
         $month= date("m");
-        $upload_dir=$this->get('kernel')->getRootDir()."/../web/uploads/".$year."/".$month;
-        $image_web_path="uploads/".$year."/".$month."/".$imgHash;
+        $upload_dir=$this->get('kernel')->getRootDir()."/../web/uploads/".$year."/".$month."/original";
+        $image_web_path="uploads/".$year."/".$month."/original/".$imgHash;
         if(!is_dir($upload_dir)){
             mkdir($upload_dir,0777, true);
         }
@@ -101,7 +145,7 @@ class CKEditorController extends Controller
         }catch(Exception $ex)
         {
             return new Response("Update error");
-        }
+        }*/
     }
 
 
