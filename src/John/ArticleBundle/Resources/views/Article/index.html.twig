@@ -29,7 +29,8 @@
 
             {% if article.featuredImage %}
                 <figure >
-                    <img  alt="{{ article.featuredImage.alt }}" src="{{ asset(('uploads/featured_images/'~article.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">
+                    {#<img  alt="{{ article.featuredImage.alt }}" src="{{ asset(('uploads/featured_images/'~article.featuredImage.name)| imagine_filter('my_thumb'),'cdn')}}">#}
+                    <img  alt="{{ article.featuredImage.alt }}" src="{{ asset(article.featuredImage.webPath|imagine_filter('my_thumb'),'cdn')}}">
                 </figure>
             {% endif %}
 

@@ -56,15 +56,59 @@ class CKEditorController extends Controller
         date_default_timezone_set('Europe/Bucharest');
         $year = date("Y");
         $month= date("m");
-        $upload_dir=$this->get('kernel')->getRootDir()."/../web/uploads/".$year."/".$month."/original";
+        $upload_dir=$this->get('kernel')->getRootDir()."/../web/uploads/article_images/".$year."/".$month."/original";
         $hash = sha1(uniqid(mt_rand(), true));
         $imgHash = $hash .".". $uploadedFile->guessExtension();
-        $image_web_path="uploads/".$year."/".$month."/original/".$imgHash;
+        $image_web_path="uploads/article_images/".$year."/".$month."/original/".$imgHash;
+
+
 
         try{
             //move original file to original folder
             //this image will be resized for responsive response (PictureFill) in Event/EventListener/ArticleListener  when the administrator approve this article for publication
-            $uploadedFile->move($upload_dir, $imgHash);
+           // $uploadedFile->move($upload_dir, $imgHash);
+
+            //1. give original file a hash name and move it in a temp directory
+            //2. use liip_imagine and filter the original file from temp directory and save it to web/uploads/article_images/year/month/hashName
+
+            $temp_path = "uploads/tmp/";
+            $temp_file=$temp_path.$imgHash ;
+
+            $uploadedFile->move($temp_path, $imgHash);
+
+            //get the width of original file and set the filter to apply
+
+            /*-- get the width and height of the image and set the filters used by liip-imagine-bundle*/
+            list($width,$height)=getimagesize($temp_file);
+
+            /*---set the filters-----*/
+
+            if($width>=640){
+                $filter='web_large';
+            }elseif($width>=480){
+                $filter='web_medium';
+
+            }elseif($width>=320){
+                $filter='web_min';
+            }else{
+                $filter='my_thumb';
+            }
+
+            $container = $this->container;                                  // the DI container
+            $dataManager = $container->get('liip_imagine.data.manager');    // the data manager service
+            $filterManager = $container->get('liip_imagine.filter.manager');// the filter manager service
+            $image = $dataManager->find( $filter,$temp_file);            // find the image and determine its type
+            $response = $filterManager->applyFilter($image,  $filter);
+            $binary = $response->getContent();
+
+            $f = fopen($image_web_path, 'w');
+            fwrite($f, $binary);                         // write the image
+
+            fclose($f);
+
+
+
+
             //write image path in database
             $em=$this->getDoctrine()->getManager();
             $image_format = $em->getRepository("JohnArticleBundle:Format")->findOneBy(array("name"=>"image"));

@@ -521,7 +521,7 @@ class Article
 
                 if(!preg_match("/^[a-zA-Z ]*$/",$tag->getName()))
                 {
-                    $context->addViolationAt("tags[$i].name", 'Only letters and white space allowed', array(), null);
+                    $context->addViolationAt("tags[$i].name", 'Only letters and white space are allowed', array(), null);
                 }
                 $i++;
 

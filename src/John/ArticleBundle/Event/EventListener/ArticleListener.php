@@ -34,7 +34,7 @@ class ArticleListener
 
        /* dump(preg_match("/<img\s*?(alt=['\"].*?['\"])*\s*src=['\"](.+?)['\"].*?>/i",$this->article->getContent()));exit();*/
 
-       dump($newContent);exit();
+
 
         $this->article->setContent($newContent);
         $this->em->persist($this->article);
@@ -47,44 +47,42 @@ class ArticleListener
 
 
 
-        /*$pictureTag='<picture>
+       /*$pictureTag='<picture>
 	   <source srcset="examples/images/extralarge.jpg" media="(min-width: 1000px)">
-	  <source srcset="examples/images/large.jpg" media="(min-width: 800px)">
-	  <img srcset="examples/images/medium.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+	   <source srcset="examples/images/large.jpg" media="(min-width: 800px)">
+	   <img srcset="examples/images/medium.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
        </picture>';
 
       return $pictureTag;*/
 
+        // as usual: $matches[0] is the complete match
+        // $matches[1] the match for the first subpattern
+        // $matches[2] the match for the second subpattern (the path)
 
-      $rel_path=strstr($matches[2],"uploads");
-      list($width,$height)=getimagesize($rel_path);
-       // dump($width);exit();
+     /*-- get the width of the image --*/
+      $image_web_path=strstr($matches[2],"uploads");
 
-      dump($this->getPictureTag($matches[2],$matches[1]));exit();
+     /*-- get the name of the image+extension--*/
+     $imgName=pathinfo($image_web_path,PATHINFO_BASENAME);
 
+      /*-- get the base directory (uploads/article_images/year/month/) of the image--*/
+      /*-- in this directory will be created folders:small,medium and large for storing responsive images*/
 
-    }
+      //$image_base_directory=strstr($image_web_path,"original",true);
+      //ATTENTION! in some situation is needed to remove "/" from the beginning
+        $image_base_directory=ltrim(strstr($matches[2],"original",true),'/');
 
-    public function getPictureTag($image,$alt)
-    {
-        //get the path relative to web
-        //ex: uploads/2015/04/original/ec0e28668e44b354b138c5ea768a68c16f29c7cb.jpeg
-        $web_path=strstr($image,"uploads");
-        list($width,$height)=getimagesize($web_path);
+     /*-- get the width and height of the image and set the filters used by liip-imagine-bundle*/
+      list($width,$height)=getimagesize($image_web_path);
 
-        //get root path
-        $path=strstr($image,"original",true);
-
-        //get the name of the image+extension
-        $imgName=pathinfo($image,PATHINFO_BASENAME);
-
+     /*---set the filters-----*/
 
         if($width>=640){
-         $filters=array(
-             'small'=>'web_min',
-             'medium'=>'web_medium',
-             'large'=>'web_large'
-         );
+            $filters=array(
+                'small'=>'web_min',
+                'medium'=>'web_medium',
+                'large'=>'web_large'
+            );
         }elseif($width>=480){
             $filters=array(
                 'small'=>'web_min',
@@ -101,74 +99,117 @@ class ArticleListener
             );
         }
 
-        if($this->makeResponsiveImages($filters,$web_path)){
-            return $this->getPictureHtml(count($filters),$path,$imgName,$alt);
-        }else{
-            return "IMG ERROR";
-        }
+
+      //for every match this function has to
+      // 1. make responsive images
+      // 2. return the picture tag used by picturefill.js
+
+      //1. Make responsive images
+
+        $this->makeResponsiveImages($filters, $image_web_path, $image_base_directory,$imgName);
+
+      //2 return the picture tag
+        /*-- $matches[1]=alt content --*/
+
+        $picTag=$this->getPictureHtml(count($filters), $image_base_directory,$imgName,$matches[1]);
+
+      return $picTag;
 
 
     }
 
-    public function makeResponsiveImages($filters,$image)
+
+
+    public function makeResponsiveImages($filters, $image_web_path,$image_base_directory,$imgName)
     {
-        //get path without original direcotry
-        $path=strstr($image,"original",true);
+       // $web_path=strstr( $image_web_path,"original",true);
+       // dump($image_web_path);
+       // dump($image_base_directory);
+       // dump($web_path);
+       // dump($_SERVER['DOCUMENT_ROOT']);exit();
 
-        //get the name of the image+extension
-        $imgName=pathinfo($image,PATHINFO_BASENAME);
+        $absolute_dir_path=$_SERVER['DOCUMENT_ROOT']."/".$image_base_directory;
 
-            try{
-
+        try{
                 foreach($filters as $type=>$filter){
-
                     $container = $this->container;                                  // the DI container
                     $dataManager = $container->get('liip_imagine.data.manager');    // the data manager service
                     $filterManager = $container->get('liip_imagine.filter.manager');// the filter manager service
-                    $image = $dataManager->find($filter,$image);            // find the image and determine its type
+                    $image = $dataManager->find($filter,$image_web_path);            // find the image and determine its type
                     $response = $filterManager->applyFilter($image, $filter);
                     $binary = $response->getContent();
 
-                    $upload_dir = $path.$type;
+                    //create the upload directory and write the new image
+                    //$upload_dir = $image_base_directory.$type;
+                    $upload_dir =$absolute_dir_path.$type;
                     if(!is_dir($upload_dir)){
                         mkdir($upload_dir,0777, true);
                     }
-                    $f = fopen($upload_dir."/".$imgName, 'w');  // create image file
-                    fwrite($f, $binary);                         // write the image
-                    fclose($f);
+                   // dump(  $image_base_directory);exit();
+                    //dump($upload_dir."/".$imgName);exit();
+                    //$f = fopen($upload_dir."/".$imgName, 'w');  // create image file
+
+
+
+
+
+                        if (!$handle = fopen($upload_dir."/".$imgName, 'w+')) {
+
+                            exit;
+                        }
+
+
+                        if (fwrite($handle, $binary) === FALSE) {
+                            dump("Cannot write to file ");
+                            exit;
+                        }
+
+
+                        fclose($handle);
+
+
+
+
+
+
+                    //fwrite($f, $binary);                         // write the image
+                    //sleep(1);
+                    //fclose($f);
                 }
 
                 return true;
 
-            }catch(Exception $ex)
-            {
+            }catch(Exception $ex){
 
-            }
+                  dump($ex);exit();
+        }
+
     }
 
-    public function getPictureHtml($nr,$path,$imageName,$alt)
+    public function getPictureHtml($filters_number,$image_base_directory,$imageName,$alt)
     {
+        $image_base_directory="/".$image_base_directory;
 
-        switch ($nr){
+        switch ($filters_number){
             case 3:
-                $small_path=$path."small/".$imageName;
-                $medium_path=$path."medium/".$imageName;
-                $large_path=$path."large/".$imageName;
+                $small_path= $image_base_directory."small/".$imageName;
+                $medium_path= $image_base_directory."medium/".$imageName;
+                $large_path= $image_base_directory."large/".$imageName;
                 break;
             case 2:
-                $small_path=$path."small/".$imageName;
-                $medium_path=$large_path=$path."medium/".$imageName;
+                $small_path= $image_base_directory."small/".$imageName;
+                $medium_path=$large_path= $image_base_directory."medium/".$imageName;
                 break;
             case 1:
-                $small_path=$medium_path=$large_path=$path."small/".$imageName;
+                $small_path=$medium_path=$large_path= $image_base_directory."small/".$imageName;
         }
 
         $pictureTag= <<<END_TEXT
-          "<picture>
+          <picture>
 	        <source srcset='$large_path' media='(min-width: 1000px)'>
 	        <source srcset='$medium_path' media='(min-width: 500px)'>
-	        <img srcset='$small_path' alt=$alt>
-            </picture>"
+	        <img srcset='$small_path' $alt>
+            </picture>
 END_TEXT;
 
        return  $pictureTag;
@@ -193,6 +234,8 @@ END_TEXT;
 
             $this->container->get("mailer")->send($message);
         }
+
+
     }
 
 

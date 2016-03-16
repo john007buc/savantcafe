@@ -5,18 +5,4 @@
     {{ include("JohnArticleBundle:Article:form.html.twig",{'form':form}) }}
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts 'bundles/johnarticle/js/collection_type.js' filter="uglifyjs"%}
-         <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script type="text/javascript" src="{{ asset('bundles/johnarticle/ckeditor/ckeditor.js') }}"></script>
-    <script>
-        CKEDITOR.replace( 'article_content',{
-            filebrowserBrowseUrl: '{{ path("article_ckeditor_browse") }}',
-            filebrowserUploadUrl: '{{ path("article_ckeditor_upload") }}',
-            filebrowserWindowWidth: '640',
-            filebrowserWindowHeight: '480'
-        });
-    </script>
-{% endblock %}
+

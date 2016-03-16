@@ -79,12 +79,17 @@ class Image
 
     public function getUploadRootDir()
     {
+
         return __DIR__."/../../../../web/".$this->getUploadDir();
     }
 
     public function getUploadDir()
     {
-        return "uploads/featured_images";
+        date_default_timezone_set('Europe/Bucharest');
+        $year = date("Y");
+        $month= date("m");
+
+        return "uploads/featured_images/{$year}/{$month}";
     }
 
 
@@ -260,9 +265,11 @@ class Image
 
             @unlink($this->getUploadRootDir()."/".$this->temp);
 
-        }else{
-            $this->file=null;
         }
+
+
+        $this->file=null;
+
 
     }
 

@@ -11,10 +11,17 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class ArticleType extends AbstractType
 {
 
+    protected $securityContext;
+
+    public function __construct(SecurityContext $securityContext)
+    {
+        $this->securityContext=$securityContext;
+    }
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -45,12 +52,14 @@ class ArticleType extends AbstractType
                 ));
 
 
-
-    $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $event){
+         $context = $this->securityContext;
+         $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $event) use ($context) {
            $article=$event->getData();
            $form=$event->getForm();
 
-           if($article!=null && $article->getPublished())
+
+            //if article is published, ONLY the admin can modify the content
+           if($article!=null && $article->getPublished() && $context->isGranted("ROLE_ADMIN"))
            {
                $form->add('draft','submit',array('label'=>"Save published article"));
            }else{
@@ -69,7 +78,7 @@ class ArticleType extends AbstractType
         $resolver
             ->setDefaults(array(
             'data_class'=>'John\ArticleBundle\Entity\Article',
-            'cascade_validation' => true,
+            'cascade_validation' => true
             ));
         /*->setRequired(array(
             'is_published',

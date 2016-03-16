@@ -34,7 +34,7 @@ class ArticleController extends Controller
         //count user's articles: if admin si logged in all articles are taken into consideration
         $user_id=$this->getUser()->getId();
         $articles_count=($is_admin)?($em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category))
-                                           :($em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category,$user_id));
+                                   :($em->getRepository("JohnArticleBundle:Article")->countArticles($active,$publish,$category,$user_id));
 
         /* - This query string is appended to the rewrite_url
            - for example  articles/mathematics/2?active=true&publish=true */
@@ -261,7 +261,7 @@ class ArticleController extends Controller
      */
     public function createEditForm($entity)
     {
-        return $this->createForm(new ArticleType(),$entity, array(
+        return $this->createForm(new ArticleType($this->container->get('security.context')),$entity, array(
             'method'=>'POST',
             'action'=>$this->generateUrl('article_update',array(
                 'id'=>$entity->getId()
@@ -308,7 +308,7 @@ class ArticleController extends Controller
 
     public function createCreateForm($entity)
     {
-        return $this->createForm(new ArticleType(),$entity,array(
+        return $this->createForm(new ArticleType($this->container->get('security.context')),$entity,array(
             'method'=>'POST',
             'action'=>$this->generateUrl(
                 'article_create'
@@ -316,6 +316,7 @@ class ArticleController extends Controller
             'attr'=>array(
                 'class'=>'article-form'
             )
+
         ));
     }
 
